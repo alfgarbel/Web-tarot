@@ -27,8 +27,9 @@ const jsonLd = {
 ---
 
 <Base
-  title={`${titulo} en el tarot: significado de la combinación | Arcanaia`}
-  description={`Qué significan ${titulo} juntas en una tirada de tarot: ${c.claves.join(', ')}. Su lectura en el amor, el trabajo y un consejo.`}
+  title={`${titulo} en el tarot | Arcanaia`}
+  migas={[{ nombre: 'Combinaciones', url: '/combinaciones/' }, { nombre: titulo, url: `/combinaciones/${slugCombinacion(c)}/` }]}
+  description={`Qué significan ${titulo} juntas en el tarot: ${c.claves.join(', ')}. En el amor, el trabajo y un consejo.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 

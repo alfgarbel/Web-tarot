@@ -29,6 +29,7 @@ const jsonLd = {
 
 <Base
   title={`${titulo}: compatibilidad en el amor (${c.nota}%) | Arcanaia`}
+  migas={[{ nombre: 'Compatibilidad', url: '/compatibilidad/' }, { nombre: titulo, url: `/compatibilidad/${slugPareja(a, b)}/` }]}
   description={`Compatibilidad de ${titulo} en el amor: ${c.nota}% de afinidad. Qué os une, dónde chocáis y un consejo para la pareja, con vuestras cartas del tarot.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />

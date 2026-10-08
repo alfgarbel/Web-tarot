@@ -28,7 +28,8 @@ const jsonLd = {
 ---
 
 <Base
-  title={`${s.nombre}: personalidad, amor, trabajo y su carta del tarot | Arcanaia`}
+  title={`${s.nombre}: personalidad, amor y trabajo | Arcanaia`}
+  migas={[{ nombre: 'Los signos', url: '/signos/' }, { nombre: s.nombre, url: `/signos/${s.slug}/` }]}
   description={`Cómo es ${s.nombre} (${s.fechas}): personalidad, virtudes y defectos, amor, trabajo, compatibilidad y ${arcano.nombre}, su arcano del tarot.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />

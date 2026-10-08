@@ -25,6 +25,20 @@ const datos = arcanos.map((a) => ({
   consejo: a.consejo,
 }));
 
+// La misma cuenta que hace el navegador, para que la página ya salga con la carta del día
+// en que se compiló. Si se publica cada noche, buscadores y asistentes leen la carta de hoy.
+const indice = (texto: string) => {
+  let h = 2166136261;
+  for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
+  return h % datos.length;
+};
+const madrid = (d: Date) => d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+const ahora = new Date();
+let elegido = indice(`${madrid(ahora)}|${s.slug}`);
+if (elegido === indice(`${madrid(new Date(ahora.getTime() - 864e5))}|${s.slug}`)) elegido = (elegido + 7) % datos.length;
+const hoy = datos[elegido];
+const fechaTexto = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+
 const faq = [
   {
     p: '¿Cómo se hace este horóscopo?',
@@ -42,28 +56,28 @@ const faq = [
 ---
 
 <Base
-  title={`Horóscopo de ${s.nombre} hoy: tu carta del tarot del día | Arcanaia`}
-  description={`Horóscopo diario de ${s.nombre} (${s.fechas}) con el tarot: la carta de hoy para tu signo y qué te dice en el amor, el trabajo, la salud y un consejo.`}
+  title={`Horóscopo de ${s.nombre} hoy con el tarot | Arcanaia`}
+  migas={[{ nombre: 'Horóscopo', url: '/horoscopo/' }, { nombre: s.nombre, url: `/horoscopo/${s.slug}/` }]}
+  description={`Horóscopo diario de ${s.nombre} (${s.fechas}) con el tarot: tu carta de hoy en el amor, el trabajo y la salud.`}
 >
   <section class="mesa">
     <div class="contenedor diario">
       <div class="lado-carta">
-        <div class="hueco" id="hueco" aria-live="polite"></div>
+        <div class="hueco" id="hueco" aria-live="polite" data-carta={hoy.slug}><Carta arcano={arcanos[elegido]} /></div>
         <div class="elegir-baraja"><SelectorBaraja /></div>
       </div>
       <div class="lado-texto">
         <nav class="migas" aria-label="Ruta"><a href="/horoscopo/">Horóscopo</a> <span aria-hidden="true">/</span> {s.nombre}</nav>
-        <p class="antetitulo" id="fecha">Hoy</p>
+        <p class="antetitulo" id="fecha">{fechaTexto}</p>
         <h1>{s.nombre} <em>hoy</em></h1>
-        <a class="carta-titulo" id="nombre" href="/cartas/"></a>
-        <p class="mensaje" id="mensaje"></p>
-        <noscript><p class="suave">Activa JavaScript para ver la carta de hoy.</p></noscript>
+        <a class="carta-titulo" id="nombre" href={`/cartas/${hoy.slug}/`}>{hoy.romano}. {hoy.nombre}</a>
+        <p class="mensaje" id="mensaje">{hoy.dia}</p>
         <dl class="areas">
-          <div><dt>Amor</dt><dd id="amor"></dd></div>
-          <div><dt>Trabajo y dinero</dt><dd id="trabajo"></dd></div>
-          <div><dt>Salud y bienestar</dt><dd id="salud"></dd></div>
+          <div><dt>Amor</dt><dd id="amor">{hoy.amor}</dd></div>
+          <div><dt>Trabajo y dinero</dt><dd id="trabajo">{hoy.trabajo}</dd></div>
+          <div><dt>Salud y bienestar</dt><dd id="salud">{hoy.salud}</dd></div>
         </dl>
-        <p class="consejo"><span>Para hoy</span> <span id="consejo"></span></p>
+        <p class="consejo"><span>Para hoy</span> <span id="consejo">{hoy.consejo}</span></p>
         <p class="otros-enlaces">
           <a href={`/signos/${s.slug}/`} class="enlace-flecha">Cómo es {s.nombre}</a>
           <a href="/carta-del-dia/" class="enlace-flecha">Tu carta del día</a>
@@ -105,10 +119,14 @@ const faq = [
   if (i === indice(`${ayer}|${slug}`)) i = (i + 7) % datos.length;
   const carta = datos[i];
   $('fecha').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
-  $('hueco').replaceChildren($(`carta-${carta.slug}`).content.cloneNode(true));
-  $('nombre').textContent = `${carta.romano}. ${carta.nombre}`;
-  $('nombre').href = `/cartas/${carta.slug}/`;
-  for (const k of ['mensaje', 'amor', 'trabajo', 'salud', 'consejo']) $(k).textContent = carta[k === 'mensaje' ? 'dia' : k];
+  // La página ya trae la carta del día en que se publicó; solo se cambia si hoy toca otra.
+  if ($('hueco').dataset.carta !== carta.slug) {
+    $('hueco').dataset.carta = carta.slug;
+    $('hueco').replaceChildren($(`carta-${carta.slug}`).content.cloneNode(true));
+    $('nombre').textContent = `${carta.romano}. ${carta.nombre}`;
+    $('nombre').href = `/cartas/${carta.slug}/`;
+    for (const k of ['mensaje', 'amor', 'trabajo', 'salud', 'consejo']) $(k).textContent = carta[k === 'mensaje' ? 'dia' : k];
+  }
 </script>
 
 <style>

@@ -4,5 +4,5 @@ import sitemap from '@astrojs/sitemap';
 // Cambiar por el dominio definitivo cuando exista.
 export default defineConfig({
   site: 'https://arcanaia.es',
-  integrations: [sitemap()],
+  integrations: [sitemap({ lastmod: new Date() })],
 });

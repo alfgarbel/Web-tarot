@@ -5,6 +5,7 @@ import SelectorBaraja from '../../components/SelectorBaraja.astro';
 import { arcanos, type Arcano } from '../../data/arcanos';
 import { menores } from '../../data/menores';
 import { combinaciones, slugCombinacion } from '../../data/combinaciones';
+import { signos } from '../../data/signos';
 
 const todas = [...arcanos, ...menores];
 
@@ -15,19 +16,41 @@ export function getStaticPaths() {
 const { arcano } = Astro.props as { arcano: Arcano };
 const i = todas.findIndex((a) => a.slug === arcano.slug);
 const anterior = todas[i - 1];
+const signosCarta = signos.filter((x) => x.arcano === arcano.slug);
 const nombreDe = (slug: string) => arcanos.find((a) => a.slug === slug)!.nombre;
 const pares = combinaciones
   .filter((c) => c.a === arcano.slug || c.b === arcano.slug)
   .map((c) => ({ href: `/combinaciones/${slugCombinacion(c)}/`, otra: nombreDe(c.a === arcano.slug ? c.b : c.a) }));
 const siguiente = todas[i + 1];
 
+const url = new URL(`/cartas/${arcano.slug}/`, Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: `${arcano.nombre}: significado en el tarot`,
-  description: arcano.general,
-  inLanguage: 'es',
-  author: { '@type': 'Organization', name: 'Arcanaia' },
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: `${arcano.nombre}: significado en el tarot`,
+      description: arcano.general,
+      inLanguage: 'es-ES',
+      mainEntityOfPage: url,
+      dateModified: new Date().toISOString().slice(0, 10),
+      image: new URL(arcano.sinImagen ? '/portada.webp' : `/barajas/ilustrada/${arcano.slug}.webp`, Astro.site).href,
+      author: { '@type': 'Organization', name: 'Arcanaia' },
+      publisher: { '@type': 'Organization', name: 'Arcanaia' },
+    },
+    {
+      // Las mismas respuestas que se ven en la ficha, en forma de pregunta.
+      '@type': 'FAQPage',
+      mainEntity: [
+        [`¿Qué significa ${arcano.nombre} en el tarot?`, `${arcano.nombre} habla de ${arcano.claves.join(', ')}. ${arcano.general}`],
+        [`¿Qué significa ${arcano.nombre} en el amor?`, arcano.amor],
+        [`¿Qué significa ${arcano.nombre} en el trabajo y el dinero?`, arcano.trabajo],
+        [`¿Qué significa ${arcano.nombre} en la salud?`, arcano.salud],
+        [`¿Qué significa ${arcano.nombre} invertida?`, arcano.invertida],
+        [`¿${arcano.nombre} es sí o no?`, `${arcano.respuesta}. ${arcano.siNo}`],
+      ].map(([q, r]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: r } })),
+    },
+  ],
 };
 
 const secciones = [
@@ -39,8 +62,9 @@ const secciones = [
 ---
 
 <Base
-  title={`${arcano.nombre} en el tarot: significado en el amor, el trabajo y sí o no | Arcanaia`}
-  description={`Qué significa ${arcano.nombre}${arcano.palo ? '' : ` (${arcano.romano})`} en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, la salud, invertida y como respuesta de sí o no.`}
+  title={`${arcano.nombre}: significado en el tarot, amor y sí o no | Arcanaia`}
+  migas={[{ nombre: 'Los arcanos', url: '/cartas/' }, { nombre: arcano.nombre, url: `/cartas/${arcano.slug}/` }]}
+  description={`Qué significa ${arcano.nombre}${arcano.palo ? '' : ` (${arcano.romano})`} en el tarot: ${arcano.claves.join(', ')}. En el amor, el trabajo, la salud, invertida y en sí o no.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
@@ -84,6 +108,15 @@ const secciones = [
               ))}
             </ul>
           </section>
+        )
+      }
+
+      {
+        signosCarta.length > 0 && (
+          <p class="signo-carta">
+            La tradición asocia esta carta a {signosCarta.map((x, k) => <>{k > 0 && ' y '}<a href={`/signos/${x.slug}/`}>{x.nombre}</a></>)}.
+            Mira también el <a href={`/horoscopo/${signosCarta[0].slug}/`}>horóscopo de hoy de {signosCarta[0].nombre}</a>.
+          </p>
         )
       }
 
@@ -134,6 +167,7 @@ const secciones = [
   .bloques section:nth-child(3) { --marca: var(--oro); }
   .bloques section:nth-child(4) { --marca: var(--azulejo); grid-column: 1 / -1; }
   .pares { margin-top: 56px; }
+  .signo-carta { margin-top: 40px; color: var(--texto-suave); }
   .pares h2 { font-size: 1.6rem; }
   .pares ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
   .pares a { display: inline-block; padding: 8px 14px; border: 1px solid var(--linea-suave); border-radius: 999px; color: var(--texto-suave); text-decoration: none; font-size: 0.95rem; }

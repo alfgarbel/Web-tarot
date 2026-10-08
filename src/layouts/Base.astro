@@ -5,9 +5,42 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  /** Ruta de migas para los datos estructurados: [{ nombre, url }], sin incluir la portada. */
+  migas?: { nombre: string; url: string }[];
 }
 
-const { title, description, image = '/portada.webp' } = Astro.props;
+const { title: tituloPedido, description: descripcionPedida, image = '/portada.webp', migas } = Astro.props;
+// Google corta los títulos hacia los 60 caracteres y las descripciones hacia los 160.
+const title = tituloPedido.length > 65 ? tituloPedido.replace(/ \| Arcanaia$/, '') : tituloPedido;
+const recortar = (t: string, max: number) => {
+  if (t.length <= max) return t;
+  const corte = t.slice(0, max - 1);
+  return corte.slice(0, corte.lastIndexOf(' ')).replace(/[,.:;]$/, '') + '…';
+};
+const description = recortar(descripcionPedida, 160);
+const esPortada = Astro.url.pathname === '/';
+const sitio = new URL('/', Astro.site).href;
+const datosSitio = esPortada
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': [
+        { '@type': 'WebSite', '@id': `${sitio}#web`, url: sitio, name: 'Arcanaia', inLanguage: 'es-ES', publisher: { '@id': `${sitio}#org` } },
+        { '@type': 'Organization', '@id': `${sitio}#org`, name: 'Arcanaia', url: sitio, logo: new URL('/favicon.svg', Astro.site).href },
+      ],
+    }
+  : null;
+const datosMigas = migas
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ nombre: 'Inicio', url: '/' }, ...migas].map((m, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: m.nombre,
+        item: new URL(m.url, Astro.site).href,
+      })),
+    }
+  : null;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const ruta = Astro.url.pathname;
@@ -32,6 +65,8 @@ const enlaces = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta property="og:locale" content="es_ES" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#170c20" />
@@ -73,6 +108,8 @@ const enlaces = [
         };
       })();
     </script>
+    {datosSitio && <script type="application/ld+json" set:html={JSON.stringify(datosSitio)} />}
+    {datosMigas && <script type="application/ld+json" set:html={JSON.stringify(datosMigas)} />}
     <slot name="head" />
   </head>
   <body>
