@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/portada.webp' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#3b1f4a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="cabecera">
+      <div class="contenedor fila">
+        <a href="/" class="marca">
+          <span class="luna" aria-hidden="true">☽</span>
+          El Tarot de Aurora
+        </a>
+        <nav aria-label="Principal">
+          <a href="/tarot-si-o-no/">Sí o No</a>
+          <a href="/cartas/">Las cartas</a>
+          <a href="/sobre-aurora/">Aurora</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">
+        <div class="pie-fila">
+          <div>
+            <p class="marca">☽ El Tarot de Aurora</p>
+            <p>Tiradas de tarot gratis, explicadas con calma.</p>
+          </div>
+          <nav aria-label="Pie">
+            <a href="/tarot-si-o-no/">Tarot Sí o No</a>
+            <a href="/cartas/">Significado de las cartas</a>
+            <a href="/sobre-aurora/">Sobre Aurora</a>
+            <a href="/aviso-legal/">Aviso legal</a>
+          </nav>
+        </div>
+        <p class="aviso">
+          Las lecturas de esta web son una herramienta de reflexión y entretenimiento. No sustituyen el
+          consejo de profesionales de la salud, el derecho o las finanzas.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .cabecera {
+    background: var(--morado-oscuro);
+    color: var(--crema);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+    flex-wrap: wrap;
+  }
+  .marca {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--crema);
+    text-decoration: none;
+    margin: 0;
+  }
+  .luna { color: var(--dorado); margin-right: 4px; }
+  nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  .cabecera nav a {
+    color: var(--crema-oscura);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .cabecera nav a:hover { color: var(--dorado-claro); }
+  .pie {
+    background: var(--morado-oscuro);
+    color: var(--crema-oscura);
+    padding: 48px 0 32px;
+    margin-top: 40px;
+  }
+  .pie-fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .pie nav { flex-direction: column; gap: 6px; }
+  .pie nav a { color: var(--crema-oscura); text-decoration: none; }
+  .pie nav a:hover { color: var(--dorado-claro); }
+  .pie .aviso { color: #a99bb0; border-top: 1px solid #3d2a4a; padding-top: 20px; margin: 0; }
+  @media (max-width: 560px) {
+    .cabecera .fila { justify-content: center; padding: 10px 0; }
+  }
+</style>

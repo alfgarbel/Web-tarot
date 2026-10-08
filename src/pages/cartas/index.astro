@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos } from '../../data/arcanos';
+---
+
+<Base
+  title="Significado de las cartas del tarot: los 22 Arcanos Mayores | El Tarot de Aurora"
+  description="El significado de los 22 Arcanos Mayores del tarot: qué dice cada carta en el amor, el trabajo, al derecho y al revés, con su respuesta de sí o no."
+>
+  <section class="seccion">
+    <div class="contenedor">
+      <span class="etiqueta">Arcanos Mayores</span>
+      <h1>Significado de las cartas del tarot</h1>
+      <p class="lead">
+        Los 22 Arcanos Mayores cuentan un viaje: del Loco que empieza sin mapa al Mundo que completa el camino. Elige
+        una carta para leer su significado en el amor, el trabajo y la vida.
+      </p>
+      <div class="rejilla">
+        {
+          arcanos.map((a) => (
+            <a href={`/cartas/${a.slug}/`} class="item">
+              <Carta arcano={a} tamano="pequena" />
+              <span class="claves">{a.claves.join(' · ')}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lead { max-width: 680px; font-size: 1.1rem; color: var(--tinta-suave); }
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 28px 20px;
+    margin-top: 36px;
+  }
+  .item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s;
+  }
+  .item:hover { transform: translateY(-6px); }
+  .claves { font-size: 0.8rem; color: var(--tinta-suave); text-align: center; }
+</style>

@@ -1,0 +1,360 @@
+---
+import Base from '../layouts/Base.astro';
+import Carta from '../components/Carta.astro';
+import { arcanos } from '../data/arcanos';
+
+const datos = arcanos.map(({ numero, romano, nombre, slug, simbolo, respuesta, siNo, consejo }) => ({
+  numero,
+  romano,
+  nombre,
+  slug,
+  simbolo,
+  respuesta,
+  siNo,
+  consejo,
+}));
+
+const preguntas = [
+  '¿Volverá mi ex?',
+  '¿Me quiere de verdad?',
+  '¿Debo escribirle?',
+  '¿Conseguiré ese trabajo?',
+  '¿Es buen momento para cambiar de vida?',
+  '¿Saldrá bien este proyecto?',
+];
+
+const faq = [
+  {
+    p: '¿Cómo funciona el tarot Sí o No?',
+    r: 'Piensas una pregunta que se pueda responder con sí o con no, barajas y eliges una carta de los 22 Arcanos Mayores. Cada carta tiene una respuesta (sí, no o quizás) y una explicación que te ayuda a entender el porqué.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí. Puedes hacer la tirada tantas veces como quieras, sin registrarte y sin dejar tus datos.',
+  },
+  {
+    p: '¿Puedo preguntar varias veces lo mismo?',
+    r: 'Puedes, pero Aurora recomienda no repetir la misma pregunta el mismo día. La primera respuesta suele ser la que más tiene que decirte.',
+  },
+  {
+    p: '¿Qué significa un «quizás»?',
+    r: 'Que la situación todavía no está decidida o que falta información. Lee la explicación de la carta: te dirá qué necesitas observar o esperar.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.p,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+---
+
+<Base
+  title="Tarot Sí o No gratis: respuesta inmediata | El Tarot de Aurora"
+  description="Haz tu pregunta, elige una carta y recibe una respuesta de sí o no con su explicación. Tarot Sí o No gratis, sin registro, con los 22 Arcanos Mayores."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="tirada">
+    <div class="contenedor">
+      <div class="intro">
+        <span class="etiqueta">Tirada gratuita · 1 carta</span>
+        <h1>Tarot Sí o No</h1>
+        <p class="lead">
+          Piensa en una pregunta que se pueda responder con un sí o un no. Respira, baraja y deja que una carta
+          te elija.
+        </p>
+      </div>
+
+      <div class="paso" id="paso-pregunta">
+        <label for="pregunta" class="label">Tu pregunta (opcional, no se guarda)</label>
+        <input
+          id="pregunta"
+          type="text"
+          maxlength="140"
+          placeholder="Por ejemplo: ¿volverá a escribirme?"
+          autocomplete="off"
+        />
+        <div class="sugerencias" aria-label="Preguntas de ejemplo">
+          {preguntas.map((p) => <button type="button" class="sugerencia">{p}</button>)}
+        </div>
+        <button class="boton" id="barajar" type="button">Barajar las cartas</button>
+      </div>
+
+      <div class="paso oculto" id="paso-elegir" aria-live="polite">
+        <p class="instruccion">Elige la carta que te llame</p>
+        <div class="abanico" id="abanico"></div>
+      </div>
+
+      <div class="paso oculto" id="paso-resultado" aria-live="polite">
+        <p class="tu-pregunta" id="tu-pregunta"></p>
+        <div class="resultado">
+          <div class="giro" id="giro">
+            <div class="cara dorso"></div>
+            <div class="cara frente" id="frente"></div>
+          </div>
+          <div class="respuesta">
+            <p class="veredicto" id="veredicto"></p>
+            <h2 id="nombre-carta"></h2>
+            <p id="texto"></p>
+            <p class="consejo"><strong>El consejo de Aurora:</strong> <span id="consejo"></span></p>
+            <div class="acciones">
+              <a class="boton secundario" id="enlace-carta" href="/cartas/">Leer más sobre esta carta</a>
+              <button class="boton" id="otra" type="button">Hacer otra pregunta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion texto">
+    <div class="contenedor estrecho">
+      <h2>Cómo leer tu respuesta</h2>
+      <p>
+        El tarot no decide por ti: te ayuda a mirar la situación con más claridad. Por eso cada respuesta viene con
+        una explicación. Un «sí» con la Torre no se vive igual que un «sí» con el Sol, y un «no» del Ermitaño a veces
+        solo significa «todavía no».
+      </p>
+      <p>
+        En esta tirada usamos los 22 Arcanos Mayores, las cartas más simbólicas de la baraja. Si quieres conocer cada
+        una a fondo, visita <a href="/cartas/">el significado de las cartas</a>.
+      </p>
+
+      <h2>Preguntas frecuentes</h2>
+      {
+        faq.map((f) => (
+          <details>
+            <summary>{f.p}</summary>
+            <p>{f.r}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="plantilla" hidden>
+    <Carta arcano={arcanos[0]} />
+  </div>
+</Base>
+
+<script is:inline define:vars={{ datos }}>
+  const $ = (id) => document.getElementById(id);
+  const pasoPregunta = $('paso-pregunta');
+  const pasoElegir = $('paso-elegir');
+  const pasoResultado = $('paso-resultado');
+  const abanico = $('abanico');
+  const input = $('pregunta');
+
+  const azar = (max) => {
+    const u = new Uint32Array(1);
+    crypto.getRandomValues(u);
+    return u[0] % max;
+  };
+
+  const barajar = (lista) => {
+    const copia = [...lista];
+    for (let i = copia.length - 1; i > 0; i--) {
+      const j = azar(i + 1);
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+  };
+
+  const mostrar = (paso) => {
+    [pasoPregunta, pasoElegir, pasoResultado].forEach((p) => p.classList.add('oculto'));
+    paso.classList.remove('oculto');
+    paso.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  document.querySelectorAll('.sugerencia').forEach((b) =>
+    b.addEventListener('click', () => {
+      input.value = b.textContent;
+      input.focus();
+    }),
+  );
+
+  const repartir = () => {
+    const mazo = barajar(datos).slice(0, 9);
+    abanico.innerHTML = '';
+    mazo.forEach((carta, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'reverso';
+      b.style.setProperty('--i', i);
+      b.setAttribute('aria-label', `Carta ${i + 1}`);
+      b.addEventListener('click', () => revelar(carta));
+      abanico.appendChild(b);
+    });
+    mostrar(pasoElegir);
+  };
+
+  const revelar = (carta) => {
+    const pregunta = input.value.trim();
+    $('tu-pregunta').textContent = pregunta ? `«${pregunta}»` : '';
+    $('frente').innerHTML = `
+      <div class="carta" role="img" aria-label="${carta.romano}. ${carta.nombre}">
+        <span class="numero">${carta.romano}</span>
+        <span class="simbolo">${carta.simbolo}</span>
+        <span class="nombre">${carta.nombre}</span>
+      </div>`;
+    const veredicto = $('veredicto');
+    veredicto.textContent = carta.respuesta;
+    veredicto.dataset.tipo = carta.respuesta === 'Sí' ? 'si' : carta.respuesta === 'No' ? 'no' : 'quizas';
+    $('nombre-carta').textContent = carta.nombre;
+    $('texto').textContent = carta.siNo;
+    $('consejo').textContent = carta.consejo;
+    $('enlace-carta').href = `/cartas/${carta.slug}/`;
+    const giro = $('giro');
+    giro.classList.remove('girada');
+    mostrar(pasoResultado);
+    setTimeout(() => giro.classList.add('girada'), 350);
+  };
+
+  $('barajar').addEventListener('click', repartir);
+  $('otra').addEventListener('click', () => {
+    input.value = '';
+    mostrar(pasoPregunta);
+  });
+</script>
+
+<style>
+  .tirada {
+    background:
+      radial-gradient(ellipse at top, rgba(201, 164, 92, 0.18), transparent 60%),
+      linear-gradient(180deg, var(--morado-oscuro), var(--morado));
+    color: var(--crema);
+    padding: 56px 0 72px;
+    min-height: 640px;
+  }
+  .tirada h1, .tirada h2 { color: var(--crema); }
+  .intro { text-align: center; max-width: 640px; margin: 0 auto 32px; }
+  .lead { font-size: 1.15rem; color: var(--crema-oscura); }
+  .tirada .etiqueta { color: var(--dorado); }
+
+  .paso { max-width: 760px; margin: 0 auto; text-align: center; scroll-margin-top: 120px; }
+  .oculto { display: none; }
+
+  .label { display: block; font-size: 0.9rem; color: var(--crema-oscura); margin-bottom: 8px; }
+  #pregunta {
+    width: 100%;
+    max-width: 520px;
+    padding: 14px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--dorado);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--crema);
+    font-size: 1rem;
+    font-family: var(--sans);
+  }
+  #pregunta::placeholder { color: #b9a9c2; }
+  #pregunta:focus { outline: 2px solid var(--dorado-claro); outline-offset: 2px; }
+  .sugerencias { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 28px; }
+  .sugerencia {
+    background: transparent;
+    border: 1px solid rgba(230, 207, 152, 0.4);
+    color: var(--crema-oscura);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .sugerencia:hover { border-color: var(--dorado); color: var(--crema); }
+  .tirada .boton { background: var(--dorado); border-color: var(--dorado); color: var(--morado-oscuro); }
+  .tirada .boton:hover { background: var(--dorado-claro); border-color: var(--dorado-claro); }
+  .tirada .boton.secundario { background: transparent; color: var(--dorado-claro); border-color: var(--dorado); }
+  .tirada .boton.secundario:hover { background: var(--dorado); color: var(--morado-oscuro); }
+
+  .instruccion { font-family: var(--serif); font-size: 1.6rem; color: var(--dorado-claro); }
+  .abanico {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+  @media (max-width: 640px) {
+    .abanico { grid-template-columns: repeat(3, 1fr); max-width: 300px; margin-left: auto; margin-right: auto; }
+  }
+
+  .resultado {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+  }
+  @media (max-width: 640px) {
+    .resultado { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  }
+  .tu-pregunta { font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--dorado-claro); }
+  .giro {
+    width: 200px;
+    aspect-ratio: 7 / 12;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .giro.girada { transform: rotateY(180deg); }
+  .cara { position: absolute; inset: 0; backface-visibility: hidden; }
+  .frente { transform: rotateY(180deg); }
+  .frente :global(.carta) { max-width: none; height: 100%; }
+  .veredicto {
+    font-family: var(--serif);
+    font-size: 3.4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .veredicto[data-tipo='si'] { color: #9fd89a; }
+  .veredicto[data-tipo='no'] { color: #f0a58a; }
+  .veredicto[data-tipo='quizas'] { color: var(--dorado-claro); }
+  .respuesta p { color: var(--crema-oscura); }
+  .consejo { border-left: 3px solid var(--dorado); padding-left: 14px; }
+  .acciones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  @media (max-width: 640px) { .acciones { justify-content: center; } }
+
+  .estrecho { max-width: 760px; }
+  details {
+    border-bottom: 1px solid var(--crema-oscura);
+    padding: 14px 0;
+  }
+  summary { font-weight: 600; cursor: pointer; color: var(--morado); }
+  details p { margin: 10px 0 0; }
+</style>
+
+<style is:global>
+  .reverso,
+  .dorso {
+    aspect-ratio: 7 / 12;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid var(--dorado);
+    background:
+      radial-gradient(circle at 50% 50%, var(--dorado) 0 6%, transparent 7%),
+      repeating-linear-gradient(45deg, rgba(201, 164, 92, 0.18) 0 2px, transparent 2px 12px),
+      repeating-linear-gradient(-45deg, rgba(201, 164, 92, 0.18) 0 2px, transparent 2px 12px),
+      var(--morado);
+    box-shadow: inset 0 0 0 4px var(--morado-oscuro), 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .reverso {
+    cursor: pointer;
+    padding: 0;
+    animation: repartir 0.5s calc(var(--i) * 60ms) both ease-out;
+    transition: transform 0.2s;
+  }
+  .reverso:hover,
+  .reverso:focus-visible { transform: translateY(-10px); outline: 2px solid var(--dorado-claro); outline-offset: 3px; }
+  @keyframes repartir {
+    from { opacity: 0; transform: translateY(30px) rotate(-6deg); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reverso { animation: none; }
+    .giro { transition: none !important; }
+  }
+</style>

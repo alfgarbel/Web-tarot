@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos, type Arcano } from '../../data/arcanos';
+
+export function getStaticPaths() {
+  return arcanos.map((arcano) => ({ params: { slug: arcano.slug }, props: { arcano } }));
+}
+
+const { arcano } = Astro.props as { arcano: Arcano };
+const i = arcanos.indexOf(arcano);
+const anterior = arcanos[i - 1];
+const siguiente = arcanos[i + 1];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${arcano.nombre}: significado en el tarot`,
+  description: arcano.general,
+  inLanguage: 'es',
+  author: { '@type': 'Organization', name: 'El Tarot de Aurora' },
+};
+---
+
+<Base
+  title={`${arcano.nombre} en el tarot: significado en el amor, trabajo y sí o no | El Tarot de Aurora`}
+  description={`Qué significa ${arcano.nombre} (${arcano.romano}) en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, invertida y como respuesta de sí o no.`}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="seccion">
+    <div class="contenedor ficha">
+      <aside class="lateral">
+        <Carta arcano={arcano} />
+        <ul class="claves">{arcano.claves.map((c) => <li>{c}</li>)}</ul>
+      </aside>
+
+      <div class="cuerpo">
+        <nav class="migas" aria-label="Ruta"><a href="/cartas/">Las cartas</a> / {arcano.nombre}</nav>
+        <span class="etiqueta">Arcano Mayor {arcano.romano}</span>
+        <h1>{arcano.nombre}</h1>
+        <p class="lead">{arcano.general}</p>
+
+        <h2>{arcano.nombre} en el amor</h2>
+        <p>{arcano.amor}</p>
+
+        <h2>{arcano.nombre} en el trabajo y el dinero</h2>
+        <p>{arcano.trabajo}</p>
+
+        <h2>{arcano.nombre} invertida</h2>
+        <p>{arcano.invertida}</p>
+
+        <h2>{arcano.nombre} en el tarot Sí o No</h2>
+        <p><strong class="respuesta">Respuesta: {arcano.respuesta}.</strong> {arcano.siNo}</p>
+
+        <div class="consejo">
+          <span class="etiqueta">El consejo de Aurora</span>
+          <p>{arcano.consejo}</p>
+        </div>
+
+        <div class="cta">
+          <p>¿Tienes una pregunta en mente?</p>
+          <a href="/tarot-si-o-no/" class="boton">Hacer la tirada Sí o No</a>
+        </div>
+
+        <nav class="pasar" aria-label="Otras cartas">
+          {anterior ? <a href={`/cartas/${anterior.slug}/`}>← {anterior.nombre}</a> : <span />}
+          {siguiente ? <a href={`/cartas/${siguiente.slug}/`}>{siguiente.nombre} →</a> : <span />}
+        </nav>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .ficha {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .ficha { grid-template-columns: 1fr; gap: 28px; }
+    .lateral { justify-self: center; position: static !important; }
+  }
+  .lateral { position: sticky; top: 96px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .claves { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .claves li {
+    background: var(--crema-oscura);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    color: var(--morado);
+  }
+  .cuerpo { max-width: 700px; }
+  .migas { font-size: 0.85rem; color: var(--tinta-suave); margin-bottom: 16px; }
+  .lead { font-size: 1.15rem; }
+  h2 { margin-top: 1.4em; font-size: 1.7rem; }
+  .respuesta { color: var(--terracota); }
+  .consejo {
+    background: var(--morado);
+    color: var(--crema);
+    border-radius: var(--radio);
+    padding: 24px 28px;
+    margin: 36px 0;
+  }
+  .consejo .etiqueta { color: var(--dorado); }
+  .consejo p { font-family: var(--serif); font-size: 1.5rem; margin: 0; }
+  .cta {
+    border: 1px solid var(--crema-oscura);
+    border-radius: var(--radio);
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cta p { margin: 0; font-weight: 600; }
+  .pasar { display: flex; justify-content: space-between; margin-top: 36px; font-weight: 600; }
+</style>

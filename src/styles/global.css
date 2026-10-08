@@ -1,0 +1,90 @@
+:root {
+  --morado: #3b1f4a;
+  --morado-oscuro: #241230;
+  --morado-claro: #5b3470;
+  --dorado: #c9a45c;
+  --dorado-claro: #e6cf98;
+  --terracota: #b8613f;
+  --crema: #f6efe4;
+  --crema-oscura: #ebdfcc;
+  --tinta: #2b2230;
+  --tinta-suave: #5f5466;
+  --radio: 14px;
+  --ancho: 1100px;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--morado);
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); }
+h3 { font-size: 1.4rem; }
+
+p { margin: 0 0 1em; }
+a { color: var(--morado-claro); }
+img { max-width: 100%; display: block; }
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.boton {
+  display: inline-block;
+  background: var(--morado);
+  color: var(--crema);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 2px solid var(--morado);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.boton:hover { background: var(--morado-claro); border-color: var(--morado-claro); }
+.boton:active { transform: scale(0.97); }
+.boton.secundario { background: transparent; color: var(--morado); }
+.boton.secundario:hover { background: var(--morado); color: var(--crema); }
+.boton.dorado { background: var(--dorado); border-color: var(--dorado); color: var(--morado-oscuro); }
+.boton.dorado:hover { background: var(--dorado-claro); border-color: var(--dorado-claro); }
+
+.etiqueta {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  font-weight: 600;
+  margin-bottom: 0.6em;
+}
+
+.seccion { padding: 72px 0; }
+
+.aviso {
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
