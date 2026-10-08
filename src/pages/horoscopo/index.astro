@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import { arcanos } from '../../data/arcanos';
+import { signos, nombreElemento } from '../../data/signos';
+
+const nombres = arcanos.map((a) => a.nombre);
+const slugs = signos.map((s) => s.slug);
+---
+
+<Base
+  title="Horóscopo de hoy con el tarot: los 12 signos | Arcanaia"
+  description="Horóscopo diario gratis para los 12 signos del zodiaco: cada día una carta del tarot para tu signo, con su mensaje para el amor, el trabajo y la salud."
+>
+  <section class="cabeza contenedor">
+    <p class="antetitulo" id="fecha">Hoy</p>
+    <h1>Horóscopo <em>de hoy</em></h1>
+    <p class="sub">Cada día, una carta del tarot para cada signo. Elige el tuyo para leer qué te dice en el amor, el trabajo y la salud.</p>
+  </section>
+
+  <section class="contenedor zona">
+    <ul class="rejilla">
+      {
+        signos.map((s) => (
+          <li>
+            <a href={`/horoscopo/${s.slug}/`}>
+              <span class="nombre">{s.nombre}</span>
+              <span class="datos">{s.fechas} · {nombreElemento(s.elemento)}</span>
+              <span class="hoy" data-signo={s.slug}></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<script is:inline define:vars={{ nombres, slugs }}>
+  const fecha = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+  const ayer = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+  const indice = (texto) => {
+    let h = 2166136261;
+    for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
+    return h % nombres.length;
+  };
+  document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  for (const slug of slugs) {
+    let i = indice(`${fecha}|${slug}`);
+    if (i === indice(`${ayer}|${slug}`)) i = (i + 7) % nombres.length;
+    document.querySelector(`[data-signo="${slug}"]`).textContent = nombres[i];
+  }
+</script>
+
+<style>
+  .cabeza { padding-top: 72px; padding-bottom: 40px; }
+  .antetitulo::first-letter { text-transform: uppercase; }
+  .sub { font-size: 1.2rem; color: var(--texto-suave); max-width: 58ch; }
+  .zona { padding-bottom: 96px; }
+  .rejilla { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 32px; }
+  .rejilla a { display: grid; gap: 4px; padding: 20px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto); }
+  .nombre { font-family: var(--serif); font-size: 1.5rem; }
+  .datos { font-size: 0.85rem; color: var(--texto-suave); }
+  .hoy { font-family: var(--serif); font-style: italic; color: var(--oro); min-height: 1.4em; }
+  .rejilla a:hover .nombre { color: var(--oro-claro); }
+  @media (max-width: 960px) { .rejilla { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .rejilla { grid-template-columns: 1fr; } }
+</style>

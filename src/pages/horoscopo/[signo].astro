@@ -1,0 +1,151 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import SelectorBaraja from '../../components/SelectorBaraja.astro';
+import Explicacion from '../../components/Explicacion.astro';
+import { arcanos } from '../../data/arcanos';
+import { lecturas } from '../../data/lecturas';
+import { signos, nombreElemento, type Signo } from '../../data/signos';
+
+export function getStaticPaths() {
+  return signos.map((s) => ({ params: { signo: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: Signo };
+// Solo arcanos mayores, como en las tiradas. La carta de cada signo depende de la fecha
+// y del signo, así que todas las personas de un signo ven la misma ese día.
+const datos = arcanos.map((a) => ({
+  slug: a.slug,
+  romano: a.romano,
+  nombre: a.nombre,
+  dia: lecturas[a.slug].dia,
+  amor: a.amor,
+  trabajo: a.trabajo,
+  salud: a.salud,
+  consejo: a.consejo,
+}));
+
+const faq = [
+  {
+    p: '¿Cómo se hace este horóscopo?',
+    r: `Cada día se elige un arcano mayor para ${s.nombre}. Todas las personas de ${s.nombre} ven la misma carta ese día, y mañana cambia. Los textos son los de la ficha de esa carta.`,
+  },
+  {
+    p: '¿A qué hora cambia?',
+    r: 'A medianoche, hora de España peninsular.',
+  },
+  {
+    p: '¿Puedo ver el de otro signo?',
+    r: 'Sí, abajo tienes los doce. Si quieres una lectura solo para ti, saca tu carta del día.',
+  },
+];
+---
+
+<Base
+  title={`Horóscopo de ${s.nombre} hoy: tu carta del tarot del día | Arcanaia`}
+  description={`Horóscopo diario de ${s.nombre} (${s.fechas}) con el tarot: la carta de hoy para tu signo y qué te dice en el amor, el trabajo, la salud y un consejo.`}
+>
+  <section class="mesa">
+    <div class="contenedor diario">
+      <div class="lado-carta">
+        <div class="hueco" id="hueco" aria-live="polite"></div>
+        <div class="elegir-baraja"><SelectorBaraja /></div>
+      </div>
+      <div class="lado-texto">
+        <nav class="migas" aria-label="Ruta"><a href="/horoscopo/">Horóscopo</a> <span aria-hidden="true">/</span> {s.nombre}</nav>
+        <p class="antetitulo" id="fecha">Hoy</p>
+        <h1>{s.nombre} <em>hoy</em></h1>
+        <a class="carta-titulo" id="nombre" href="/cartas/"></a>
+        <p class="mensaje" id="mensaje"></p>
+        <noscript><p class="suave">Activa JavaScript para ver la carta de hoy.</p></noscript>
+        <dl class="areas">
+          <div><dt>Amor</dt><dd id="amor"></dd></div>
+          <div><dt>Trabajo y dinero</dt><dd id="trabajo"></dd></div>
+          <div><dt>Salud y bienestar</dt><dd id="salud"></dd></div>
+        </dl>
+        <p class="consejo"><span>Para hoy</span> <span id="consejo"></span></p>
+        <p class="otros-enlaces">
+          <a href={`/signos/${s.slug}/`} class="enlace-flecha">Cómo es {s.nombre}</a>
+          <a href="/carta-del-dia/" class="enlace-flecha">Tu carta del día</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {arcanos.map((a) => <template id={`carta-${a.slug}`}><Carta arcano={a} /></template>)}
+
+  <section class="contenedor otros">
+    <h2>El horóscopo de hoy para los demás signos</h2>
+    <ul>
+      {signos.map((o) => (
+        <li><a href={`/horoscopo/${o.slug}/`} aria-current={o === s ? 'page' : undefined}><span>{o.nombre}</span><span class="suave">{nombreElemento(o.elemento)}</span></a></li>
+      ))}
+    </ul>
+  </section>
+
+  <Explicacion titulo={`El horóscopo de ${s.nombre} con el tarot`} faq={faq}>
+    <p class="suave">
+      En lugar de calcular posiciones de planetas, cada día te damos una carta. Léela por la mañana como una propuesta
+      para la jornada, no como algo que va a pasar sí o sí.
+    </p>
+  </Explicacion>
+</Base>
+
+<script is:inline define:vars={{ datos, slug: s.slug }}>
+  const $ = (id) => document.getElementById(id);
+  const fecha = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+  const indice = (texto) => {
+    let h = 2166136261;
+    for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
+    return h % datos.length;
+  };
+  const ayer = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+  let i = indice(`${fecha}|${slug}`);
+  // Evita que un signo repita la carta de ayer.
+  if (i === indice(`${ayer}|${slug}`)) i = (i + 7) % datos.length;
+  const carta = datos[i];
+  $('fecha').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  $('hueco').replaceChildren($(`carta-${carta.slug}`).content.cloneNode(true));
+  $('nombre').textContent = `${carta.romano}. ${carta.nombre}`;
+  $('nombre').href = `/cartas/${carta.slug}/`;
+  for (const k of ['mensaje', 'amor', 'trabajo', 'salud', 'consejo']) $(k).textContent = carta[k === 'mensaje' ? 'dia' : k];
+</script>
+
+<style>
+  .mesa {
+    padding: 64px 0 96px;
+    background: radial-gradient(60% 70% at 25% 40%, rgba(46, 76, 140, 0.35), transparent 70%),
+      radial-gradient(60% 60% at 70% 30%, rgba(77, 42, 96, 0.5), transparent 70%);
+  }
+  .diario { display: grid; grid-template-columns: 300px 1fr; gap: 96px; align-items: start; max-width: 1040px; }
+  .lado-carta { position: sticky; top: 108px; }
+  .hueco { width: 300px; aspect-ratio: 7 / 12; }
+  .hueco :global(.carta) { max-width: none; height: 100%; }
+  .elegir-baraja { margin-top: 28px; }
+  .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 20px; }
+  .migas a { color: var(--texto-suave); }
+  .antetitulo::first-letter { text-transform: uppercase; }
+  .carta-titulo { display: inline-block; font-size: 0.85rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro); text-decoration: none; }
+  .carta-titulo:hover { color: var(--oro-claro); }
+  .mensaje { font-family: var(--serif); font-size: clamp(1.5rem, 2.8vw, 2rem); line-height: 1.3; margin: 14px 0 32px; max-width: 32ch; }
+  .areas { margin: 0 0 32px; display: grid; gap: 0; max-width: 60ch; }
+  .areas div { padding: 16px 0; border-top: 1px solid var(--linea-suave); }
+  .areas dt { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); margin-bottom: 6px; }
+  .areas dd { margin: 0; color: var(--texto-suave); }
+  .consejo { border-left: 1px solid var(--oro); padding-left: 18px; color: var(--texto-suave); max-width: 52ch; }
+  .consejo span:first-child { color: var(--texto); font-weight: 600; margin-right: 6px; }
+  .otros-enlaces { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 32px; }
+  .otros { padding-bottom: 80px; }
+  .otros h2 { font-size: 1.5rem; }
+  .otros ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 28px; }
+  .otros a { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto); }
+  .otros a:hover, .otros a[aria-current='page'] { color: var(--oro-claro); }
+  @media (max-width: 820px) {
+    .mesa { padding: 40px 0 64px; }
+    .diario { grid-template-columns: 1fr; gap: 32px; }
+    .lado-carta { position: static; justify-self: center; }
+    .hueco { width: 210px; }
+    .elegir-baraja { display: none; }
+    .otros ul { grid-template-columns: 1fr 1fr; }
+  }
+</style>

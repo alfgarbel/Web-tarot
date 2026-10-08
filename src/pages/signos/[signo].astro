@@ -49,6 +49,7 @@ const jsonLd = {
       <nav class="migas" aria-label="Ruta"><a href="/signos/">Los signos</a> <span aria-hidden="true">/</span> {s.nombre}</nav>
       <h1>{s.nombre}</h1>
       <p class="general">{f.intro}</p>
+      <p class="hoy-enlace"><a href={`/horoscopo/${s.slug}/`} class="enlace-flecha">Horóscopo de {s.nombre} para hoy</a></p>
 
       <div class="luces-sombras">
         <section>
@@ -100,6 +101,7 @@ const jsonLd = {
   .migas a { color: var(--texto-suave); }
   .cuerpo { max-width: 680px; }
   .general { font-size: 1.2rem; line-height: 1.7; margin-top: 12px; }
+  .hoy-enlace { margin-top: 20px; }
   .luces-sombras { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
   .luces-sombras h2 { font-size: 1.3rem; }
   .luces-sombras ul { list-style: none; padding: 0; margin: 0; }
@@ -126,7 +128,8 @@ const jsonLd = {
   @media (max-width: 860px) {
     .ficha { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
     .lateral { position: static; justify-self: center; width: 220px; }
-    .luces-sombras { grid-template-columns: 1fr; gap: 32px; }
+    .hoy-enlace { margin-top: 20px; }
+  .luces-sombras { grid-template-columns: 1fr; gap: 32px; }
     .compat ul { grid-template-columns: 1fr 1fr; }
   }
 </style>

@@ -13,7 +13,7 @@ const ogImage = new URL(image, Astro.site);
 const ruta = Astro.url.pathname;
 const enlaces = [
   { href: '/tiradas/', texto: 'Tiradas', tambien: ['/tarot-si-o-no/', '/tarot-del-amor/', '/volvera-mi-ex/', '/pasado-presente-futuro/', '/cruz-celta/', '/carta-del-dia/', '/tarot-del-trabajo/', '/tarot-de-la-salud/', '/dos-caminos/'] },
-  { href: '/signos/', texto: 'Signos', tambien: ['/compatibilidad/'] },
+  { href: '/signos/', texto: 'Signos', tambien: ['/compatibilidad/', '/horoscopo/'] },
   { href: '/cartas/', texto: 'Los arcanos', corto: 'Arcanos', tambien: ['/combinaciones/'] },
   { href: '/aprender-tarot/', texto: 'Aprender', tambien: [] },
 ];
@@ -110,6 +110,7 @@ const enlaces = [
             <a href="/dos-caminos/">Decidir entre dos caminos</a>
             <a href="/carta-del-dia/">Carta del día</a>
             <a href="/compatibilidad/">Compatibilidad de signos</a>
+            <a href="/horoscopo/">Horóscopo de hoy</a>
             <a href="/signos/">Los 12 signos</a>
             <a href="/cartas/">Las 78 cartas</a>
             <a href="/combinaciones/">Combinaciones de cartas</a>
