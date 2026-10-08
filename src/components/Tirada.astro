@@ -34,7 +34,7 @@ const datos = arcanos.map((a) => ({
     <div class="paso" id="paso-pregunta">
       <slot />
       <form class="formulario" id="formulario">
-        <label for="pregunta">Tu pregunta <span class="suave">(opcional, no se guarda)</span></label>
+        <label for="pregunta">Tu pregunta <span class="suave">(opcional, solo queda en tu navegador)</span></label>
         <div class="campo">
           <input id="pregunta" type="text" maxlength="140" placeholder={placeholder} autocomplete="off" />
           <button class="boton" type="submit">Barajar</button>
@@ -64,6 +64,7 @@ const datos = arcanos.map((a) => ({
 
     <div class="paso oculto" id="paso-resultado" aria-live="polite">
       <p class="tu-pregunta" id="tu-pregunta"></p>
+      <p class="aviso-repetida" id="aviso" hidden></p>
       <ol class="lectura" id="lectura" style={`--n:${n}`}>
         {
           posiciones.map((p, i) => (
@@ -84,9 +85,10 @@ const datos = arcanos.map((a) => ({
       <div class="final">
         <p class="consejo"><span>{cierre}</span> <span id="consejo"></span></p>
         <div class="acciones">
-          <button class="boton" id="otra" type="button">Hacer otra tirada</button>
+          <button class="boton" id="otra" type="button">Preguntar otra cosa</button>
           <a class="enlace-flecha" href="/tiradas/">Ver todas las tiradas</a>
         </div>
+        <p class="nota">Las cartas recuerdan lo que les preguntas. Si repites la misma pregunta hoy, te darán la misma respuesta.</p>
       </div>
     </div>
   </div>
@@ -156,12 +158,20 @@ const datos = arcanos.map((a) => ({
     boton.classList.add('tomada');
     huecos[elegidas.length].classList.add('lleno');
     elegidas.push(carta);
-    if (elegidas.length === n) setTimeout(revelar, 650);
+    if (elegidas.length === n) {
+      window.memoriaTirada?.guardar(location.pathname, input.value, elegidas.map((c) => c.slug));
+      setTimeout(() => revelar(false), 650);
+    }
   };
 
-  const revelar = () => {
+  const revelar = (repetida) => {
     const pregunta = input.value.trim();
     $('tu-pregunta').textContent = pregunta ? `«${pregunta}»` : '';
+    const aviso = $('aviso');
+    aviso.hidden = !repetida;
+    aviso.textContent = pregunta
+      ? 'Ya les hiciste esta pregunta a las cartas hoy. Esta fue su respuesta, y sigue siendo la misma.'
+      : 'Acabas de hacer esta tirada. Esta fue tu lectura. Si tienes otra pregunta, escríbela y vuelve a barajar.';
     posiciones.forEach((li, i) => {
       const carta = elegidas[i];
       const clave = Object.keys(carta.textos)[i];
@@ -185,7 +195,14 @@ const datos = arcanos.map((a) => ({
 
   $('formulario').addEventListener('submit', (e) => {
     e.preventDefault();
-    repartir();
+    const previa = window.memoriaTirada?.leer(location.pathname, input.value);
+    const cartas = previa?.cartas.map((slug) => datos.find((d) => d.slug === slug));
+    if (cartas && cartas.length === n && cartas.every(Boolean)) {
+      elegidas = cartas;
+      revelar(true);
+    } else {
+      repartir();
+    }
   });
   $('otra').addEventListener('click', () => {
     input.value = '';
@@ -368,6 +385,16 @@ const datos = arcanos.map((a) => ({
     margin-bottom: 12px;
   }
   .acciones { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 36px; }
+  .nota { font-size: 0.9rem; color: var(--texto-suave); margin: 20px auto 0; max-width: 46ch; }
+  .aviso-repetida {
+    max-width: 560px;
+    margin: 8px auto 0;
+    padding: 12px 18px;
+    border: 1px solid color-mix(in srgb, var(--oro) 45%, transparent);
+    border-radius: var(--radio);
+    text-align: center;
+    color: var(--oro-claro);
+  }
   @media (prefers-reduced-motion: reduce) {
     .giro { transition: none; }
     .explicacion { transition: none; }

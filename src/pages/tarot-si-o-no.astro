@@ -27,7 +27,7 @@ const faq = [
   },
   {
     p: '¿Puedo preguntar varias veces lo mismo?',
-    r: 'Puedes, pero no conviene repetir la misma pregunta el mismo día. La primera respuesta suele ser la que más tiene que decirte.',
+    r: 'Las cartas recuerdan lo que les preguntas durante 24 horas en tu navegador. Si repites la misma pregunta el mismo día, verás la misma respuesta: la primera suele ser la que más tiene que decirte.',
   },
   {
     p: '¿Qué significa un «quizás»?',
@@ -58,7 +58,7 @@ const jsonLd = {
         <h1>Tarot <em>Sí o No</em></h1>
         <p class="sub">Piensa una pregunta que se responda con un sí o un no. Respira y baraja.</p>
         <form class="formulario" id="formulario">
-          <label for="pregunta">Tu pregunta <span class="suave">(opcional, no se guarda)</span></label>
+          <label for="pregunta">Tu pregunta <span class="suave">(opcional, solo queda en tu navegador)</span></label>
           <div class="campo">
             <input id="pregunta" type="text" maxlength="140" placeholder="¿Volverá a escribirme?" autocomplete="off" />
             <button class="boton" type="submit">Barajar</button>
@@ -83,14 +83,16 @@ const jsonLd = {
           </div>
           <div class="respuesta">
             <p class="tu-pregunta" id="tu-pregunta"></p>
+            <p class="aviso-repetida" id="aviso" hidden></p>
             <p class="veredicto" id="veredicto"></p>
             <p class="carta-titulo" id="nombre-carta"></p>
             <p class="texto" id="texto"></p>
             <p class="consejo"><span>Consejo</span> <span id="consejo"></span></p>
             <div class="acciones">
-              <button class="boton" id="otra" type="button">Otra pregunta</button>
+              <button class="boton" id="otra" type="button">Preguntar otra cosa</button>
               <a class="enlace-flecha" id="enlace-carta" href="/cartas/">Leer la carta completa</a>
             </div>
+            <p class="nota">Si repites la misma pregunta hoy, las cartas te darán la misma respuesta.</p>
           </div>
         </div>
       </div>
@@ -170,15 +172,23 @@ const jsonLd = {
       b.style.setProperty('--i', i);
       b.style.setProperty('--giro', `${(i - 4) * 7}deg`);
       b.setAttribute('aria-label', `Carta ${i + 1} de 9`);
-      b.addEventListener('click', () => revelar(carta));
+      b.addEventListener('click', () => {
+        window.memoriaTirada?.guardar(location.pathname, input.value, [carta.slug]);
+        revelar(carta, false);
+      });
       abanico.appendChild(b);
     });
     mostrar(pasos[1]);
   };
 
-  const revelar = (carta) => {
+  const revelar = (carta, repetida) => {
     const pregunta = input.value.trim();
     $('tu-pregunta').textContent = pregunta ? `«${pregunta}»` : '';
+    const aviso = $('aviso');
+    aviso.hidden = !repetida;
+    aviso.textContent = pregunta
+      ? 'Ya les hiciste esta pregunta a las cartas hoy. Esta fue su respuesta, y sigue siendo la misma.'
+      : 'Acabas de sacar una carta. Si tienes otra pregunta, escríbela y vuelve a barajar.';
     const molde = document.getElementById(`carta-${carta.slug}`);
     $('frente').replaceChildren(molde.content.cloneNode(true));
     const veredicto = $('veredicto');
@@ -196,7 +206,10 @@ const jsonLd = {
 
   $('formulario').addEventListener('submit', (e) => {
     e.preventDefault();
-    repartir();
+    const previa = window.memoriaTirada?.leer(location.pathname, input.value);
+    const carta = previa && datos.find((d) => d.slug === previa.cartas[0]);
+    if (carta) revelar(carta, true);
+    else repartir();
   });
   $('otra').addEventListener('click', () => {
     input.value = '';
@@ -319,6 +332,14 @@ const jsonLd = {
   .consejo { border-left: 1px solid var(--oro); padding-left: 18px; color: var(--texto-suave); max-width: 52ch; }
   .consejo span:first-child { color: var(--texto); font-weight: 600; margin-right: 6px; }
   .acciones { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 32px; }
+  .nota { font-size: 0.9rem; color: var(--texto-suave); margin: 18px 0 0; max-width: 46ch; }
+  .aviso-repetida {
+    padding: 10px 16px;
+    border: 1px solid color-mix(in srgb, var(--oro) 45%, transparent);
+    border-radius: var(--radio);
+    color: var(--oro-claro);
+    max-width: 52ch;
+  }
   @media (prefers-reduced-motion: no-preference) {
     .giro.girada + .respuesta { animation: subir 0.9s 0.5s var(--ease) both; }
   }
@@ -329,6 +350,7 @@ const jsonLd = {
     .resultado { grid-template-columns: 1fr; gap: 36px; justify-items: center; text-align: center; }
     .giro { width: 200px; }
     .consejo { border-left: 0; padding-left: 0; }
+    .nota { margin-inline: auto; }
     .acciones { justify-content: center; }
   }
 
