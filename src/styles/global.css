@@ -166,7 +166,7 @@ img { max-width: 100%; display: block; }
   border-radius: 3px;
 }
 
-/* Carta de diseño propio: marco doble en oro y tipografía Bodoni. */
+/* Carta de diseño propio: marco Art Déco, arco, sol de rayos y motivo de línea dorada. */
 .carta {
   position: relative;
   aspect-ratio: 7 / 12;
@@ -174,50 +174,57 @@ img { max-width: 100%; display: block; }
   max-width: 240px;
   border-radius: 6px;
   background:
-    radial-gradient(120% 70% at 50% 45%, rgba(201, 164, 92, 0.16), transparent 70%),
+    radial-gradient(90% 45% at 50% 45%, rgba(201, 164, 92, 0.18), transparent 70%),
     linear-gradient(170deg, #2c1638 0%, #1a0d23 100%);
-  border: 1px solid var(--oro);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  justify-items: center;
-  align-items: center;
-  padding: 9% 8%;
-  color: var(--oro-claro);
+  color: var(--oro);
   text-decoration: none;
   box-shadow: 0 24px 50px -24px rgba(5, 2, 8, 0.9);
+  container-type: inline-size;
 }
-.carta::before {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border: 1px solid var(--linea);
-  border-radius: 3px;
-  pointer-events: none;
+.carta-arte { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.carta-arte path, .carta-arte circle, .carta-arte rect, .carta-arte polygon, .carta-arte ellipse {
+  fill: none;
+  stroke: var(--oro);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
+.carta-arte .fino { stroke-width: 0.45; opacity: 0.7; }
+.carta-arte .arco { stroke-width: 0.5; opacity: 0.55; }
+.carta-arte .rayos { stroke-width: 0.5; opacity: 0.45; }
+.carta-arte .relleno { fill: var(--oro); stroke: none; }
+.carta-arte .motivo :is(path, circle, polygon, ellipse, rect) { stroke: var(--oro-claro); stroke-width: 1.7; }
+.carta-arte .motivo .f { fill: var(--oro-claro); }
+.carta-arte .motivo .g { stroke-width: 2.4; }
 .carta-numero {
+  position: absolute;
+  top: 7.6%;
+  left: 0;
+  right: 0;
+  text-align: center;
   font-family: var(--serif);
-  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  font-size: 7.5cqi;
   letter-spacing: 0.2em;
-  color: var(--oro);
-}
-.carta-simbolo {
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
   line-height: 1;
-  color: var(--oro);
-  font-family: var(--serif);
+  padding-left: 0.2em;
+  color: var(--oro-claro);
 }
 .carta-nombre {
+  position: absolute;
+  top: 78%;
+  bottom: 4%;
+  left: 10%;
+  right: 10%;
+  display: grid;
+  place-items: center;
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-size: 9.5cqi;
   color: var(--texto);
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.1;
 }
-.carta-pequena { max-width: 168px; padding: 10% 8%; }
-.carta-pequena .carta-simbolo { font-size: 2.6rem; }
-.carta-pequena .carta-numero { font-size: 0.85rem; }
-.carta-pequena .carta-nombre { font-size: 0.95rem; }
+.carta-pequena { max-width: 168px; }
 
 /* Sección clara de cal, como las paredes encaladas del patio. */
 .seccion-cal {

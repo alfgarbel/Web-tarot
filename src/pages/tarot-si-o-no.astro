@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Carta from '../components/Carta.astro';
 import { arcanos } from '../data/arcanos';
 
 const datos = arcanos.map(({ romano, nombre, slug, simbolo, respuesta, siNo, consejo }) => ({
@@ -95,6 +96,8 @@ const jsonLd = {
   </section>
 
   <div class="azulejos" aria-hidden="true"></div>
+  {arcanos.map((a) => <template id={`carta-${a.slug}`}><Carta arcano={a} /></template>)}
+
   <section class="contenido seccion-cal">
     <div class="contenedor estrecho">
       <h2>Cómo leer tu respuesta</h2>
@@ -174,12 +177,8 @@ const jsonLd = {
   const revelar = (carta) => {
     const pregunta = input.value.trim();
     $('tu-pregunta').textContent = pregunta ? `«${pregunta}»` : '';
-    $('frente').innerHTML = `
-      <div class="carta" data-tipo="${carta.respuesta === 'Sí' ? 'si' : carta.respuesta === 'No' ? 'no' : 'quizas'}" role="img" aria-label="${carta.romano}. ${carta.nombre}">
-        <span class="carta-numero">${carta.romano}</span>
-        <span class="carta-simbolo" aria-hidden="true">${carta.simbolo}</span>
-        <span class="carta-nombre">${carta.nombre}</span>
-      </div>`;
+    const molde = document.getElementById(`carta-${carta.slug}`);
+    $('frente').replaceChildren(molde.content.cloneNode(true));
     const veredicto = $('veredicto');
     veredicto.textContent = carta.respuesta;
     veredicto.dataset.tipo = carta.respuesta === 'Sí' ? 'si' : carta.respuesta === 'No' ? 'no' : 'quizas';
