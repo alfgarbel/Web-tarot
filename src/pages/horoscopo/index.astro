@@ -2,9 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import { arcanos } from '../../data/arcanos';
 import { signos, nombreElemento } from '../../data/signos';
+import { fechaMadrid, repartoDelDia } from '../../data/horoscopo';
 
 const nombres = arcanos.map((a) => a.nombre);
-const slugs = signos.map((s) => s.slug);
+const reparto = repartoDelDia(fechaMadrid(new Date()));
 ---
 
 <Base
@@ -25,7 +26,7 @@ const slugs = signos.map((s) => s.slug);
             <a href={`/horoscopo/${s.slug}/`}>
               <span class="nombre">{s.nombre}</span>
               <span class="datos">{s.fechas} · {nombreElemento(s.elemento)}</span>
-              <span class="hoy" data-signo={s.slug}></span>
+              <span class="hoy" data-signo={s.slug}>{nombres[reparto[signos.indexOf(s)]]}</span>
             </a>
           </li>
         ))
@@ -34,20 +35,15 @@ const slugs = signos.map((s) => s.slug);
   </section>
 </Base>
 
-<script is:inline define:vars={{ nombres, slugs }}>
-  const fecha = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
-  const ayer = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
-  const indice = (texto) => {
-    let h = 2166136261;
-    for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
-    return h % nombres.length;
-  };
-  document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
-  for (const slug of slugs) {
-    let i = indice(`${fecha}|${slug}`);
-    if (i === indice(`${ayer}|${slug}`)) i = (i + 7) % nombres.length;
-    document.querySelector(`[data-signo="${slug}"]`).textContent = nombres[i];
-  }
+<script type="application/json" id="datos-horoscopo" set:html={JSON.stringify(nombres)} />
+
+<script>
+  import { fechaMadrid, repartoDelDia } from '../../data/horoscopo';
+
+  const nombres: string[] = JSON.parse(document.getElementById('datos-horoscopo')!.textContent!);
+  const reparto = repartoDelDia(fechaMadrid(new Date()));
+  document.getElementById('fecha')!.textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  document.querySelectorAll<HTMLElement>('[data-signo]').forEach((el, i) => (el.textContent = nombres[reparto[i]]));
 </script>
 
 <style>

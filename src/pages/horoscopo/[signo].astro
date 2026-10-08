@@ -6,6 +6,7 @@ import Explicacion from '../../components/Explicacion.astro';
 import { arcanos } from '../../data/arcanos';
 import { lecturas } from '../../data/lecturas';
 import { signos, nombreElemento, type Signo } from '../../data/signos';
+import { fechaMadrid, repartoDelDia } from '../../data/horoscopo';
 
 export function getStaticPaths() {
   return signos.map((s) => ({ params: { signo: s.slug }, props: { s } }));
@@ -18,31 +19,26 @@ const datos = arcanos.map((a) => ({
   slug: a.slug,
   romano: a.romano,
   nombre: a.nombre,
+  // Textos de las tiradas, no los de la ficha de la carta, para que el horóscopo no repita la ficha.
   dia: lecturas[a.slug].dia,
-  amor: a.amor,
-  trabajo: a.trabajo,
-  salud: a.salud,
+  amor: lecturas[a.slug].amorTu,
+  trabajo: lecturas[a.slug].trabajoAhora,
+  salud: `${lecturas[a.slug].saludEnergia} ${lecturas[a.slug].saludCuidarte}`,
   consejo: a.consejo,
 }));
 
-// La misma cuenta que hace el navegador, para que la página ya salga con la carta del día
-// en que se compiló. Si se publica cada noche, buscadores y asistentes leen la carta de hoy.
-const indice = (texto: string) => {
-  let h = 2166136261;
-  for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
-  return h % datos.length;
-};
-const madrid = (d: Date) => d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+// La página sale ya con la carta del día en que se compiló; si se publica cada noche,
+// buscadores y asistentes leen la carta de hoy. El navegador la corrige si la fecha cambió.
+const posicion = signos.indexOf(s);
 const ahora = new Date();
-let elegido = indice(`${madrid(ahora)}|${s.slug}`);
-if (elegido === indice(`${madrid(new Date(ahora.getTime() - 864e5))}|${s.slug}`)) elegido = (elegido + 7) % datos.length;
+const elegido = repartoDelDia(fechaMadrid(ahora))[posicion];
 const hoy = datos[elegido];
 const fechaTexto = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
 
 const faq = [
   {
     p: '¿Cómo se hace este horóscopo?',
-    r: `Cada día se elige un arcano mayor para ${s.nombre}. Todas las personas de ${s.nombre} ven la misma carta ese día, y mañana cambia. Los textos son los de la ficha de esa carta.`,
+    r: `Cada día se elige un arcano mayor para ${s.nombre}. Todas las personas de ${s.nombre} ven la misma carta ese día, y mañana cambia. Cada signo recibe una carta distinta ese día.`,
   },
   {
     p: '¿A qué hora cambia?',
@@ -105,26 +101,22 @@ const faq = [
   </Explicacion>
 </Base>
 
-<script is:inline define:vars={{ datos, slug: s.slug }}>
-  const $ = (id) => document.getElementById(id);
-  const fecha = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
-  const indice = (texto) => {
-    let h = 2166136261;
-    for (const c of texto) h = Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0;
-    return h % datos.length;
-  };
-  const ayer = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
-  let i = indice(`${fecha}|${slug}`);
-  // Evita que un signo repita la carta de ayer.
-  if (i === indice(`${ayer}|${slug}`)) i = (i + 7) % datos.length;
-  const carta = datos[i];
+<script type="application/json" id="datos-horoscopo" set:html={JSON.stringify({ datos, posicion })} />
+
+<script>
+  import { fechaMadrid, repartoDelDia } from '../../data/horoscopo';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const { datos, posicion } = JSON.parse($('datos-horoscopo').textContent!);
+  const carta = datos[repartoDelDia(fechaMadrid(new Date()))[posicion]];
   $('fecha').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
-  // La página ya trae la carta del día en que se publicó; solo se cambia si hoy toca otra.
+  // Solo se cambia si hoy toca otra carta que la del día en que se publicó la página.
   if ($('hueco').dataset.carta !== carta.slug) {
     $('hueco').dataset.carta = carta.slug;
-    $('hueco').replaceChildren($(`carta-${carta.slug}`).content.cloneNode(true));
+    const plantilla = document.getElementById(`carta-${carta.slug}`) as HTMLTemplateElement;
+    $('hueco').replaceChildren(plantilla.content.cloneNode(true));
     $('nombre').textContent = `${carta.romano}. ${carta.nombre}`;
-    $('nombre').href = `/cartas/${carta.slug}/`;
+    ($('nombre') as HTMLAnchorElement).href = `/cartas/${carta.slug}/`;
     for (const k of ['mensaje', 'amor', 'trabajo', 'salud', 'consejo']) $(k).textContent = carta[k === 'mensaje' ? 'dia' : k];
   }
 </script>

@@ -99,7 +99,7 @@ const jsonLd = {
       </section>
     </div>
     {
-      !mismo && (
+      !t && !mismo && (
         <div class="dos">
           {[a, b].map((s) => (
             <section class="bloque" data-marca="romero">
@@ -112,7 +112,7 @@ const jsonLd = {
       )
     }
     {
-      mismo && (
+      !t && mismo && (
         <section class="bloque" data-marca="romero">
           <h2>{a.nombre} en el amor</h2>
           <p>{a.amor}</p>
