@@ -175,7 +175,7 @@ img { max-width: 100%; display: block; }
   border-radius: 6px;
   background:
     radial-gradient(120% 70% at 50% 45%, rgba(201, 164, 92, 0.16), transparent 70%),
-    linear-gradient(170deg, var(--tono-1, #2c1638) 0%, var(--tono-2, #1a0d23) 100%);
+    linear-gradient(170deg, #2c1638 0%, #1a0d23 100%);
   border: 1px solid var(--oro);
   display: grid;
   grid-template-rows: auto 1fr auto;
