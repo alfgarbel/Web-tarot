@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+
+const tiradas = [
+  {
+    href: '/tarot-del-amor/',
+    titulo: 'Tarot del amor',
+    cartas: 3,
+    texto: 'Tú, la otra persona y la relación. Para entender qué está pasando en tu historia y hacia dónde va.',
+    tono: 'terracota',
+  },
+  {
+    href: '/tarot-si-o-no/',
+    titulo: 'Tarot Sí o No',
+    cartas: 1,
+    texto: 'Una pregunta, una carta y una respuesta clara con su explicación. Para cuando necesitas decidir.',
+    tono: 'oro',
+  },
+  {
+    href: '/pasado-presente-futuro/',
+    titulo: 'Pasado, presente y futuro',
+    cartas: 3,
+    texto: 'La tirada clásica. De dónde vienes, dónde estás y hacia dónde te llevan tus pasos.',
+    tono: 'azulejo',
+  },
+  {
+    href: '/carta-del-dia/',
+    titulo: 'Carta del día',
+    cartas: 1,
+    texto: 'Un arcano y un mensaje para orientar tu jornada. Cada día, una carta nueva.',
+    tono: 'romero',
+  },
+];
+
+const proximas = ['¿Volverá mi ex?', 'Cruz celta', 'Compatibilidad'];
+---
+
+<Base
+  title="Tiradas de tarot gratis: amor, sí o no y más | Noctámbula"
+  description="Todas las tiradas de tarot gratis de Noctámbula: tarot del amor, sí o no, pasado presente y futuro y carta del día. Sin registro y escritas a mano."
+>
+  <section class="cabeza">
+    <div class="contenedor">
+      <h1>Elige <em>tu tirada</em></h1>
+      <p class="sub">Todas son gratis, sin registro y con textos escritos a mano para cada carta y cada posición.</p>
+    </div>
+  </section>
+
+  <section class="contenedor">
+    <ol class="lista">
+      {
+        tiradas.map((t) => (
+          <li class="revelar" data-tono={t.tono}>
+            <a href={t.href} class="fila">
+              <span class="mazo" style={`--n:${t.cartas}`} aria-hidden="true">
+                {Array.from({ length: t.cartas }, (_, i) => (
+                  <span class="dorso" style={`--i:${i}`} />
+                ))}
+              </span>
+              <span class="nombre">{t.titulo}</span>
+              <span class="detalle">
+                <span class="cuantas">{t.cartas === 1 ? 'Una carta' : 'Tres cartas'}</span>
+                {t.texto}
+              </span>
+              <span class="flecha" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="proximas"><span>Muy pronto</span> {proximas.join(' · ')}</p>
+  </section>
+</Base>
+
+<style>
+  .cabeza { padding: 72px 0 32px; }
+  .sub { max-width: 52ch; font-size: 1.15rem; color: var(--texto-suave); }
+  .lista { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--linea-suave); }
+  li[data-tono='terracota'] { --tono: var(--terracota-claro); }
+  li[data-tono='oro'] { --tono: var(--oro-claro); }
+  li[data-tono='azulejo'] { --tono: var(--azulejo-claro); }
+  li[data-tono='romero'] { --tono: var(--romero-claro); }
+  .lista li { border-bottom: 1px solid var(--linea-suave); }
+  .fila {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1.1fr) 40px;
+    gap: 40px;
+    align-items: center;
+    padding: 40px 0;
+    text-decoration: none;
+    color: var(--texto);
+  }
+  .mazo { position: relative; height: 110px; display: block; }
+  .mazo .dorso {
+    position: absolute;
+    width: 64px;
+    left: calc(50% - 32px + (var(--i) - (var(--n) - 1) / 2) * 30px);
+    bottom: 0;
+    transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * 9deg));
+    transform-origin: 50% 120%;
+    transition: transform 0.5s var(--ease);
+  }
+  .fila:hover .mazo .dorso { transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * 14deg)) translateY(-6px); }
+  .nombre { font-family: var(--serif); font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.05; transition: color 0.3s; }
+  .fila:hover .nombre { color: var(--tono); }
+  .detalle { color: var(--texto-suave); }
+  .cuantas { display: block; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tono); margin-bottom: 6px; }
+  .flecha { font-size: 1.6rem; color: var(--tono); transition: transform 0.4s var(--ease); }
+  .fila:hover .flecha { transform: translateX(6px); }
+  .proximas { margin: 36px 0 96px; color: var(--texto-suave); }
+  .proximas span { color: var(--oro); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; margin-right: 12px; }
+  @media (max-width: 820px) {
+    .fila { grid-template-columns: 96px 1fr; gap: 8px 24px; padding: 28px 0; }
+    .mazo { grid-row: span 2; height: 84px; }
+    .mazo .dorso { width: 46px; left: calc(50% - 23px + (var(--i) - (var(--n) - 1) / 2) * 20px); }
+    .flecha { display: none; }
+  }
+</style>

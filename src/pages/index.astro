@@ -51,6 +51,21 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
     </div>
   </section>
 
+  <section class="mas-tiradas">
+    <div class="contenedor mas-rejilla">
+      <div class="revelar">
+        <span class="antetitulo">Más tiradas</span>
+        <h2>Cuando una carta <em>no basta</em></h2>
+        <a href="/tiradas/" class="enlace-flecha">Ver todas las tiradas</a>
+      </div>
+      <ul class="mas-lista revelar">
+        <li data-tono="terracota"><a href="/tarot-del-amor/"><span>Tarot del amor</span><span>Tú, la otra persona y la relación</span></a></li>
+        <li data-tono="azulejo"><a href="/pasado-presente-futuro/"><span>Pasado, presente y futuro</span><span>La tirada clásica de tres cartas</span></a></li>
+        <li data-tono="romero"><a href="/carta-del-dia/"><span>Carta del día</span><span>Un mensaje para orientar tu jornada</span></a></li>
+      </ul>
+    </div>
+  </section>
+
   <section class="arcanos">
     <div class="contenedor">
       <div class="arcanos-cabecera revelar">
@@ -213,5 +228,29 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
   @media (max-width: 860px) {
     .principios { padding: 64px 0 80px; }
     .principios-rejilla { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .mas-tiradas { padding: 96px 0 104px; }
+  .mas-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 72px; align-items: start; }
+  .mas-rejilla h2 { max-width: 12ch; }
+  .mas-lista { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--linea-suave); }
+  .mas-lista li { border-bottom: 1px solid var(--linea-suave); }
+  .mas-lista li[data-tono='terracota'] { --tono: var(--terracota-claro); }
+  .mas-lista li[data-tono='azulejo'] { --tono: var(--azulejo-claro); }
+  .mas-lista li[data-tono='romero'] { --tono: var(--romero-claro); }
+  .mas-lista a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 24px;
+    padding: 26px 0;
+    text-decoration: none;
+    color: var(--texto);
+  }
+  .mas-lista a span:first-child { font-family: var(--serif); font-size: clamp(1.5rem, 2.6vw, 2rem); transition: color 0.3s; }
+  .mas-lista a span:last-child { color: var(--texto-suave); grid-column: 1; }
+  .mas-lista a::after { content: '→'; grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--tono); font-size: 1.4rem; transition: transform 0.4s var(--ease); }
+  .mas-lista a:hover span:first-child { color: var(--tono); }
+  .mas-lista a:hover::after { transform: translateX(6px); }
+  @media (max-width: 820px) {
+    .mas-rejilla { grid-template-columns: 1fr; gap: 32px; }
   }
 </style>

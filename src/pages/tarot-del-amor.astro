@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Tirada from '../components/Tirada.astro';
+import Explicacion from '../components/Explicacion.astro';
+
+const faq = [
+  {
+    p: '¿Cómo funciona el tarot del amor?',
+    r: 'Piensas en tu situación sentimental, barajas y eliges tres cartas. La primera habla de ti, la segunda de la otra persona y la tercera de la relación: lo que hay entre vosotros y hacia dónde puede ir.',
+  },
+  {
+    p: '¿Sirve si no tengo pareja?',
+    r: 'Sí. Puedes pensar en alguien que te guste, en una historia que terminó o simplemente en el amor que quieres atraer. La segunda carta hablará entonces de quien está por llegar o de esa persona que tienes en mente.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, siempre. No hace falta registrarse ni dejar ningún dato, y tu pregunta no se guarda en ningún sitio.',
+  },
+  {
+    p: '¿Y si sale una carta difícil?',
+    r: 'Ninguna carta es una condena. La Torre o la Luna señalan algo que conviene mirar de frente, no un final escrito. Lee el texto con calma y quédate con lo que te ayude a decidir.',
+  },
+];
+---
+
+<Base
+  title="Tarot del amor gratis: tirada de tres cartas | Noctámbula"
+  description="Tirada de tarot del amor gratis y sin registro: tres cartas para ver cómo estás tú, qué siente la otra persona y hacia dónde va vuestra relación."
+>
+  <Tirada
+    posiciones={[
+      { clave: 'amorTu', titulo: 'Tú' },
+      { clave: 'amorOtra', titulo: 'La otra persona' },
+      { clave: 'amorRelacion', titulo: 'La relación' },
+    ]}
+    preguntas={['¿Qué siente por mí?', '¿Tiene futuro lo nuestro?', '¿Volverá?', '¿Llegará alguien pronto?']}
+    placeholder="¿Qué pasa entre nosotros?"
+    cierre="Para tu corazón"
+  >
+    <h1>Tarot <em>del amor</em></h1>
+    <p class="sub">Tres cartas: tú, la otra persona y lo que hay entre los dos. Piensa en esa historia y baraja.</p>
+  </Tirada>
+
+  <Explicacion titulo="Cómo leer tu tirada del amor" faq={faq}>
+    <p class="suave">
+      Lee las cartas en orden. La primera te muestra cómo llegas tú a esta historia: tus ganas, tus miedos y lo que
+      necesitas. La segunda habla de la otra persona, de lo que siente y de lo que quizá no dice. La tercera une las dos y
+      describe la relación en este momento.
+    </p>
+    <p class="suave">
+      Si quieres una respuesta más directa a una sola pregunta, prueba el <a href="/tarot-si-o-no/">tarot Sí o No</a>.
+      Y si una carta te deja con ganas de saber más, toca su nombre para leer su significado completo.
+    </p>
+  </Explicacion>
+</Base>

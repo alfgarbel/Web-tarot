@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Tirada from '../components/Tirada.astro';
+import Explicacion from '../components/Explicacion.astro';
+
+const faq = [
+  {
+    p: '¿Qué es la tirada de pasado, presente y futuro?',
+    r: 'Es la tirada clásica de tres cartas. La primera muestra lo que te ha traído hasta aquí, la segunda cómo estás ahora y la tercera hacia dónde van las cosas si sigues por el mismo camino.',
+  },
+  {
+    p: '¿El futuro que sale es seguro?',
+    r: 'No. La carta del futuro describe una tendencia, no un destino fijo. Si no te gusta lo que ves, la carta del presente suele darte la pista de qué puedes cambiar.',
+  },
+  {
+    p: '¿Sobre qué puedo preguntar?',
+    r: 'Sobre cualquier tema: el trabajo, una amistad, una mudanza o tu vida en general. Si tu pregunta es de amor, la tirada del tarot del amor te dará una lectura más precisa.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, y sin registro. Tu pregunta no se guarda en ningún sitio.',
+  },
+];
+---
+
+<Base
+  title="Tirada pasado, presente y futuro: tarot gratis de tres cartas | Noctámbula"
+  description="Tirada de tarot gratis de pasado, presente y futuro: tres cartas para entender de dónde vienes, dónde estás y hacia dónde vas. Sin registro."
+>
+  <Tirada
+    posiciones={[
+      { clave: 'pasado', titulo: 'Pasado' },
+      { clave: 'presente', titulo: 'Presente' },
+      { clave: 'futuro', titulo: 'Futuro' },
+    ]}
+    preguntas={['¿Qué me espera en el trabajo?', '¿Cómo va a ir este año?', '¿Hago bien en mudarme?']}
+    placeholder="¿Hacia dónde voy?"
+  >
+    <h1>Pasado, presente <em>y futuro</em></h1>
+    <p class="sub">La tirada clásica de tres cartas. De dónde vienes, dónde estás y hacia dónde vas.</p>
+  </Tirada>
+
+  <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
+    <p class="suave">
+      Lee las tres cartas como una historia. El pasado explica el presente, y el presente da forma al futuro. Si la carta
+      del futuro te preocupa, vuelve a la del presente: ahí está lo que todavía puedes cambiar.
+    </p>
+    <p class="suave">
+      Cada carta tiene su significado completo en <a href="/cartas/">los veintidós arcanos</a>. Toca su nombre para
+      leerlo.
+    </p>
+  </Explicacion>
+</Base>

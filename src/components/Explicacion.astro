@@ -1,0 +1,45 @@
+---
+// Sección clara bajo cada tirada: cómo leerla y preguntas frecuentes (con su JSON-LD).
+interface Props {
+  titulo: string;
+  faq: { p: string; r: string }[];
+}
+
+const { titulo, faq } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.p, acceptedAnswer: { '@type': 'Answer', text: f.r } })),
+};
+---
+
+<div class="azulejos" aria-hidden="true"></div>
+<section class="contenido seccion-cal">
+  <div class="contenedor estrecho">
+    <h2>{titulo}</h2>
+    <slot />
+    <h2 class="faq-titulo">Preguntas frecuentes</h2>
+    {
+      faq.map((f) => (
+        <details>
+          <summary>{f.p}</summary>
+          <p class="suave">{f.r}</p>
+        </details>
+      ))
+    }
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
+
+<style>
+  .contenido { padding: 96px 0; }
+  .estrecho { max-width: 760px; }
+  .faq-titulo { margin-top: 1.4em; }
+  details { border-top: 1px solid rgba(43, 26, 44, 0.15); padding: 18px 0; }
+  details:last-of-type { border-bottom: 1px solid rgba(43, 26, 44, 0.15); }
+  summary { cursor: pointer; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: '+'; color: var(--terracota); font-size: 1.4rem; line-height: 1; transition: transform 0.3s var(--ease); }
+  details[open] summary::after { transform: rotate(45deg); }
+  summary::-webkit-details-marker { display: none; }
+  details p { margin: 12px 0 0; }
+</style>
