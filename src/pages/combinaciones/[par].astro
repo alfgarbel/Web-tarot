@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
 import { arcanos } from '../../data/arcanos';
 import { combinaciones, slugCombinacion, type Combinacion } from '../../data/combinaciones';
+import { combinacionesAmpliadas } from '../../data/combinaciones-ampliado';
 
 export function getStaticPaths() {
   return combinaciones.map((c) => ({ params: { par: slugCombinacion(c) }, props: { c } }));
@@ -12,17 +13,26 @@ const { c } = Astro.props as { c: Combinacion };
 const a = arcanos.find((x) => x.slug === c.a)!;
 const b = arcanos.find((x) => x.slug === c.b)!;
 const titulo = `${a.nombre} y ${b.nombre}`;
+const amp = combinacionesAmpliadas[slugCombinacion(c)];
 const relacionadas = combinaciones
   .filter((o) => o !== c && [o.a, o.b].some((s) => s === c.a || s === c.b))
   .map((o) => ({ href: `/combinaciones/${slugCombinacion(o)}/`, texto: `${arcanos.find((x) => x.slug === o.a)!.nombre} y ${arcanos.find((x) => x.slug === o.b)!.nombre}` }));
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: `${titulo} en el tarot: qué significan juntas`,
-  description: c.resumen,
-  inLanguage: 'es',
-  author: { '@type': 'Organization', name: 'Arcanaia' },
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: `${titulo} en el tarot: qué significan juntas`,
+      description: c.resumen,
+      inLanguage: 'es-ES',
+      mainEntityOfPage: new URL(`/combinaciones/${slugCombinacion(c)}/`, Astro.site).href,
+      author: { '@type': 'Organization', name: 'Arcanaia' },
+    },
+    ...(amp
+      ? [{ '@type': 'FAQPage', mainEntity: amp.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.r } })) }]
+      : []),
+  ],
 };
 ---
 
@@ -67,7 +77,42 @@ const jsonLd = {
         <p>{c.trabajo}</p>
       </section>
     </div>
+    {
+      amp && (
+        <>
+          <section class="bloque" data-marca="azulejo">
+            <h2>Un ejemplo</h2>
+            <p>{amp.ejemplo}</p>
+          </section>
+          <section class="bloque posiciones">
+            <h2>Según la posición en la tirada</h2>
+            <div class="tres">
+              <div><h3>En el pasado</h3><p>{amp.posiciones.pasado}</p></div>
+              <div><h3>En el presente</h3><p>{amp.posiciones.presente}</p></div>
+              <div><h3>En el futuro</h3><p>{amp.posiciones.futuro}</p></div>
+            </div>
+          </section>
+          <section class="bloque" data-marca="terracota">
+            <h2>Si salen invertidas</h2>
+            <p>{amp.invertidas}</p>
+          </section>
+        </>
+      )
+    }
     <blockquote class="consejo">{c.consejo}</blockquote>
+    {
+      amp && (
+        <section class="preguntas">
+          <h2>Preguntas frecuentes</h2>
+          {amp.faq.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.r}</p>
+            </details>
+          ))}
+        </section>
+      )
+    }
     <p class="nota suave">
       Cada carta tiene su propia ficha: <a href={`/cartas/${a.slug}/`}>{a.nombre}</a> y <a href={`/cartas/${b.slug}/`}>{b.nombre}</a>.
       Si te han salido en una <a href="/pasado-presente-futuro/">tirada de tres cartas</a>, lee también la posición en la que cayó cada una.
@@ -114,6 +159,20 @@ const jsonLd = {
   .consejo::before { content: '«'; color: var(--oro); }
   .consejo::after { content: '»'; color: var(--oro); }
   .nota { margin-top: 28px; max-width: 64ch; }
+  .bloque[data-marca='azulejo'] { --marca: var(--azulejo); }
+  .bloque > p { color: var(--texto-suave); }
+  .tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 12px; }
+  .tres h3 { font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); margin: 0 0 8px; }
+  .tres p { color: var(--texto-suave); margin: 0; }
+  .preguntas { margin-top: 64px; }
+  .preguntas h2 { font-size: 1.5rem; }
+  .preguntas details { border-top: 1px solid var(--linea-suave); padding: 16px 0; }
+  .preguntas details:last-of-type { border-bottom: 1px solid var(--linea-suave); }
+  .preguntas summary { cursor: pointer; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .preguntas summary::after { content: '+'; color: var(--oro); font-size: 1.3rem; line-height: 1; transition: transform 0.3s var(--ease); }
+  .preguntas details[open] summary::after { transform: rotate(45deg); }
+  .preguntas summary::-webkit-details-marker { display: none; }
+  .preguntas details p { color: var(--texto-suave); margin: 10px 0 0; }
   .otras { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--linea-suave); }
   .otras h2 { font-size: 1.4rem; }
   .otras ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
@@ -123,6 +182,6 @@ const jsonLd = {
     .pareja { grid-template-columns: 1fr 1fr; gap: 24px 20px; justify-items: center; }
     .centro { order: -1; grid-column: 1 / -1; }
     .pareja-carta { width: 100%; max-width: 150px; }
-    .dos, .otras ul { grid-template-columns: 1fr; }
+    .dos, .otras ul, .tres { grid-template-columns: 1fr; }
   }
 </style>

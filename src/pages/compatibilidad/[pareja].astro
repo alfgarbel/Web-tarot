@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
 import { arcanos } from '../../data/arcanos';
+import { textosParejas } from '../../data/compat';
 import { parejas, compatibilidad, nombreElemento, nombreModalidad, signos, slugPareja, type Signo } from '../../data/signos';
 
 export function getStaticPaths() {
@@ -12,6 +13,7 @@ const { a, b } = Astro.props as { a: Signo; b: Signo };
 const c = compatibilidad(a, b);
 const mismo = a === b;
 const titulo = `${a.nombre} y ${b.nombre}`;
+const t = textosParejas[slugPareja(a, b)];
 const arcano = (s: Signo) => arcanos.find((x) => x.slug === s.arcano)!;
 
 const otras = (s: Signo) =>
@@ -62,10 +64,30 @@ const jsonLd = {
   </section>
 
   <article class="contenedor cuerpo">
+    {t && <p class="resumen">{t.resumen}</p>}
     <section class="bloque principal">
       <h2>Cómo encajáis</h2>
       <p>{c.aspecto.texto}</p>
     </section>
+    {
+      t && (
+        <>
+          <section class="bloque" data-marca="terracota">
+            <h2>{titulo} en el amor</h2>
+            {t.amor.map((p) => <p>{p}</p>)}
+            <p>{t.pasion}</p>
+          </section>
+          <div class="dos">
+            <section class="bloque" data-marca="romero"><h2>En la amistad</h2><p>{t.amistad}</p></section>
+            <section class="bloque" data-marca="azulejo"><h2>En el trabajo</h2><p>{t.trabajo}</p></section>
+          </div>
+          <div class="dos listas">
+            <section class="bloque"><h2>Lo que os une</h2><ul>{t.fuertes.map((x) => <li>{x}</li>)}</ul></section>
+            <section class="bloque" data-marca="terracota"><h2>Dónde chocáis</h2><ul>{t.roces.map((x) => <li>{x}</li>)}</ul></section>
+          </div>
+        </>
+      )
+    }
     <div class="dos">
       <section class="bloque" data-marca="terracota">
         <h2>Vuestros elementos</h2>
@@ -98,7 +120,7 @@ const jsonLd = {
         </section>
       )
     }
-    <blockquote class="consejo">{c.aspecto.consejo}</blockquote>
+    <blockquote class="consejo">{t ? t.consejo : c.aspecto.consejo}</blockquote>
     <p class="cartas-nota suave">
       Las cartas son los arcanos que la tradición asocia a cada signo: {arcano(a).nombre} para {a.nombre}{!mismo && <> y {arcano(b).nombre} para {b.nombre}</>}.
       Si quieres saber cómo está ahora vuestra historia, haz el <a href="/tarot-del-amor/">tarot del amor</a>.
@@ -171,6 +193,12 @@ const jsonLd = {
   .consejo::before { content: '«'; color: var(--oro); }
   .consejo::after { content: '»'; color: var(--oro); }
   .cartas-nota { margin-top: 28px; max-width: 64ch; }
+  .resumen { font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.7rem); line-height: 1.4; margin: 56px 0 0; }
+  .bloque > p { color: var(--texto-suave); }
+  .principal > p { color: var(--texto); }
+  .listas ul { list-style: none; padding: 0; margin: 0; }
+  .listas li { padding: 9px 0 9px 22px; border-bottom: 1px solid var(--linea-suave); color: var(--texto-suave); position: relative; }
+  .listas li::before { content: '✦'; position: absolute; left: 0; top: 0.8em; font-size: 0.75em; color: var(--marca, var(--oro)); }
   .otras { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--linea-suave); }
   .otras h2 { font-size: 1.4rem; }
   .otras ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
