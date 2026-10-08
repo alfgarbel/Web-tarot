@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Explicacion from '../components/Explicacion.astro';
+import { entradilla, capitulos, faq } from '../data/guia';
+
+// Los párrafos son texto plano con **negrita** para términos clave.
+const escapar = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const marcar = (t: string) => escapar(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Cómo aprender tarot: guía para principiantes',
+  description: entradilla,
+  inLanguage: 'es',
+  author: { '@type': 'Organization', name: 'Arcanaia' },
+};
+---
+
+<Base
+  title="Cómo aprender tarot: guía para principiantes paso a paso | Arcanaia"
+  description="Guía gratuita para aprender a leer el tarot desde cero: cómo es la baraja, cómo aprender las cartas sin memorizar, cómo preguntar, tus primeras tiradas y un plan de práctica de 30 días."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="cabeza contenedor">
+    <h1>Cómo aprender <em>tarot</em></h1>
+    <p class="sub">{entradilla}</p>
+  </section>
+
+  <div class="contenedor guia">
+    <nav class="indice" aria-label="Capítulos">
+      <p class="indice-titulo">Capítulos</p>
+      <ol>
+        {capitulos.map((c) => <li><a href={`#${c.id}`}>{c.titulo}</a></li>)}
+      </ol>
+    </nav>
+
+    <article class="texto">
+      {
+        capitulos.map((c, i) => (
+          <section id={c.id}>
+            <p class="numero">{String(i + 1).padStart(2, '0')}</p>
+            <h2>{c.titulo}</h2>
+            {c.parrafos.map((p) => <p set:html={marcar(p)} />)}
+            {c.lista && <ul>{c.lista.map((l) => <li set:html={marcar(l)} />)}</ul>}
+            {c.enlaces && (
+              <p class="enlaces">
+                {c.enlaces.map((e) => <a href={e.href} class="enlace-flecha">{e.texto}</a>)}
+              </p>
+            )}
+          </section>
+        ))
+      }
+    </article>
+  </div>
+
+  <Explicacion titulo="Y ahora, a practicar" faq={faq.map((f) => ({ p: f.q, r: f.r }))}>
+    <p>Lo que más enseña es sacar una carta cada día y apuntar qué te sugiere. Empieza hoy con la <a href="/carta-del-dia/">carta del día</a> y ten a mano <a href="/cartas/">las fichas de las 78 cartas</a>.</p>
+  </Explicacion>
+</Base>
+
+<style>
+  .cabeza { padding-top: 72px; padding-bottom: 56px; }
+  .sub { font-size: 1.25rem; color: var(--texto-suave); max-width: 58ch; }
+  .guia { display: grid; grid-template-columns: 260px 1fr; gap: 80px; align-items: start; padding-bottom: 96px; }
+  .indice { position: sticky; top: 108px; }
+  .indice-titulo { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); margin-bottom: 12px; }
+  .indice ol { list-style: none; padding: 0; margin: 0; counter-reset: cap; }
+  .indice li { counter-increment: cap; }
+  .indice a { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--linea-suave); color: var(--texto-suave); text-decoration: none; font-size: 0.95rem; }
+  .indice a::before { content: counter(cap, decimal-leading-zero); color: var(--oro); font-variant-numeric: tabular-nums; }
+  .indice a:hover { color: var(--oro-claro); }
+  .texto { max-width: 680px; }
+  .texto section { padding-top: 24px; margin-bottom: 64px; scroll-margin-top: 96px; }
+  .numero { font-family: var(--serif); font-size: 1rem; color: var(--oro); margin: 0 0 4px; letter-spacing: 0.1em; }
+  .texto h2 { font-size: clamp(1.8rem, 3vw, 2.3rem); }
+  .texto p { color: var(--texto-suave); line-height: 1.75; }
+  .texto :global(strong) { color: var(--texto); font-weight: 600; }
+  .texto ul { padding-left: 1.2em; color: var(--texto-suave); }
+  .texto li { margin: 0.4em 0; line-height: 1.6; }
+  .texto li::marker { color: var(--oro); }
+  .enlaces { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px; }
+  @media (max-width: 900px) {
+    .guia { grid-template-columns: 1fr; gap: 32px; }
+    .indice { position: static; }
+  }
+</style>

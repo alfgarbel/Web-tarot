@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos } from '../../data/arcanos';
+import { signos, compatibilidad, slugPareja, nombreElemento, nombreModalidad, type Signo } from '../../data/signos';
+import { fichasSignos } from '../../data/signos-fichas';
+
+export function getStaticPaths() {
+  return signos.map((s) => ({ params: { signo: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: Signo };
+const f = fichasSignos[s.slug];
+const arcano = arcanos.find((a) => a.slug === s.arcano)!;
+const i = signos.indexOf(s);
+const anterior = signos[(i + 11) % 12];
+const siguiente = signos[(i + 1) % 12];
+const parejas = signos.map((o) => ({ o, slug: slugPareja(s, o), nota: compatibilidad(s, o).nota }));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${s.nombre}: personalidad, amor y trabajo`,
+  description: f.intro,
+  inLanguage: 'es',
+  author: { '@type': 'Organization', name: 'Arcanaia' },
+};
+---
+
+<Base
+  title={`${s.nombre}: personalidad, amor, trabajo y su carta del tarot | Arcanaia`}
+  description={`Cómo es ${s.nombre} (${s.fechas}): personalidad, virtudes y defectos, amor, trabajo, compatibilidad y ${arcano.nombre}, su arcano del tarot.`}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="contenedor ficha">
+    <aside class="lateral">
+      <a href={`/cartas/${arcano.slug}/`} aria-label={`Ficha de ${arcano.nombre}`}><Carta arcano={arcano} /></a>
+      <dl class="datos">
+        <div><dt>Fechas</dt><dd>{s.fechas}</dd></div>
+        <div><dt>Elemento</dt><dd>{nombreElemento(s.elemento)}</dd></div>
+        <div><dt>Ritmo</dt><dd>{nombreModalidad(s.modalidad)}</dd></div>
+        <div><dt>Regente</dt><dd>{s.regente}</dd></div>
+        <div><dt>Arcano</dt><dd><a href={`/cartas/${arcano.slug}/`}>{arcano.nombre}</a></dd></div>
+      </dl>
+    </aside>
+
+    <div class="cuerpo">
+      <nav class="migas" aria-label="Ruta"><a href="/signos/">Los signos</a> <span aria-hidden="true">/</span> {s.nombre}</nav>
+      <h1>{s.nombre}</h1>
+      <p class="general">{f.intro}</p>
+
+      <div class="luces-sombras">
+        <section>
+          <h2>Sus luces</h2>
+          <ul>{f.luces.map((l) => <li>{l}</li>)}</ul>
+        </section>
+        <section>
+          <h2>Sus sombras</h2>
+          <ul>{f.sombras.map((l) => <li>{l}</li>)}</ul>
+        </section>
+      </div>
+
+      <div class="bloques">
+        <section data-marca="oro"><h2>Personalidad</h2><p>{f.personalidad}</p></section>
+        <section data-marca="terracota"><h2>En el amor</h2><p>{s.amor}</p><p>{s.necesita}</p></section>
+        <section data-marca="romero"><h2>En el trabajo y el dinero</h2><p>{f.trabajo}</p></section>
+        <section data-marca="azulejo"><h2>En la amistad</h2><p>{f.amistad}</p></section>
+        <section data-marca="oro"><h2>Su carta: {arcano.nombre}</h2><p>{f.carta}</p></section>
+      </div>
+
+      <blockquote class="consejo">{f.consejo}</blockquote>
+
+      <section class="compat">
+        <h2>{s.nombre} con otros signos</h2>
+        <ul>
+          {parejas.map((p) => (
+            <li><a href={`/compatibilidad/${p.slug}/`}><span>{p.o.nombre}</span><span>{p.nota}%</span></a></li>
+          ))}
+        </ul>
+      </section>
+
+      <nav class="pasar" aria-label="Otros signos">
+        <a href={`/signos/${anterior.slug}/`} class="enlace-flecha">{anterior.nombre}</a>
+        <a href={`/signos/${siguiente.slug}/`} class="enlace-flecha">{siguiente.nombre}</a>
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .ficha { display: grid; grid-template-columns: 300px 1fr; gap: 96px; align-items: start; padding-top: 72px; padding-bottom: 64px; }
+  .lateral { position: sticky; top: 108px; }
+  .lateral :global(.carta) { max-width: 300px; }
+  .datos { margin: 28px 0 0; display: grid; gap: 0; max-width: 300px; }
+  .datos div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--linea-suave); }
+  .datos dt { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); }
+  .datos dd { margin: 0; text-align: right; color: var(--texto-suave); font-size: 0.95rem; }
+  .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 28px; }
+  .migas a { color: var(--texto-suave); }
+  .cuerpo { max-width: 680px; }
+  .general { font-size: 1.2rem; line-height: 1.7; margin-top: 12px; }
+  .luces-sombras { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
+  .luces-sombras h2 { font-size: 1.3rem; }
+  .luces-sombras ul { list-style: none; padding: 0; margin: 0; }
+  .luces-sombras li { padding: 8px 0 8px 22px; border-bottom: 1px solid var(--linea-suave); color: var(--texto-suave); position: relative; }
+  .luces-sombras li::before { content: '✦'; position: absolute; left: 0; color: var(--oro); font-size: 0.8em; top: 0.75em; }
+  .luces-sombras section:last-child li::before { content: '◦'; color: var(--azulejo); font-size: 1.1em; top: 0.45em; }
+  .bloques section { border-top: 2px solid var(--marca); padding-top: 18px; margin-top: 48px; }
+  .bloques [data-marca='oro'] { --marca: var(--oro); }
+  .bloques [data-marca='terracota'] { --marca: var(--terracota); }
+  .bloques [data-marca='romero'] { --marca: var(--romero); }
+  .bloques [data-marca='azulejo'] { --marca: var(--azulejo); }
+  .bloques h2 { font-size: 1.6rem; }
+  .bloques p { color: var(--texto-suave); }
+  .bloques p + p { margin-top: 0.5em; }
+  .consejo { margin: 72px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.25; }
+  .consejo::before { content: '«'; color: var(--oro); }
+  .consejo::after { content: '»'; color: var(--oro); }
+  .compat { margin-top: 72px; }
+  .compat h2 { font-size: 1.4rem; }
+  .compat ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 24px; }
+  .compat a { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto-suave); }
+  .compat a:hover { color: var(--oro-claro); }
+  .pasar { display: flex; justify-content: space-between; gap: 16px; margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--linea-suave); }
+  @media (max-width: 860px) {
+    .ficha { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+    .lateral { position: static; justify-self: center; width: 220px; }
+    .luces-sombras { grid-template-columns: 1fr; gap: 32px; }
+    .compat ul { grid-template-columns: 1fr 1fr; }
+  }
+</style>

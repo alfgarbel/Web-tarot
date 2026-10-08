@@ -13,8 +13,9 @@ const ogImage = new URL(image, Astro.site);
 const ruta = Astro.url.pathname;
 const enlaces = [
   { href: '/tiradas/', texto: 'Tiradas', tambien: ['/tarot-si-o-no/', '/tarot-del-amor/', '/volvera-mi-ex/', '/pasado-presente-futuro/', '/cruz-celta/', '/carta-del-dia/', '/tarot-del-trabajo/', '/tarot-de-la-salud/', '/dos-caminos/'] },
-  { href: '/compatibilidad/', texto: 'Signos', tambien: [] },
-  { href: '/cartas/', texto: 'Los arcanos', tambien: [] },
+  { href: '/signos/', texto: 'Signos', tambien: ['/compatibilidad/'] },
+  { href: '/cartas/', texto: 'Los arcanos', corto: 'Arcanos', tambien: ['/combinaciones/'] },
+  { href: '/aprender-tarot/', texto: 'Aprender', tambien: [] },
 ];
 ---
 
@@ -82,7 +83,7 @@ const enlaces = [
           {
             enlaces.map((e) => (
               <a href={e.href} aria-current={[e.href, ...e.tambien].some((r) => ruta.startsWith(r)) ? 'page' : undefined}>
-                {e.texto}
+                {e.corto ? <><span class="nav-largo">{e.texto}</span><span class="nav-corto">{e.corto}</span></> : e.texto}
               </a>
             ))
           }
@@ -109,7 +110,10 @@ const enlaces = [
             <a href="/dos-caminos/">Decidir entre dos caminos</a>
             <a href="/carta-del-dia/">Carta del día</a>
             <a href="/compatibilidad/">Compatibilidad de signos</a>
+            <a href="/signos/">Los 12 signos</a>
             <a href="/cartas/">Las 78 cartas</a>
+            <a href="/combinaciones/">Combinaciones de cartas</a>
+            <a href="/aprender-tarot/">Aprender tarot</a>
             <a href="/aviso-legal/">Aviso legal</a>
           </nav>
         </div>
@@ -167,14 +171,18 @@ const enlaces = [
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
+    white-space: nowrap;
     transition: color 0.3s;
   }
+  .nav-corto { display: none; }
   .cabecera nav a:hover,
   .cabecera nav a[aria-current='page'] { color: var(--oro-claro); }
   @media (max-width: 520px) {
     .marca { font-size: 1.35rem; }
-    nav { gap: 16px; }
+    nav { gap: 14px; }
     .cabecera nav a { font-size: 0.88rem; }
+    .nav-largo { display: none; }
+    .nav-corto { display: inline; }
   }
 
   .pie {

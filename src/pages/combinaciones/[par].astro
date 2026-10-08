@@ -1,0 +1,127 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos } from '../../data/arcanos';
+import { combinaciones, slugCombinacion, type Combinacion } from '../../data/combinaciones';
+
+export function getStaticPaths() {
+  return combinaciones.map((c) => ({ params: { par: slugCombinacion(c) }, props: { c } }));
+}
+
+const { c } = Astro.props as { c: Combinacion };
+const a = arcanos.find((x) => x.slug === c.a)!;
+const b = arcanos.find((x) => x.slug === c.b)!;
+const titulo = `${a.nombre} y ${b.nombre}`;
+const relacionadas = combinaciones
+  .filter((o) => o !== c && [o.a, o.b].some((s) => s === c.a || s === c.b))
+  .map((o) => ({ href: `/combinaciones/${slugCombinacion(o)}/`, texto: `${arcanos.find((x) => x.slug === o.a)!.nombre} y ${arcanos.find((x) => x.slug === o.b)!.nombre}` }));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${titulo} en el tarot: qué significan juntas`,
+  description: c.resumen,
+  inLanguage: 'es',
+  author: { '@type': 'Organization', name: 'Arcanaia' },
+};
+---
+
+<Base
+  title={`${titulo} en el tarot: significado de la combinación | Arcanaia`}
+  description={`Qué significan ${titulo} juntas en una tirada de tarot: ${c.claves.join(', ')}. Su lectura en el amor, el trabajo y un consejo.`}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="cabeza">
+    <div class="contenedor">
+      <nav class="migas" aria-label="Ruta"><a href="/combinaciones/">Combinaciones</a> <span aria-hidden="true">/</span> {titulo}</nav>
+      <div class="pareja">
+        {
+          [a, b].map((x) => (
+            <a href={`/cartas/${x.slug}/`} class="pareja-carta" aria-label={`Ficha de ${x.nombre}`}>
+              <Carta arcano={x} />
+            </a>
+          ))
+        }
+        <div class="centro">
+          <h1><span>{a.nombre}</span> <em>y</em> <span>{b.nombre}</span></h1>
+          <p class="claves">{c.claves.join(', ')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="contenedor cuerpo">
+    <section class="bloque principal">
+      <h2>Qué significan juntas</h2>
+      <p>{c.resumen}</p>
+    </section>
+    <div class="dos">
+      <section class="bloque" data-marca="terracota">
+        <h2>En el amor</h2>
+        <p>{c.amor}</p>
+      </section>
+      <section class="bloque" data-marca="romero">
+        <h2>En el trabajo y el dinero</h2>
+        <p>{c.trabajo}</p>
+      </section>
+    </div>
+    <blockquote class="consejo">{c.consejo}</blockquote>
+    <p class="nota suave">
+      Cada carta tiene su propia ficha: <a href={`/cartas/${a.slug}/`}>{a.nombre}</a> y <a href={`/cartas/${b.slug}/`}>{b.nombre}</a>.
+      Si te han salido en una <a href="/pasado-presente-futuro/">tirada de tres cartas</a>, lee también la posición en la que cayó cada una.
+    </p>
+
+    {
+      relacionadas.length > 0 && (
+        <section class="otras">
+          <h2>Otras combinaciones con estas cartas</h2>
+          <ul>
+            {relacionadas.map((r) => (
+              <li><a href={r.href}>{r.texto}</a></li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>
+
+<style>
+  .cabeza { padding: 48px 0 72px; background: radial-gradient(50% 70% at 50% 45%, rgba(77, 42, 96, 0.6), transparent 70%); }
+  .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 32px; }
+  .migas a { color: var(--texto-suave); }
+  .pareja { display: grid; grid-template-columns: 220px 1fr 220px; gap: 48px; align-items: center; }
+  .pareja-carta { display: block; transition: transform 0.5s var(--ease); }
+  .pareja-carta:first-child { transform: rotate(-4deg); }
+  .pareja-carta:nth-child(2) { order: 2; transform: rotate(4deg); }
+  .pareja-carta:hover { transform: translateY(-6px); }
+  .centro { order: 1; text-align: center; }
+  .centro h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 16px; }
+  .centro h1 span { white-space: nowrap; }
+  .claves { color: var(--oro); font-family: var(--serif); font-style: italic; font-size: 1.3rem; }
+
+  .cuerpo { max-width: 920px; padding-bottom: 64px; }
+  .bloque { border-top: 2px solid var(--marca, var(--oro)); padding-top: 18px; margin-top: 48px; }
+  .bloque[data-marca='terracota'] { --marca: var(--terracota); }
+  .bloque[data-marca='romero'] { --marca: var(--romero); }
+  .bloque h2 { font-size: 1.6rem; }
+  .principal p { font-size: 1.2rem; line-height: 1.7; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .dos .bloque p { color: var(--texto-suave); }
+  .consejo { margin: 72px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.25; }
+  .consejo::before { content: '«'; color: var(--oro); }
+  .consejo::after { content: '»'; color: var(--oro); }
+  .nota { margin-top: 28px; max-width: 64ch; }
+  .otras { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--linea-suave); }
+  .otras h2 { font-size: 1.4rem; }
+  .otras ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .otras a { display: block; padding: 8px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto-suave); }
+  .otras a:hover { color: var(--oro-claro); }
+  @media (max-width: 860px) {
+    .pareja { grid-template-columns: 1fr 1fr; gap: 24px 20px; justify-items: center; }
+    .centro { order: -1; grid-column: 1 / -1; }
+    .pareja-carta { width: 100%; max-width: 150px; }
+    .dos, .otras ul { grid-template-columns: 1fr; }
+  }
+</style>

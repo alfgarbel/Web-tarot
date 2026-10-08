@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos } from '../../data/arcanos';
+import { signos, nombreElemento } from '../../data/signos';
+
+const arcano = (slug: string) => arcanos.find((a) => a.slug === slug)!;
+---
+
+<Base
+  title="Los 12 signos del zodiaco: personalidad, amor y su carta del tarot | Arcanaia"
+  description="Cómo es cada signo del zodiaco: fechas, elemento, personalidad, amor, trabajo y el arcano mayor que la tradición le asocia."
+>
+  <section class="cabeza contenedor">
+    <h1>Los doce <em>signos</em></h1>
+    <p class="sub">Cada signo tiene una carta del tarot que la tradición le asocia. Elige el tuyo para leer cómo es en el amor, en el trabajo y con la gente que quiere.</p>
+  </section>
+
+  <section class="contenedor zona">
+    <ul class="rejilla">
+      {
+        signos.map((s) => (
+          <li>
+            <a href={`/signos/${s.slug}/`}>
+              <Carta arcano={arcano(s.arcano)} />
+              <span class="nombre">{s.nombre}</span>
+              <span class="datos">{s.fechas}</span>
+              <span class="datos">{nombreElemento(s.elemento)}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="suave pie-nota">¿Quieres saber cómo encajas con alguien? Mira la <a href="/compatibilidad/">compatibilidad de signos</a>.</p>
+  </section>
+</Base>
+
+<style>
+  .cabeza { padding-top: 72px; padding-bottom: 40px; }
+  .sub { font-size: 1.2rem; color: var(--texto-suave); max-width: 58ch; }
+  .zona { padding-bottom: 96px; }
+  .rejilla { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 48px 28px; }
+  .rejilla a { display: grid; gap: 4px; justify-items: center; text-align: center; text-decoration: none; color: var(--texto); }
+  .rejilla :global(.carta) { margin-bottom: 14px; transition: transform 0.5s var(--ease); }
+  .rejilla a:hover :global(.carta) { transform: translateY(-6px); }
+  .nombre { font-family: var(--serif); font-size: 1.4rem; }
+  .datos { font-size: 0.82rem; color: var(--texto-suave); }
+  .pie-nota { margin-top: 56px; }
+  @media (max-width: 1000px) { .rejilla { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 640px) { .rejilla { grid-template-columns: repeat(2, 1fr); gap: 36px 20px; } }
+</style>

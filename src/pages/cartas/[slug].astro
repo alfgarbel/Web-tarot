@@ -4,6 +4,7 @@ import Carta from '../../components/Carta.astro';
 import SelectorBaraja from '../../components/SelectorBaraja.astro';
 import { arcanos, type Arcano } from '../../data/arcanos';
 import { menores } from '../../data/menores';
+import { combinaciones, slugCombinacion } from '../../data/combinaciones';
 
 const todas = [...arcanos, ...menores];
 
@@ -14,6 +15,10 @@ export function getStaticPaths() {
 const { arcano } = Astro.props as { arcano: Arcano };
 const i = todas.findIndex((a) => a.slug === arcano.slug);
 const anterior = todas[i - 1];
+const nombreDe = (slug: string) => arcanos.find((a) => a.slug === slug)!.nombre;
+const pares = combinaciones
+  .filter((c) => c.a === arcano.slug || c.b === arcano.slug)
+  .map((c) => ({ href: `/combinaciones/${slugCombinacion(c)}/`, otra: nombreDe(c.a === arcano.slug ? c.b : c.a) }));
 const siguiente = todas[i + 1];
 
 const jsonLd = {
@@ -28,13 +33,14 @@ const jsonLd = {
 const secciones = [
   { titulo: 'En el amor', texto: arcano.amor },
   { titulo: 'En el trabajo y el dinero', texto: arcano.trabajo },
+  { titulo: 'En la salud y el bienestar', texto: arcano.salud },
   { titulo: 'Invertida', texto: arcano.invertida },
 ];
 ---
 
 <Base
   title={`${arcano.nombre} en el tarot: significado en el amor, el trabajo y sí o no | Arcanaia`}
-  description={`Qué significa ${arcano.nombre}${arcano.palo ? '' : ` (${arcano.romano})`} en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, invertida y como respuesta de sí o no.`}
+  description={`Qué significa ${arcano.nombre}${arcano.palo ? '' : ` (${arcano.romano})`} en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, la salud, invertida y como respuesta de sí o no.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
@@ -67,6 +73,19 @@ const secciones = [
         <p>{arcano.siNo}</p>
         <a href="/tarot-si-o-no/" class="boton linea">Hacer la tirada</a>
       </section>
+
+      {
+        pares.length > 0 && (
+          <section class="pares">
+            <h2>Combinada con otras cartas</h2>
+            <ul>
+              {pares.map((p) => (
+                <li><a href={p.href}>{arcano.nombre} y {p.otra}</a></li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
 
       <blockquote class="consejo">{arcano.consejo}</blockquote>
 
@@ -112,7 +131,13 @@ const secciones = [
   .bloques section { border-top: 2px solid var(--marca); padding-top: 18px; }
   .bloques section:nth-child(1) { --marca: var(--terracota); }
   .bloques section:nth-child(2) { --marca: var(--romero); }
-  .bloques section:nth-child(3) { --marca: var(--azulejo); }
+  .bloques section:nth-child(3) { --marca: var(--oro); }
+  .bloques section:nth-child(4) { --marca: var(--azulejo); grid-column: 1 / -1; }
+  .pares { margin-top: 56px; }
+  .pares h2 { font-size: 1.6rem; }
+  .pares ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .pares a { display: inline-block; padding: 8px 14px; border: 1px solid var(--linea-suave); border-radius: 999px; color: var(--texto-suave); text-decoration: none; font-size: 0.95rem; }
+  .pares a:hover { border-color: var(--oro); color: var(--oro-claro); }
   .sino {
     margin-top: 64px;
     padding: 40px;

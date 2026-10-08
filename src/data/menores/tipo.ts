@@ -11,6 +11,7 @@ export interface TextoMenor {
   general: string;
   amor: string;
   trabajo: string;
+  salud: string;
   invertida: string;
   consejo: string;
 }

@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import Explicacion from '../../components/Explicacion.astro';
+import { arcanos } from '../../data/arcanos';
+import { combinaciones, slugCombinacion } from '../../data/combinaciones';
+
+const nombre = (slug: string) => arcanos.find((a) => a.slug === slug)!.nombre;
+const lista = combinaciones.map((c) => ({ href: `/combinaciones/${slugCombinacion(c)}/`, a: nombre(c.a), b: nombre(c.b), claves: c.claves.join(', ') }));
+
+const faq = [
+  {
+    p: '¿Cómo se lee una combinación de dos cartas?',
+    r: 'Primero lee cada carta por separado. Después fíjate en qué tienen en común y en qué se contradicen: una carta suave puede calmar a una dura, y una dura puede dar urgencia a una suave. El significado conjunto nace de ese diálogo.',
+  },
+  {
+    p: '¿Importa el orden en que salen?',
+    r: 'En una tirada con posiciones, sí: la carta del pasado no pesa igual que la del futuro. Aquí te damos el sentido general de la pareja; luego ajústalo a la posición en la que cayó cada una.',
+  },
+  {
+    p: '¿Por qué solo hay arcanos mayores?',
+    r: 'Son las combinaciones que más se consultan y las que usan nuestras tiradas. Para los arcanos menores, lee la ficha de cada carta y aplica la misma idea.',
+  },
+];
+---
+
+<Base
+  title="Combinaciones de cartas del tarot: qué significan juntas | Arcanaia"
+  description={`Significado de las ${combinaciones.length} combinaciones de arcanos mayores más consultadas: qué dicen juntas en el amor, el trabajo y un consejo para cada pareja de cartas.`}
+>
+  <section class="cabeza contenedor">
+    <h1>Combinaciones <em>de cartas</em></h1>
+    <p class="sub">Dos cartas juntas no suman, conversan. Aquí tienes las parejas de arcanos mayores que más se consultan y lo que dicen cuando salen a la vez.</p>
+  </section>
+
+  <section class="contenedor zona">
+    <ul class="lista">
+      {
+        lista.map((c) => (
+          <li>
+            <a href={c.href}>
+              <span class="nombre">{c.a} <em>y</em> {c.b}</span>
+              <span class="claves">{c.claves}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <Explicacion titulo="Cómo leer dos cartas juntas" faq={faq}>
+    <p>En una tirada, las cartas se influyen. La Torre junto a La Estrella no es solo un golpe: es un golpe que deja paso a la esperanza. El Sol junto a La Luna habla de algo que empieza a aclararse.</p>
+    <p>Cuando te salgan dos cartas que te cuesta relacionar, busca su combinación aquí y después vuelve a la <a href="/cartas/">ficha de cada una</a> para leerla en su posición.</p>
+  </Explicacion>
+</Base>
+
+<style>
+  .cabeza { padding-top: 72px; padding-bottom: 40px; }
+  .sub { font-size: 1.2rem; color: var(--texto-suave); max-width: 58ch; }
+  .zona { padding-bottom: 96px; }
+  .lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; }
+  .lista a { display: grid; gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto); }
+  .nombre { font-family: var(--serif); font-size: 1.2rem; }
+  .nombre em { color: var(--oro); }
+  .claves { font-size: 0.88rem; color: var(--texto-suave); }
+  .lista a:hover .nombre { color: var(--oro-claro); }
+  @media (max-width: 960px) { .lista { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .lista { grid-template-columns: 1fr; } }
+</style>
