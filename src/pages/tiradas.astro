@@ -31,6 +31,13 @@ const tiradas = [
     tono: 'romero',
   },
   {
+    href: '/cruz-celta/',
+    titulo: 'Cruz celta',
+    cartas: 10,
+    texto: 'La tirada más completa. Diez cartas para mirar a fondo una situación importante desde todos sus ángulos.',
+    tono: 'terracota',
+  },
+  {
     href: '/carta-del-dia/',
     titulo: 'Carta del día',
     cartas: 1,
@@ -39,7 +46,7 @@ const tiradas = [
   },
 ];
 
-const proximas = ['Cruz celta', 'Compatibilidad'];
+const proximas = ['Compatibilidad'];
 ---
 
 <Base
@@ -59,14 +66,14 @@ const proximas = ['Cruz celta', 'Compatibilidad'];
         tiradas.map((t) => (
           <li class="revelar" data-tono={t.tono}>
             <a href={t.href} class="fila">
-              <span class="mazo" style={`--n:${t.cartas}`} aria-hidden="true">
-                {Array.from({ length: t.cartas }, (_, i) => (
+              <span class="mazo" style={`--n:${Math.min(t.cartas, 5)}; --paso:${t.cartas > 3 ? 16 : 30}px; --abre:${t.cartas > 3 ? 7 : 9}deg`} aria-hidden="true">
+                {Array.from({ length: Math.min(t.cartas, 5) }, (_, i) => (
                   <span class="dorso" style={`--i:${i}`} />
                 ))}
               </span>
               <span class="nombre">{t.titulo}</span>
               <span class="detalle">
-                <span class="cuantas">{t.cartas === 1 ? 'Una carta' : 'Tres cartas'}</span>
+                <span class="cuantas">{t.cartas === 1 ? 'Una carta' : t.cartas === 3 ? 'Tres cartas' : 'Diez cartas'}</span>
                 {t.texto}
               </span>
               <span class="flecha" aria-hidden="true">→</span>
@@ -101,9 +108,9 @@ const proximas = ['Cruz celta', 'Compatibilidad'];
   .mazo .dorso {
     position: absolute;
     width: 64px;
-    left: calc(50% - 32px + (var(--i) - (var(--n) - 1) / 2) * 30px);
+    left: calc(50% - 32px + (var(--i) - (var(--n) - 1) / 2) * var(--paso));
     bottom: 0;
-    transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * 9deg));
+    transform: rotate(calc((var(--i) - (var(--n) - 1) / 2) * var(--abre)));
     transform-origin: 50% 120%;
     transition: transform 0.5s var(--ease);
   }
@@ -119,7 +126,7 @@ const proximas = ['Cruz celta', 'Compatibilidad'];
   @media (max-width: 820px) {
     .fila { grid-template-columns: 96px 1fr; gap: 8px 24px; padding: 28px 0; }
     .mazo { grid-row: span 2; height: 84px; }
-    .mazo .dorso { width: 46px; left: calc(50% - 23px + (var(--i) - (var(--n) - 1) / 2) * 20px); }
+    .mazo .dorso { width: 46px; left: calc(50% - 23px + (var(--i) - (var(--n) - 1) / 2) * var(--paso) * 0.66); }
     .flecha { display: none; }
   }
 </style>
