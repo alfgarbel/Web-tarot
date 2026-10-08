@@ -1,13 +1,15 @@
-# El Tarot de Aurora
+# Noctámbula
 
 Web de tarot gratuita hecha con [Astro](https://astro.build). Las lecturas se montan con textos propios escritos de antemano (sin IA).
+
+Nombre provisional. Diseño: noche morada con un único acento dorado, Bodoni Moda para titulares y Figtree para el texto.
 
 ## Qué incluye
 
 - Portada (`/`)
 - Tirada **Tarot Sí o No** (`/tarot-si-o-no/`): barajar, elegir carta, girarla y ver la respuesta con su explicación
 - Significado de los 22 Arcanos Mayores (`/cartas/` y `/cartas/<carta>/`)
-- Sobre Aurora y aviso legal (borrador)
+- Aviso legal (borrador)
 - Sitemap y datos estructurados para SEO
 
 Los textos de las cartas están en `src/data/arcanos.ts`.

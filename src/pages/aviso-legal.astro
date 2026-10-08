@@ -2,38 +2,31 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Aviso legal | El Tarot de Aurora" description="Aviso legal y condiciones de uso de El Tarot de Aurora.">
-  <section class="seccion">
-    <div class="contenedor estrecho">
-      <h1>Aviso legal</h1>
-      <p class="pendiente">
-        Borrador: completar con los datos del titular (nombre o razón social, NIF y dirección de contacto) antes de
-        publicar la web, y revisar con un asesor.
-      </p>
-      <h2>Finalidad de la web</h2>
-      <p>
-        El Tarot de Aurora ofrece tiradas de tarot y contenidos sobre el significado de las cartas con fines de
-        entretenimiento y reflexión personal. Las lecturas no constituyen asesoramiento médico, psicológico, legal ni
-        financiero, y no deben usarse para tomar decisiones en esos ámbitos.
-      </p>
-      <h2>Datos personales</h2>
-      <p>
-        Las preguntas que escribes en las tiradas no se envían ni se guardan: se quedan en tu navegador. La web no pide
-        registro.
-      </p>
-      <h2>Propiedad intelectual</h2>
-      <p>Los textos y el diseño de esta web son propiedad de su titular. No se permite su copia sin autorización.</p>
-    </div>
+<Base title="Aviso legal | Noctámbula" description="Aviso legal y condiciones de uso de Noctámbula.">
+  <section class="contenedor estrecho">
+    <h1>Aviso legal</h1>
+    <p class="pendiente">
+      Borrador: completar con los datos del titular (nombre o razón social, NIF y dirección de contacto) antes de publicar
+      la web, y revisarlo con un asesor.
+    </p>
+    <h2>Finalidad de la web</h2>
+    <p class="suave">
+      Noctámbula ofrece tiradas de tarot y contenidos sobre el significado de las cartas con fines de entretenimiento y
+      reflexión personal. Las lecturas no constituyen asesoramiento médico, psicológico, legal ni financiero, y no deben
+      usarse para tomar decisiones en esos ámbitos.
+    </p>
+    <h2>Datos personales</h2>
+    <p class="suave">
+      Las preguntas que escribes en las tiradas no se envían ni se guardan: se quedan en tu navegador. La web no pide
+      registro.
+    </p>
+    <h2>Propiedad intelectual</h2>
+    <p class="suave">Los textos y el diseño de esta web son propiedad de su titular. No se permite su copia sin autorización.</p>
   </section>
 </Base>
 
 <style>
-  .estrecho { max-width: 760px; }
-  h2 { margin-top: 1.4em; }
-  .pendiente {
-    background: #fff4d6;
-    border: 1px solid var(--dorado);
-    border-radius: 10px;
-    padding: 12px 16px;
-  }
+  .estrecho { max-width: 760px; padding-top: 72px; padding-bottom: 40px; }
+  h2 { font-size: 1.7rem; margin-top: 1.4em; }
+  .pendiente { border: 1px dashed var(--oro); border-radius: var(--radio); padding: 14px 18px; color: var(--oro-claro); }
 </style>

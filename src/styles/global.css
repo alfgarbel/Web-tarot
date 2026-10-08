@@ -1,90 +1,206 @@
+@import '@fontsource/bodoni-moda/latin-400.css';
+@import '@fontsource/bodoni-moda/latin-400-italic.css';
+@import '@fontsource/bodoni-moda/latin-600.css';
+@import '@fontsource-variable/figtree';
+
+/*
+  Noctámbula. Tema único de noche: la web se usa sobre todo de noche y desde el móvil.
+  Un solo acento (oro viejo) sobre una base morada.
+*/
 :root {
+  --noche: #170c20;
+  --noche-2: #1f1029;
   --morado: #3b1f4a;
-  --morado-oscuro: #241230;
-  --morado-claro: #5b3470;
-  --dorado: #c9a45c;
-  --dorado-claro: #e6cf98;
-  --terracota: #b8613f;
-  --crema: #f6efe4;
-  --crema-oscura: #ebdfcc;
-  --tinta: #2b2230;
-  --tinta-suave: #5f5466;
-  --radio: 14px;
-  --ancho: 1100px;
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --morado-2: #4d2a60;
+  --oro: #c9a45c;
+  --oro-claro: #e3cc94;
+  --texto: #eee6f2;
+  --texto-suave: #b6a7c0;
+  --linea: rgba(201, 164, 92, 0.26);
+  --linea-suave: rgba(238, 230, 242, 0.1);
+  --serif: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --sans: 'Figtree Variable', 'Figtree', system-ui, sans-serif;
+  --ancho: 1240px;
+  --radio: 4px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--crema);
-  color: var(--tinta);
+  background: var(--noche);
+  color: var(--texto);
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* Grano sutil, fijo y sin eventos, para quitar el aspecto plano de pantalla. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3 {
   font-family: var(--serif);
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--morado);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
   margin: 0 0 0.5em;
+  color: var(--texto);
 }
-h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
-h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); }
-h3 { font-size: 1.4rem; }
+h1 { font-size: clamp(2.6rem, 6vw, 5.2rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+h3 { font-size: 1.5rem; }
+h1 em, h2 em { font-style: italic; color: var(--oro-claro); padding-bottom: 0.08em; }
 
 p { margin: 0 0 1em; }
-a { color: var(--morado-claro); }
+a { color: var(--oro-claro); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 img { max-width: 100%; display: block; }
 
 .contenedor {
   width: 100%;
   max-width: var(--ancho);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
+@media (max-width: 640px) { .contenedor { padding: 0 18px; } }
 
 .boton {
-  display: inline-block;
-  background: var(--morado);
-  color: var(--crema);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  background: var(--oro);
+  color: var(--noche);
   font-family: var(--sans);
   font-weight: 600;
-  font-size: 1rem;
-  padding: 14px 28px;
-  border-radius: 999px;
-  border: 2px solid var(--morado);
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  padding: 15px 26px;
+  border-radius: var(--radio);
+  border: 1px solid var(--oro);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.15s;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.15s;
 }
-.boton:hover { background: var(--morado-claro); border-color: var(--morado-claro); }
-.boton:active { transform: scale(0.97); }
-.boton.secundario { background: transparent; color: var(--morado); }
-.boton.secundario:hover { background: var(--morado); color: var(--crema); }
-.boton.dorado { background: var(--dorado); border-color: var(--dorado); color: var(--morado-oscuro); }
-.boton.dorado:hover { background: var(--dorado-claro); border-color: var(--dorado-claro); }
+.boton:hover { background: var(--oro-claro); border-color: var(--oro-claro); }
+.boton:active { transform: translateY(1px); }
+.boton:focus-visible { outline: 2px solid var(--oro-claro); outline-offset: 3px; }
+.boton.linea { background: transparent; color: var(--texto); border-color: var(--linea); }
+.boton.linea:hover { border-color: var(--oro); color: var(--oro-claro); }
 
-.etiqueta {
-  display: inline-block;
+.enlace-flecha {
+  color: var(--texto);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 2px;
+  transition: border-color 0.3s, color 0.3s;
+}
+.enlace-flecha:hover { color: var(--oro-claro); border-color: var(--oro); }
+
+.antetitulo {
+  display: block;
+  font-family: var(--sans);
   font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--terracota);
   font-weight: 600;
-  margin-bottom: 0.6em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 1.2em;
 }
 
-.seccion { padding: 72px 0; }
+.suave { color: var(--texto-suave); }
 
-.aviso {
-  font-size: 0.85rem;
-  color: var(--tinta-suave);
+/* Aparición al hacer scroll (la activa un IntersectionObserver en Base). */
+@media (prefers-reduced-motion: no-preference) {
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .revelar.visible { opacity: 1; transform: none; }
 }
+
+/* Reverso de carta, compartido por la portada y la tirada. */
+.dorso {
+  position: relative;
+  aspect-ratio: 7 / 12;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--oro);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 17%, var(--oro) 17.5% 18.2%, transparent 18.7%),
+    radial-gradient(circle at 50% 50%, var(--oro) 0 4%, transparent 4.5%),
+    repeating-linear-gradient(45deg, rgba(201, 164, 92, 0.13) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(-45deg, rgba(201, 164, 92, 0.13) 0 1px, transparent 1px 10px),
+    #241130;
+  box-shadow: 0 24px 50px -22px rgba(5, 2, 8, 0.95);
+}
+.dorso::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--linea);
+  border-radius: 3px;
+}
+
+/* Carta de diseño propio: marco doble en oro y tipografía Bodoni. */
+.carta {
+  position: relative;
+  aspect-ratio: 7 / 12;
+  width: 100%;
+  max-width: 240px;
+  border-radius: 6px;
+  background:
+    radial-gradient(120% 70% at 50% 45%, rgba(201, 164, 92, 0.16), transparent 70%),
+    linear-gradient(170deg, #2c1638 0%, #1a0d23 100%);
+  border: 1px solid var(--oro);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  align-items: center;
+  padding: 9% 8%;
+  color: var(--oro-claro);
+  text-decoration: none;
+  box-shadow: 0 24px 50px -24px rgba(5, 2, 8, 0.9);
+}
+.carta::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--linea);
+  border-radius: 3px;
+  pointer-events: none;
+}
+.carta-numero {
+  font-family: var(--serif);
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  letter-spacing: 0.2em;
+  color: var(--oro);
+}
+.carta-simbolo {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1;
+  color: var(--oro);
+  font-family: var(--serif);
+}
+.carta-nombre {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  color: var(--texto);
+  text-align: center;
+  line-height: 1.2;
+}
+.carta-pequena { max-width: 168px; padding: 10% 8%; }
+.carta-pequena .carta-simbolo { font-size: 2.6rem; }
+.carta-pequena .carta-numero { font-size: 0.85rem; }
+.carta-pequena .carta-nombre { font-size: 0.95rem; }

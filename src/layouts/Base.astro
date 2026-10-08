@@ -10,6 +10,11 @@ interface Props {
 const { title, description, image = '/portada.webp' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+const ruta = Astro.url.pathname;
+const enlaces = [
+  { href: '/tarot-si-o-no/', texto: 'Tarot Sí o No' },
+  { href: '/cartas/', texto: 'Los arcanos' },
+];
 ---
 
 <!doctype html>
@@ -21,32 +26,28 @@ const ogImage = new URL(image, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Noctámbula" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="es_ES" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#3b1f4a" />
+    <meta name="theme-color" content="#170c20" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
     <slot name="head" />
   </head>
   <body>
     <header class="cabecera">
       <div class="contenedor fila">
-        <a href="/" class="marca">
-          <span class="luna" aria-hidden="true">☽</span>
-          El Tarot de Aurora
-        </a>
+        <a href="/" class="marca" aria-label="Noctámbula, inicio">Noctámbula</a>
         <nav aria-label="Principal">
-          <a href="/tarot-si-o-no/">Sí o No</a>
-          <a href="/cartas/">Las cartas</a>
-          <a href="/sobre-aurora/">Aurora</a>
+          {
+            enlaces.map((e) => (
+              <a href={e.href} aria-current={ruta.startsWith(e.href) ? 'page' : undefined}>
+                {e.texto}
+              </a>
+            ))
+          }
         </nav>
       </div>
     </header>
@@ -58,77 +59,92 @@ const ogImage = new URL(image, Astro.site);
     <footer class="pie">
       <div class="contenedor">
         <div class="pie-fila">
-          <div>
-            <p class="marca">☽ El Tarot de Aurora</p>
-            <p>Tiradas de tarot gratis, explicadas con calma.</p>
-          </div>
+          <p class="marca-pie">Noctámbula</p>
           <nav aria-label="Pie">
             <a href="/tarot-si-o-no/">Tarot Sí o No</a>
-            <a href="/cartas/">Significado de las cartas</a>
-            <a href="/sobre-aurora/">Sobre Aurora</a>
+            <a href="/cartas/">Los 22 arcanos</a>
             <a href="/aviso-legal/">Aviso legal</a>
           </nav>
         </div>
         <p class="aviso">
-          Las lecturas de esta web son una herramienta de reflexión y entretenimiento. No sustituyen el
-          consejo de profesionales de la salud, el derecho o las finanzas.
+          Las lecturas son una herramienta de reflexión y entretenimiento. No sustituyen el consejo de profesionales de la
+          salud, el derecho o las finanzas.
         </p>
       </div>
     </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entradas) =>
+          entradas.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          }),
+        { rootMargin: '0px 0px -10% 0px' },
+      );
+      document.querySelectorAll('.revelar').forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>
 
 <style>
   .cabecera {
-    background: var(--morado-oscuro);
-    color: var(--crema);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 20;
+    background: rgba(23, 12, 32, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--linea-suave);
   }
   .fila {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 68px;
     gap: 16px;
-    min-height: 64px;
-    flex-wrap: wrap;
   }
   .marca {
     font-family: var(--serif);
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: var(--crema);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--texto);
     text-decoration: none;
-    margin: 0;
+    letter-spacing: -0.01em;
   }
-  .luna { color: var(--dorado); margin-right: 4px; }
-  nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  nav { display: flex; gap: 28px; }
   .cabecera nav a {
-    color: var(--crema-oscura);
+    color: var(--texto-suave);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
+    transition: color 0.3s;
   }
-  .cabecera nav a:hover { color: var(--dorado-claro); }
+  .cabecera nav a:hover,
+  .cabecera nav a[aria-current='page'] { color: var(--oro-claro); }
+  @media (max-width: 520px) {
+    .marca { font-size: 1.35rem; }
+    nav { gap: 16px; }
+    .cabecera nav a { font-size: 0.88rem; }
+  }
+
   .pie {
-    background: var(--morado-oscuro);
-    color: var(--crema-oscura);
-    padding: 48px 0 32px;
+    border-top: 1px solid var(--linea-suave);
+    padding: 56px 0 40px;
     margin-top: 40px;
   }
   .pie-fila {
     display: flex;
     justify-content: space-between;
-    gap: 32px;
+    align-items: baseline;
+    gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
-  .pie nav { flex-direction: column; gap: 6px; }
-  .pie nav a { color: var(--crema-oscura); text-decoration: none; }
-  .pie nav a:hover { color: var(--dorado-claro); }
-  .pie .aviso { color: #a99bb0; border-top: 1px solid #3d2a4a; padding-top: 20px; margin: 0; }
-  @media (max-width: 560px) {
-    .cabecera .fila { justify-content: center; padding: 10px 0; }
-  }
+  .marca-pie { font-family: var(--serif); font-style: italic; font-size: 2.4rem; margin: 0; }
+  .pie nav a { color: var(--texto-suave); text-decoration: none; font-size: 0.95rem; }
+  .pie nav a:hover { color: var(--oro-claro); }
+  .aviso { font-size: 0.85rem; color: var(--texto-suave); max-width: 70ch; margin: 0; }
 </style>

@@ -3,151 +3,209 @@ import Base from '../layouts/Base.astro';
 import Carta from '../components/Carta.astro';
 import { arcanos } from '../data/arcanos';
 
-const destacadas = ['los-enamorados', 'la-estrella', 'la-luna', 'el-sol']
-  .map((s) => arcanos.find((a) => a.slug === s)!)
-  .filter(Boolean);
+const abanico = [-24, -16, -8, 0, 8, 16, 24];
 ---
 
 <Base
-  title="El Tarot de Aurora: tiradas de tarot gratis y significado de las cartas"
-  description="Tiradas de tarot gratis explicadas con calma. Pregunta al tarot Sí o No, descubre el significado de cada carta y encuentra claridad en el amor, el trabajo y la vida."
+  title="Noctámbula: tarot gratis y significado de las cartas"
+  description="Tiradas de tarot gratis, sin registro, con interpretaciones escritas a mano. Pregunta al tarot Sí o No y descubre el significado de los 22 Arcanos Mayores."
 >
+  <link rel="preload" as="image" href="/mesa-arco.webp" slot="head" />
+
   <section class="portada">
-    <div class="contenedor">
+    <div class="contenedor portada-rejilla">
       <div class="portada-texto">
-        <span class="etiqueta">Tarot gratis · sin registro</span>
-        <h1>Las cartas no deciden por ti. Te ayudan a ver con claridad.</h1>
-        <p>
-          Tiradas de tarot gratuitas con interpretaciones escritas con cuidado, para el amor, el trabajo y esos días en
-          los que necesitas una respuesta.
-        </p>
+        <h1>Pregunta a las cartas <em>esta noche.</em></h1>
+        <p class="portada-sub">Tiradas de tarot gratis, escritas con calma y sin asustarte. Sin registro y sin letra pequeña.</p>
         <div class="botones">
-          <a href="/tarot-si-o-no/" class="boton dorado">Preguntar al tarot Sí o No</a>
-          <a href="/cartas/" class="boton secundario claro">Ver el significado de las cartas</a>
+          <a href="/tarot-si-o-no/" class="boton">Tirar una carta</a>
+          <a href="/cartas/" class="enlace-flecha">Ver los arcanos</a>
         </div>
       </div>
+      <figure class="portada-imagen">
+        <img
+          src="/mesa-arco.webp"
+          width="800"
+          height="1092"
+          alt="Mesa con mantel de terciopelo morado, cartas de tarot boca abajo, velas encendidas y una taza de manzanilla en un patio andaluz."
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </section>
 
-  <section class="seccion">
-    <div class="contenedor">
-      <span class="etiqueta">Tiradas</span>
-      <h2>Elige tu tirada</h2>
-      <div class="tiradas">
-        <a href="/tarot-si-o-no/" class="tirada-tarjeta">
-          <span class="icono">☯</span>
-          <h3>Tarot Sí o No</h3>
-          <p>Una pregunta, una carta y una respuesta clara con su explicación.</p>
-          <span class="ir">Hacer la tirada →</span>
-        </a>
-        <div class="tirada-tarjeta pronto">
-          <span class="icono">♡</span>
-          <h3>Tarot del Amor</h3>
-          <p>Tres cartas para entender qué siente, qué te frena y hacia dónde va la relación.</p>
-          <span class="ir">Muy pronto</span>
-        </div>
-        <div class="tirada-tarjeta pronto">
-          <span class="icono">☀</span>
-          <h3>Carta del día</h3>
-          <p>Un mensaje para hoy, con un consejo sencillo para ponerlo en práctica.</p>
-          <span class="ir">Muy pronto</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="seccion fondo-crema">
-    <div class="contenedor">
-      <span class="etiqueta">Arcanos Mayores</span>
-      <h2>Conoce las cartas</h2>
-      <p class="sub">Cada carta tiene su historia, su consejo y su lectura en el amor y el trabajo.</p>
-      <div class="destacadas">
-        {
-          destacadas.map((a) => (
-            <a href={`/cartas/${a.slug}/`} class="destacada">
-              <Carta arcano={a} tamano="pequena" />
-            </a>
-          ))
-        }
-      </div>
-      <a href="/cartas/" class="boton secundario">Ver las 22 cartas</a>
-    </div>
-  </section>
-
-  <section class="seccion">
-    <div class="contenedor aurora">
-      <div>
-        <span class="etiqueta">La voz detrás de las cartas</span>
-        <h2>«Mi abuela decía que las cartas no se leen con los ojos, sino con la paciencia.»</h2>
-        <p>
-          Las interpretaciones de esta web están escritas con la voz de Aurora: serena, honesta y sin dramas. Nada de
-          predicciones que asustan ni promesas imposibles. Solo cartas que te ayudan a pensar.
+  <section class="tirada-promo">
+    <div class="contenedor promo-rejilla">
+      <a href="/tarot-si-o-no/" class="abanico revelar" aria-label="Ir a la tirada de Tarot Sí o No">
+        {abanico.map((giro, i) => <span class="dorso" style={`--giro:${giro}deg; --i:${i}`} />)}
+      </a>
+      <div class="promo-texto revelar">
+        <span class="antetitulo">Tarot Sí o No</span>
+        <h2>Una pregunta. Una carta. <em>Una respuesta.</em></h2>
+        <p class="suave">
+          Piensa en lo que te quita el sueño, baraja y elige. Cada carta trae su respuesta y la razón que hay detrás.
         </p>
-        <a href="/sobre-aurora/">Conoce a Aurora →</a>
+        <a href="/tarot-si-o-no/" class="boton linea">Hacer la tirada</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="arcanos">
+    <div class="contenedor">
+      <div class="arcanos-cabecera revelar">
+        <h2>Los veintidós <em>arcanos mayores</em></h2>
+        <a href="/cartas/" class="enlace-flecha">Ver todos</a>
+      </div>
+    </div>
+    <div class="tira" role="list">
+      {
+        arcanos.map((a) => (
+          <a href={`/cartas/${a.slug}/`} class="tira-item" role="listitem">
+            <Carta arcano={a} tamano="pequena" />
+            <span class="tira-claves">{a.claves[0]}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="principios">
+    <div class="contenedor principios-rejilla">
+      <img
+        class="principios-imagen revelar"
+        src="/velas.webp"
+        width="900"
+        height="810"
+        loading="lazy"
+        alt="Velas encendidas y cartas de tarot sobre terciopelo morado."
+      />
+      <div class="principios-texto revelar">
+        <h2>Las cartas proponen. <em>Tú decides.</em></h2>
+        <dl>
+          <div>
+            <dt>Respuestas con su porqué</dt>
+            <dd>Ningún «sí» o «no» sin una explicación que te ayude a entenderlo.</dd>
+          </div>
+          <div>
+            <dt>Nada de miedo para vender</dt>
+            <dd>No hay maldiciones, amarres ni urgencias. Solo lectura y reflexión.</dd>
+          </div>
+          <div>
+            <dt>Tu pregunta es tuya</dt>
+            <dd>Lo que escribes no se envía ni se guarda. Se queda en tu pantalla.</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .portada {
-    background:
-      linear-gradient(90deg, rgba(36, 18, 48, 0.92) 0%, rgba(36, 18, 48, 0.7) 45%, rgba(36, 18, 48, 0.15) 100%),
-      url('/portada.webp') center / cover no-repeat,
-      var(--morado-oscuro);
-    color: var(--crema);
-    padding: 110px 0 120px;
+  /* Portada: texto a la izquierda, imagen en arco a la derecha. */
+  .portada { padding: 56px 0 96px; }
+  .portada-rejilla {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: center;
+    min-height: calc(100dvh - 68px - 152px);
   }
-  .portada-texto { max-width: 560px; }
-  .portada h1 { color: var(--crema); }
-  .portada p { font-size: 1.15rem; color: var(--crema-oscura); }
-  .portada .etiqueta { color: var(--dorado); }
-  .botones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-  .boton.secundario.claro { color: var(--crema); border-color: var(--crema-oscura); }
-  .boton.secundario.claro:hover { background: var(--crema); color: var(--morado); }
-  @media (max-width: 640px) {
-    .portada {
-      background:
-        linear-gradient(180deg, rgba(36, 18, 48, 0.85), rgba(36, 18, 48, 0.92)),
-        url('/portada.webp') center / cover no-repeat,
-        var(--morado-oscuro);
-      padding: 72px 0 80px;
-    }
+  .portada h1 { max-width: 11ch; }
+  .portada-sub { font-size: 1.15rem; color: var(--texto-suave); max-width: 40ch; }
+  .botones { display: flex; align-items: center; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
+  .portada-imagen { margin: 0; justify-self: end; width: 100%; max-width: 440px; }
+  .portada-imagen img {
+    width: 100%;
+    height: auto;
+    border-radius: 999px 999px var(--radio) var(--radio);
+    border: 1px solid var(--linea);
+    padding: 10px;
+    object-fit: cover;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .portada-texto > * { animation: subir 1s var(--ease) both; }
+    .portada-texto > :nth-child(2) { animation-delay: 0.1s; }
+    .portada-texto > :nth-child(3) { animation-delay: 0.2s; }
+    .portada-imagen { animation: aparecer 1.4s 0.15s var(--ease) both; }
+  }
+  @keyframes subir { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes aparecer { from { opacity: 0; transform: scale(0.97); } }
+  @media (max-width: 860px) {
+    .portada { padding: 32px 0 64px; }
+    .portada-rejilla { grid-template-columns: 1fr; gap: 40px; min-height: 0; }
+    .portada-imagen { justify-self: center; max-width: 320px; }
   }
 
-  .tiradas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
+  /* Promo de la tirada: abanico de cartas a la izquierda. */
+  .tirada-promo {
+    padding: 112px 0;
+    background: linear-gradient(180deg, var(--noche) 0%, var(--noche-2) 50%, var(--noche) 100%);
   }
-  .tirada-tarjeta {
-    background: #fff;
-    border: 1px solid var(--crema-oscura);
-    border-radius: var(--radio);
-    padding: 28px;
+  .promo-rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .abanico {
+    position: relative;
+    height: 360px;
+    display: block;
+  }
+  .abanico .dorso {
+    position: absolute;
+    width: 150px;
+    left: calc(50% - 75px);
+    bottom: 0;
+    transform-origin: 50% 140%;
+    transform: rotate(var(--giro));
+    transition: transform 0.6s var(--ease);
+  }
+  .abanico:hover .dorso { transform: rotate(calc(var(--giro) * 1.35)); }
+  .abanico:hover .dorso:nth-child(4) { transform: translateY(-14px); }
+  .promo-texto h2 { max-width: 13ch; }
+  .promo-texto p { max-width: 44ch; margin-bottom: 32px; }
+  @media (max-width: 860px) {
+    .tirada-promo { padding: 72px 0; }
+    .promo-rejilla { grid-template-columns: 1fr; gap: 40px; }
+    .abanico { height: 270px; }
+    .abanico .dorso { width: 112px; left: calc(50% - 56px); }
+  }
+
+  /* Tira horizontal de los 22 arcanos. */
+  .arcanos { padding: 112px 0 96px; }
+  .arcanos-cabecera { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+  .tira {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 168px;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 24px max(24px, calc((100vw - var(--ancho)) / 2 + 24px)) 28px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--linea) transparent;
+  }
+  .tira-item {
+    scroll-snap-align: start;
     text-decoration: none;
-    color: var(--tinta);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  a.tirada-tarjeta:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(59, 31, 74, 0.12); }
-  .icono { font-size: 2rem; color: var(--terracota); }
-  .ir { font-weight: 600; color: var(--morado-claro); }
-  .pronto { opacity: 0.65; }
-  .pronto .ir { color: var(--tinta-suave); }
-
-  .fondo-crema { background: var(--crema-oscura); }
-  .sub { color: var(--tinta-suave); }
-  .destacadas {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 140px));
-    gap: 20px;
-    margin: 28px 0 32px;
+    gap: 12px;
+    justify-items: center;
+    transition: transform 0.5s var(--ease);
   }
-  @media (max-width: 640px) { .destacadas { grid-template-columns: repeat(2, minmax(0, 140px)); } }
-  .destacada { transition: transform 0.2s; }
-  .destacada:hover { transform: translateY(-6px) rotate(-1deg); }
+  .tira-item:hover { transform: translateY(-8px); }
+  .tira-claves { font-size: 0.85rem; color: var(--texto-suave); }
+  @media (max-width: 640px) {
+    .arcanos { padding: 72px 0 56px; }
+    .tira { grid-auto-columns: 132px; gap: 14px; padding-left: 18px; padding-right: 18px; }
+  }
 
-  .aurora { max-width: 760px; text-align: center; }
-  .aurora h2 { font-style: italic; }
+  /* Principios: imagen grande y lista editorial. */
+  .principios { padding: 96px 0 120px; }
+  .principios-rejilla { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: center; }
+  .principios-imagen { width: 100%; height: auto; border-radius: var(--radio); }
+  dl { margin: 40px 0 0; display: grid; gap: 28px; }
+  dl div { border-left: 1px solid var(--oro); padding-left: 22px; }
+  dt { font-family: var(--serif); font-size: 1.45rem; margin-bottom: 4px; }
+  dd { margin: 0; color: var(--texto-suave); max-width: 46ch; }
+  @media (max-width: 860px) {
+    .principios { padding: 64px 0 80px; }
+    .principios-rejilla { grid-template-columns: 1fr; gap: 40px; }
+  }
 </style>

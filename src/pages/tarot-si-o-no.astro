@@ -1,10 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
-import Carta from '../components/Carta.astro';
 import { arcanos } from '../data/arcanos';
 
-const datos = arcanos.map(({ numero, romano, nombre, slug, simbolo, respuesta, siNo, consejo }) => ({
-  numero,
+const datos = arcanos.map(({ romano, nombre, slug, simbolo, respuesta, siNo, consejo }) => ({
   romano,
   nombre,
   slug,
@@ -14,14 +12,7 @@ const datos = arcanos.map(({ numero, romano, nombre, slug, simbolo, respuesta, s
   consejo,
 }));
 
-const preguntas = [
-  '¿Volverá mi ex?',
-  '¿Me quiere de verdad?',
-  '¿Debo escribirle?',
-  '¿Conseguiré ese trabajo?',
-  '¿Es buen momento para cambiar de vida?',
-  '¿Saldrá bien este proyecto?',
-];
+const preguntas = ['¿Volverá mi ex?', '¿Me quiere de verdad?', '¿Debo escribirle?', '¿Conseguiré ese trabajo?'];
 
 const faq = [
   {
@@ -34,11 +25,11 @@ const faq = [
   },
   {
     p: '¿Puedo preguntar varias veces lo mismo?',
-    r: 'Puedes, pero Aurora recomienda no repetir la misma pregunta el mismo día. La primera respuesta suele ser la que más tiene que decirte.',
+    r: 'Puedes, pero no conviene repetir la misma pregunta el mismo día. La primera respuesta suele ser la que más tiene que decirte.',
   },
   {
     p: '¿Qué significa un «quizás»?',
-    r: 'Que la situación todavía no está decidida o que falta información. Lee la explicación de la carta: te dirá qué necesitas observar o esperar.',
+    r: 'Que la situación todavía no está decidida o que falta información. Lee la explicación de la carta: te dirá qué observar o esperar.',
   },
 ];
 
@@ -54,35 +45,26 @@ const jsonLd = {
 ---
 
 <Base
-  title="Tarot Sí o No gratis: respuesta inmediata | El Tarot de Aurora"
-  description="Haz tu pregunta, elige una carta y recibe una respuesta de sí o no con su explicación. Tarot Sí o No gratis, sin registro, con los 22 Arcanos Mayores."
+  title="Tarot Sí o No gratis: respuesta inmediata | Noctámbula"
+  description="Haz tu pregunta, elige una carta y recibe una respuesta de sí o no con su explicación. Tarot Sí o No gratis y sin registro, con los 22 Arcanos Mayores."
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
-  <section class="tirada">
+  <section class="mesa">
     <div class="contenedor">
-      <div class="intro">
-        <span class="etiqueta">Tirada gratuita · 1 carta</span>
-        <h1>Tarot Sí o No</h1>
-        <p class="lead">
-          Piensa en una pregunta que se pueda responder con un sí o un no. Respira, baraja y deja que una carta
-          te elija.
-        </p>
-      </div>
-
       <div class="paso" id="paso-pregunta">
-        <label for="pregunta" class="label">Tu pregunta (opcional, no se guarda)</label>
-        <input
-          id="pregunta"
-          type="text"
-          maxlength="140"
-          placeholder="Por ejemplo: ¿volverá a escribirme?"
-          autocomplete="off"
-        />
-        <div class="sugerencias" aria-label="Preguntas de ejemplo">
-          {preguntas.map((p) => <button type="button" class="sugerencia">{p}</button>)}
-        </div>
-        <button class="boton" id="barajar" type="button">Barajar las cartas</button>
+        <h1>Tarot <em>Sí o No</em></h1>
+        <p class="sub">Piensa una pregunta que se responda con un sí o un no. Respira y baraja.</p>
+        <form class="formulario" id="formulario">
+          <label for="pregunta">Tu pregunta <span class="suave">(opcional, no se guarda)</span></label>
+          <div class="campo">
+            <input id="pregunta" type="text" maxlength="140" placeholder="¿Volverá a escribirme?" autocomplete="off" />
+            <button class="boton" type="submit">Barajar</button>
+          </div>
+          <div class="sugerencias">
+            {preguntas.map((p) => <button type="button" class="sugerencia">{p}</button>)}
+          </div>
+        </form>
       </div>
 
       <div class="paso oculto" id="paso-elegir" aria-live="polite">
@@ -91,20 +73,20 @@ const jsonLd = {
       </div>
 
       <div class="paso oculto" id="paso-resultado" aria-live="polite">
-        <p class="tu-pregunta" id="tu-pregunta"></p>
         <div class="resultado">
           <div class="giro" id="giro">
             <div class="cara dorso"></div>
             <div class="cara frente" id="frente"></div>
           </div>
           <div class="respuesta">
+            <p class="tu-pregunta" id="tu-pregunta"></p>
             <p class="veredicto" id="veredicto"></p>
-            <h2 id="nombre-carta"></h2>
-            <p id="texto"></p>
-            <p class="consejo"><strong>El consejo de Aurora:</strong> <span id="consejo"></span></p>
+            <p class="carta-titulo" id="nombre-carta"></p>
+            <p class="texto" id="texto"></p>
+            <p class="consejo"><span>Consejo</span> <span id="consejo"></span></p>
             <div class="acciones">
-              <a class="boton secundario" id="enlace-carta" href="/cartas/">Leer más sobre esta carta</a>
-              <button class="boton" id="otra" type="button">Hacer otra pregunta</button>
+              <button class="boton" id="otra" type="button">Otra pregunta</button>
+              <a class="enlace-flecha" id="enlace-carta" href="/cartas/">Leer la carta completa</a>
             </div>
           </div>
         </div>
@@ -112,41 +94,35 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="seccion texto">
+  <section class="contenido">
     <div class="contenedor estrecho">
       <h2>Cómo leer tu respuesta</h2>
-      <p>
-        El tarot no decide por ti: te ayuda a mirar la situación con más claridad. Por eso cada respuesta viene con
-        una explicación. Un «sí» con la Torre no se vive igual que un «sí» con el Sol, y un «no» del Ermitaño a veces
-        solo significa «todavía no».
+      <p class="suave">
+        El tarot no decide por ti: te ayuda a mirar la situación con más claridad. Por eso cada respuesta viene con una
+        explicación. Un «sí» de la Torre no se vive igual que un «sí» del Sol, y un «no» del Ermitaño a veces solo
+        significa «todavía no».
       </p>
-      <p>
-        En esta tirada usamos los 22 Arcanos Mayores, las cartas más simbólicas de la baraja. Si quieres conocer cada
-        una a fondo, visita <a href="/cartas/">el significado de las cartas</a>.
+      <p class="suave">
+        En esta tirada usamos los 22 Arcanos Mayores, las cartas más simbólicas de la baraja. Si quieres conocer cada una
+        a fondo, visita <a href="/cartas/">el significado de los arcanos</a>.
       </p>
 
-      <h2>Preguntas frecuentes</h2>
+      <h2 class="faq-titulo">Preguntas frecuentes</h2>
       {
         faq.map((f) => (
           <details>
             <summary>{f.p}</summary>
-            <p>{f.r}</p>
+            <p class="suave">{f.r}</p>
           </details>
         ))
       }
     </div>
   </section>
-
-  <div class="plantilla" hidden>
-    <Carta arcano={arcanos[0]} />
-  </div>
 </Base>
 
 <script is:inline define:vars={{ datos }}>
   const $ = (id) => document.getElementById(id);
-  const pasoPregunta = $('paso-pregunta');
-  const pasoElegir = $('paso-elegir');
-  const pasoResultado = $('paso-resultado');
+  const pasos = ['paso-pregunta', 'paso-elegir', 'paso-resultado'].map($);
   const abanico = $('abanico');
   const input = $('pregunta');
 
@@ -166,7 +142,7 @@ const jsonLd = {
   };
 
   const mostrar = (paso) => {
-    [pasoPregunta, pasoElegir, pasoResultado].forEach((p) => p.classList.add('oculto'));
+    pasos.forEach((p) => p.classList.add('oculto'));
     paso.classList.remove('oculto');
     paso.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -184,13 +160,14 @@ const jsonLd = {
     mazo.forEach((carta, i) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'reverso';
+      b.className = 'dorso elegible';
       b.style.setProperty('--i', i);
-      b.setAttribute('aria-label', `Carta ${i + 1}`);
+      b.style.setProperty('--giro', `${(i - 4) * 7}deg`);
+      b.setAttribute('aria-label', `Carta ${i + 1} de 9`);
       b.addEventListener('click', () => revelar(carta));
       abanico.appendChild(b);
     });
-    mostrar(pasoElegir);
+    mostrar(pasos[1]);
   };
 
   const revelar = (carta) => {
@@ -198,163 +175,168 @@ const jsonLd = {
     $('tu-pregunta').textContent = pregunta ? `«${pregunta}»` : '';
     $('frente').innerHTML = `
       <div class="carta" role="img" aria-label="${carta.romano}. ${carta.nombre}">
-        <span class="numero">${carta.romano}</span>
-        <span class="simbolo">${carta.simbolo}</span>
-        <span class="nombre">${carta.nombre}</span>
+        <span class="carta-numero">${carta.romano}</span>
+        <span class="carta-simbolo" aria-hidden="true">${carta.simbolo}</span>
+        <span class="carta-nombre">${carta.nombre}</span>
       </div>`;
     const veredicto = $('veredicto');
     veredicto.textContent = carta.respuesta;
     veredicto.dataset.tipo = carta.respuesta === 'Sí' ? 'si' : carta.respuesta === 'No' ? 'no' : 'quizas';
-    $('nombre-carta').textContent = carta.nombre;
+    $('nombre-carta').textContent = `${carta.romano}. ${carta.nombre}`;
     $('texto').textContent = carta.siNo;
     $('consejo').textContent = carta.consejo;
     $('enlace-carta').href = `/cartas/${carta.slug}/`;
     const giro = $('giro');
     giro.classList.remove('girada');
-    mostrar(pasoResultado);
-    setTimeout(() => giro.classList.add('girada'), 350);
+    mostrar(pasos[2]);
+    setTimeout(() => giro.classList.add('girada'), 300);
   };
 
-  $('barajar').addEventListener('click', repartir);
+  $('formulario').addEventListener('submit', (e) => {
+    e.preventDefault();
+    repartir();
+  });
   $('otra').addEventListener('click', () => {
     input.value = '';
-    mostrar(pasoPregunta);
+    mostrar(pasos[0]);
   });
 </script>
 
 <style>
-  .tirada {
-    background:
-      radial-gradient(ellipse at top, rgba(201, 164, 92, 0.18), transparent 60%),
-      linear-gradient(180deg, var(--morado-oscuro), var(--morado));
-    color: var(--crema);
-    padding: 56px 0 72px;
-    min-height: 640px;
+  .mesa {
+    padding: 72px 0 96px;
+    min-height: calc(100dvh - 68px);
+    background: radial-gradient(70% 60% at 50% 30%, rgba(77, 42, 96, 0.55), transparent 70%);
   }
-  .tirada h1, .tirada h2 { color: var(--crema); }
-  .intro { text-align: center; max-width: 640px; margin: 0 auto 32px; }
-  .lead { font-size: 1.15rem; color: var(--crema-oscura); }
-  .tirada .etiqueta { color: var(--dorado); }
-
-  .paso { max-width: 760px; margin: 0 auto; text-align: center; scroll-margin-top: 120px; }
+  .paso { scroll-margin-top: 96px; }
   .oculto { display: none; }
 
-  .label { display: block; font-size: 0.9rem; color: var(--crema-oscura); margin-bottom: 8px; }
+  #paso-pregunta { max-width: 640px; }
+  .sub { font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 40px; }
+  label { display: block; font-size: 0.95rem; margin-bottom: 10px; }
+  .campo {
+    display: flex;
+    gap: 8px;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.3s;
+  }
+  .campo:focus-within { border-color: var(--oro); }
   #pregunta {
-    width: 100%;
-    max-width: 520px;
-    padding: 14px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--dorado);
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--crema);
-    font-size: 1rem;
-    font-family: var(--sans);
-  }
-  #pregunta::placeholder { color: #b9a9c2; }
-  #pregunta:focus { outline: 2px solid var(--dorado-claro); outline-offset: 2px; }
-  .sugerencias { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 28px; }
-  .sugerencia {
+    flex: 1;
+    min-width: 0;
     background: transparent;
-    border: 1px solid rgba(230, 207, 152, 0.4);
-    color: var(--crema-oscura);
-    border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 0.88rem;
+    border: 0;
+    color: var(--texto);
+    font: inherit;
+    font-size: 1.05rem;
+    padding: 10px 12px;
+  }
+  #pregunta::placeholder { color: #8f7f99; }
+  #pregunta:focus { outline: none; }
+  .sugerencias { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; }
+  .sugerencia {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+    border-bottom: 1px dotted var(--linea);
     cursor: pointer;
-    font-family: var(--sans);
   }
-  .sugerencia:hover { border-color: var(--dorado); color: var(--crema); }
-  .tirada .boton { background: var(--dorado); border-color: var(--dorado); color: var(--morado-oscuro); }
-  .tirada .boton:hover { background: var(--dorado-claro); border-color: var(--dorado-claro); }
-  .tirada .boton.secundario { background: transparent; color: var(--dorado-claro); border-color: var(--dorado); }
-  .tirada .boton.secundario:hover { background: var(--dorado); color: var(--morado-oscuro); }
+  .sugerencia:hover { color: var(--oro-claro); }
 
-  .instruccion { font-family: var(--serif); font-size: 1.6rem; color: var(--dorado-claro); }
+  .instruccion { font-family: var(--serif); font-style: italic; font-size: 2rem; text-align: center; margin: 0; }
   .abanico {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 10px;
-    margin-top: 24px;
+    position: relative;
+    height: 420px;
+    max-width: 900px;
+    margin: 24px auto 0;
   }
+  .abanico :global(.elegible) {
+    position: absolute;
+    width: 150px;
+    left: calc(50% - 75px);
+    bottom: 10px;
+    padding: 0;
+    cursor: pointer;
+    transform-origin: 50% 230%;
+    transform: rotate(var(--giro));
+    transition: transform 0.5s var(--ease), border-color 0.3s;
+  }
+  .abanico :global(.elegible:hover),
+  .abanico :global(.elegible:focus-visible) {
+    transform: rotate(var(--giro)) translateY(-26px);
+    border-color: var(--oro-claro);
+    outline: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .abanico :global(.elegible) { animation: repartir 0.7s calc(var(--i) * 55ms) var(--ease) both; }
+  }
+  @keyframes repartir { from { opacity: 0; transform: rotate(0deg) translateY(40px); } }
   @media (max-width: 640px) {
-    .abanico { grid-template-columns: repeat(3, 1fr); max-width: 300px; margin-left: auto; margin-right: auto; }
+    .abanico {
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 320px;
+    }
+    .abanico :global(.elegible) { position: relative; width: 100%; left: auto; bottom: auto; transform: none; }
+    .abanico :global(.elegible:hover) { transform: translateY(-6px); }
+    @keyframes repartir { from { opacity: 0; transform: translateY(20px); } }
   }
 
   .resultado {
     display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 40px;
+    grid-template-columns: 260px 1fr;
+    gap: 72px;
     align-items: center;
-    text-align: left;
+    max-width: 960px;
+    margin: 0 auto;
   }
-  @media (max-width: 640px) {
-    .resultado { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-  }
-  .tu-pregunta { font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--dorado-claro); }
   .giro {
-    width: 200px;
+    width: 260px;
     aspect-ratio: 7 / 12;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition: transform 1s var(--ease);
   }
   .giro.girada { transform: rotateY(180deg); }
-  .cara { position: absolute; inset: 0; backface-visibility: hidden; }
+  .cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
   .frente { transform: rotateY(180deg); }
   .frente :global(.carta) { max-width: none; height: 100%; }
-  .veredicto {
-    font-family: var(--serif);
-    font-size: 3.4rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 8px;
+  .tu-pregunta { font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--texto-suave); }
+  .veredicto { font-family: var(--serif); font-size: clamp(4rem, 9vw, 6.5rem); line-height: 1; margin: 0 0 8px; color: var(--oro-claro); }
+  .carta-titulo { font-size: 0.85rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro); margin-bottom: 20px; }
+  .texto { font-size: 1.12rem; max-width: 52ch; }
+  .consejo { border-left: 1px solid var(--oro); padding-left: 18px; color: var(--texto-suave); max-width: 52ch; }
+  .consejo span:first-child { color: var(--texto); font-weight: 600; margin-right: 6px; }
+  .acciones { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 32px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .giro.girada + .respuesta { animation: subir 0.9s 0.5s var(--ease) both; }
   }
-  .veredicto[data-tipo='si'] { color: #9fd89a; }
-  .veredicto[data-tipo='no'] { color: #f0a58a; }
-  .veredicto[data-tipo='quizas'] { color: var(--dorado-claro); }
-  .respuesta p { color: var(--crema-oscura); }
-  .consejo { border-left: 3px solid var(--dorado); padding-left: 14px; }
-  .acciones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
-  @media (max-width: 640px) { .acciones { justify-content: center; } }
+  @keyframes subir { from { opacity: 0; transform: translateY(16px); } }
+  @media (prefers-reduced-motion: reduce) { .giro { transition: none; } }
+  @media (max-width: 760px) {
+    .mesa { padding: 40px 0 64px; }
+    .resultado { grid-template-columns: 1fr; gap: 36px; justify-items: center; text-align: center; }
+    .giro { width: 200px; }
+    .consejo { border-left: 0; padding-left: 0; }
+    .acciones { justify-content: center; }
+  }
 
+  .contenido { padding: 96px 0 40px; border-top: 1px solid var(--linea-suave); }
   .estrecho { max-width: 760px; }
-  details {
-    border-bottom: 1px solid var(--crema-oscura);
-    padding: 14px 0;
-  }
-  summary { font-weight: 600; cursor: pointer; color: var(--morado); }
-  details p { margin: 10px 0 0; }
-</style>
-
-<style is:global>
-  .reverso,
-  .dorso {
-    aspect-ratio: 7 / 12;
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid var(--dorado);
-    background:
-      radial-gradient(circle at 50% 50%, var(--dorado) 0 6%, transparent 7%),
-      repeating-linear-gradient(45deg, rgba(201, 164, 92, 0.18) 0 2px, transparent 2px 12px),
-      repeating-linear-gradient(-45deg, rgba(201, 164, 92, 0.18) 0 2px, transparent 2px 12px),
-      var(--morado);
-    box-shadow: inset 0 0 0 4px var(--morado-oscuro), 0 6px 18px rgba(0, 0, 0, 0.35);
-  }
-  .reverso {
-    cursor: pointer;
-    padding: 0;
-    animation: repartir 0.5s calc(var(--i) * 60ms) both ease-out;
-    transition: transform 0.2s;
-  }
-  .reverso:hover,
-  .reverso:focus-visible { transform: translateY(-10px); outline: 2px solid var(--dorado-claro); outline-offset: 3px; }
-  @keyframes repartir {
-    from { opacity: 0; transform: translateY(30px) rotate(-6deg); }
-    to { opacity: 1; transform: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reverso { animation: none; }
-    .giro { transition: none !important; }
-  }
+  .faq-titulo { margin-top: 1.4em; }
+  details { border-top: 1px solid var(--linea-suave); padding: 18px 0; }
+  details:last-of-type { border-bottom: 1px solid var(--linea-suave); }
+  summary { cursor: pointer; font-size: 1.1rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: '+'; color: var(--oro); font-size: 1.4rem; line-height: 1; transition: transform 0.3s var(--ease); }
+  details[open] summary::after { transform: rotate(45deg); }
+  summary::-webkit-details-marker { display: none; }
+  details p { margin: 12px 0 0; }
 </style>

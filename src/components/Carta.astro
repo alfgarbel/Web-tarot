@@ -9,51 +9,8 @@ interface Props {
 const { arcano, tamano = 'normal' } = Astro.props;
 ---
 
-<div class:list={['carta', tamano]} aria-label={`${arcano.romano}. ${arcano.nombre}`} role="img">
-  <span class="numero">{arcano.romano}</span>
-  <span class="simbolo">{arcano.simbolo}</span>
-  <span class="nombre">{arcano.nombre}</span>
+<div class:list={['carta', tamano === 'pequena' && 'carta-pequena']} role="img" aria-label={`${arcano.romano}. ${arcano.nombre}`}>
+  <span class="carta-numero">{arcano.romano}</span>
+  <span class="carta-simbolo" aria-hidden="true">{arcano.simbolo}</span>
+  <span class="carta-nombre">{arcano.nombre}</span>
 </div>
-
-<style is:global>
-  .carta {
-    aspect-ratio: 7 / 12;
-    width: 100%;
-    max-width: 220px;
-    border-radius: 12px;
-    background:
-      radial-gradient(circle at 50% 42%, rgba(201, 164, 92, 0.25), transparent 60%),
-      linear-gradient(160deg, var(--morado) 0%, var(--morado-oscuro) 100%);
-    border: 2px solid var(--dorado);
-    box-shadow: inset 0 0 0 6px var(--morado-oscuro), inset 0 0 0 7px rgba(201, 164, 92, 0.6);
-    color: var(--dorado-claro);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 10px;
-    text-align: center;
-    text-decoration: none;
-  }
-  .numero {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-  .simbolo {
-    font-size: 4rem;
-    line-height: 1;
-    color: var(--dorado);
-  }
-  .nombre {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--crema);
-  }
-  .pequena { max-width: 140px; padding: 12px 6px; }
-  .pequena .simbolo { font-size: 2.6rem; }
-  .pequena .numero { font-size: 1rem; }
-  .pequena .nombre { font-size: 0.95rem; }
-</style>

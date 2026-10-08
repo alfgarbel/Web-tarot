@@ -18,56 +18,57 @@ const jsonLd = {
   headline: `${arcano.nombre}: significado en el tarot`,
   description: arcano.general,
   inLanguage: 'es',
-  author: { '@type': 'Organization', name: 'El Tarot de Aurora' },
+  author: { '@type': 'Organization', name: 'Noctámbula' },
 };
+
+const secciones = [
+  { titulo: 'En el amor', texto: arcano.amor },
+  { titulo: 'En el trabajo y el dinero', texto: arcano.trabajo },
+  { titulo: 'Invertida', texto: arcano.invertida },
+];
 ---
 
 <Base
-  title={`${arcano.nombre} en el tarot: significado en el amor, trabajo y sí o no | El Tarot de Aurora`}
+  title={`${arcano.nombre} en el tarot: significado en el amor, el trabajo y sí o no | Noctámbula`}
   description={`Qué significa ${arcano.nombre} (${arcano.romano}) en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, invertida y como respuesta de sí o no.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
-  <article class="seccion">
-    <div class="contenedor ficha">
-      <aside class="lateral">
-        <Carta arcano={arcano} />
-        <ul class="claves">{arcano.claves.map((c) => <li>{c}</li>)}</ul>
-      </aside>
+  <article class="contenedor ficha">
+    <aside class="lateral">
+      <Carta arcano={arcano} />
+    </aside>
 
-      <div class="cuerpo">
-        <nav class="migas" aria-label="Ruta"><a href="/cartas/">Las cartas</a> / {arcano.nombre}</nav>
-        <span class="etiqueta">Arcano Mayor {arcano.romano}</span>
-        <h1>{arcano.nombre}</h1>
-        <p class="lead">{arcano.general}</p>
+    <div class="cuerpo">
+      <nav class="migas" aria-label="Ruta"><a href="/cartas/">Los arcanos</a> <span aria-hidden="true">/</span> {arcano.nombre}</nav>
+      <h1>{arcano.nombre}</h1>
+      <p class="claves">{arcano.claves.join(', ')}</p>
+      <p class="general">{arcano.general}</p>
 
-        <h2>{arcano.nombre} en el amor</h2>
-        <p>{arcano.amor}</p>
-
-        <h2>{arcano.nombre} en el trabajo y el dinero</h2>
-        <p>{arcano.trabajo}</p>
-
-        <h2>{arcano.nombre} invertida</h2>
-        <p>{arcano.invertida}</p>
-
-        <h2>{arcano.nombre} en el tarot Sí o No</h2>
-        <p><strong class="respuesta">Respuesta: {arcano.respuesta}.</strong> {arcano.siNo}</p>
-
-        <div class="consejo">
-          <span class="etiqueta">El consejo de Aurora</span>
-          <p>{arcano.consejo}</p>
-        </div>
-
-        <div class="cta">
-          <p>¿Tienes una pregunta en mente?</p>
-          <a href="/tarot-si-o-no/" class="boton">Hacer la tirada Sí o No</a>
-        </div>
-
-        <nav class="pasar" aria-label="Otras cartas">
-          {anterior ? <a href={`/cartas/${anterior.slug}/`}>← {anterior.nombre}</a> : <span />}
-          {siguiente ? <a href={`/cartas/${siguiente.slug}/`}>{siguiente.nombre} →</a> : <span />}
-        </nav>
+      <div class="bloques">
+        {
+          secciones.map((s) => (
+            <section>
+              <h2>{s.titulo}</h2>
+              <p>{s.texto}</p>
+            </section>
+          ))
+        }
       </div>
+
+      <section class="sino">
+        <h2>Como respuesta de sí o no</h2>
+        <p class="sino-respuesta">{arcano.respuesta}</p>
+        <p>{arcano.siNo}</p>
+        <a href="/tarot-si-o-no/" class="boton linea">Hacer la tirada</a>
+      </section>
+
+      <blockquote class="consejo">{arcano.consejo}</blockquote>
+
+      <nav class="pasar" aria-label="Otras cartas">
+        {anterior ? <a href={`/cartas/${anterior.slug}/`} class="enlace-flecha">{anterior.romano}. {anterior.nombre}</a> : <span />}
+        {siguiente ? <a href={`/cartas/${siguiente.slug}/`} class="enlace-flecha">{siguiente.romano}. {siguiente.nombre}</a> : <span />}
+      </nav>
     </div>
   </article>
 </Base>
@@ -75,47 +76,55 @@ const jsonLd = {
 <style>
   .ficha {
     display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 56px;
+    grid-template-columns: 300px 1fr;
+    gap: 96px;
     align-items: start;
+    padding-top: 72px;
+    padding-bottom: 64px;
   }
-  @media (max-width: 760px) {
-    .ficha { grid-template-columns: 1fr; gap: 28px; }
-    .lateral { justify-self: center; position: static !important; }
+  .lateral { position: sticky; top: 108px; }
+  .lateral :global(.carta) { max-width: 300px; }
+  .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 28px; }
+  .migas a { color: var(--texto-suave); }
+  .cuerpo { max-width: 680px; }
+  .claves { color: var(--oro); font-family: var(--serif); font-style: italic; font-size: 1.3rem; margin-top: -0.4em; }
+  .general { font-size: 1.2rem; line-height: 1.7; margin-top: 28px; }
+  .general::first-letter {
+    font-family: var(--serif);
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.85;
+    padding: 6px 6px 0 0;
+    color: var(--oro-claro);
   }
-  .lateral { position: sticky; top: 96px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-  .claves { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
-  .claves li {
-    background: var(--crema-oscura);
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-size: 0.85rem;
-    color: var(--morado);
+  .bloques { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 48px; margin-top: 56px; }
+  .bloques section:first-child { grid-column: 1 / -1; }
+  .bloques h2, .sino h2 { font-size: 1.6rem; }
+  .bloques p { color: var(--texto-suave); }
+  .sino {
+    margin-top: 64px;
+    padding: 40px;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: rgba(59, 31, 74, 0.35);
   }
-  .cuerpo { max-width: 700px; }
-  .migas { font-size: 0.85rem; color: var(--tinta-suave); margin-bottom: 16px; }
-  .lead { font-size: 1.15rem; }
-  h2 { margin-top: 1.4em; font-size: 1.7rem; }
-  .respuesta { color: var(--terracota); }
+  .sino-respuesta { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--oro-claro); margin-bottom: 16px; }
+  .sino p:not(.sino-respuesta) { color: var(--texto-suave); max-width: 54ch; margin-bottom: 28px; }
   .consejo {
-    background: var(--morado);
-    color: var(--crema);
-    border-radius: var(--radio);
-    padding: 24px 28px;
-    margin: 36px 0;
+    margin: 72px 0 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.2;
+    padding-bottom: 0.1em;
   }
-  .consejo .etiqueta { color: var(--dorado); }
-  .consejo p { font-family: var(--serif); font-size: 1.5rem; margin: 0; }
-  .cta {
-    border: 1px solid var(--crema-oscura);
-    border-radius: var(--radio);
-    padding: 24px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+  .consejo::before { content: '«'; color: var(--oro); }
+  .consejo::after { content: '»'; color: var(--oro); }
+  .pasar { display: flex; justify-content: space-between; gap: 16px; margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--linea-suave); }
+  @media (max-width: 860px) {
+    .ficha { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+    .lateral { position: static; justify-self: center; width: 220px; }
+    .bloques { grid-template-columns: 1fr; }
+    .sino { padding: 28px 22px; }
   }
-  .cta p { margin: 0; font-weight: 600; }
-  .pasar { display: flex; justify-content: space-between; margin-top: 36px; font-weight: 600; }
 </style>

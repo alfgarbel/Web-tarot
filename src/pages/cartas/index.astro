@@ -5,47 +5,57 @@ import { arcanos } from '../../data/arcanos';
 ---
 
 <Base
-  title="Significado de las cartas del tarot: los 22 Arcanos Mayores | El Tarot de Aurora"
-  description="El significado de los 22 Arcanos Mayores del tarot: qué dice cada carta en el amor, el trabajo, al derecho y al revés, con su respuesta de sí o no."
+  title="Significado de las cartas del tarot: los 22 Arcanos Mayores | Noctámbula"
+  description="El significado de los 22 Arcanos Mayores del tarot: qué dice cada carta en el amor, el trabajo, al derecho y al revés, y su respuesta de sí o no."
 >
-  <section class="seccion">
+  <section class="cabeza">
     <div class="contenedor">
-      <span class="etiqueta">Arcanos Mayores</span>
-      <h1>Significado de las cartas del tarot</h1>
-      <p class="lead">
-        Los 22 Arcanos Mayores cuentan un viaje: del Loco que empieza sin mapa al Mundo que completa el camino. Elige
-        una carta para leer su significado en el amor, el trabajo y la vida.
+      <h1>Los veintidós <em>arcanos mayores</em></h1>
+      <p class="sub">
+        Del Loco, que empieza sin mapa, al Mundo, que completa el camino. Elige una carta para leer qué dice en el amor, el
+        trabajo y la vida.
       </p>
-      <div class="rejilla">
-        {
-          arcanos.map((a) => (
+    </div>
+  </section>
+
+  <section class="contenedor">
+    <ol class="rejilla">
+      {
+        arcanos.map((a) => (
+          <li>
             <a href={`/cartas/${a.slug}/`} class="item">
               <Carta arcano={a} tamano="pequena" />
-              <span class="claves">{a.claves.join(' · ')}</span>
+              <span class="claves">{a.claves.join(', ')}</span>
             </a>
-          ))
-        }
-      </div>
-    </div>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 </Base>
 
 <style>
-  .lead { max-width: 680px; font-size: 1.1rem; color: var(--tinta-suave); }
+  .cabeza { padding: 72px 0 24px; }
+  .cabeza h1 { max-width: 14ch; }
+  .sub { max-width: 56ch; font-size: 1.15rem; color: var(--texto-suave); }
   .rejilla {
+    list-style: none;
+    padding: 0;
+    margin: 40px 0 80px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 28px 20px;
-    margin-top: 36px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 44px 24px;
   }
   .item {
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    transition: transform 0.2s;
+    display: grid;
+    gap: 14px;
+    justify-items: center;
+    transition: transform 0.5s var(--ease);
   }
-  .item:hover { transform: translateY(-6px); }
-  .claves { font-size: 0.8rem; color: var(--tinta-suave); text-align: center; }
+  .item:hover { transform: translateY(-8px); }
+  .claves { font-size: 0.85rem; color: var(--texto-suave); text-align: center; }
+  @media (max-width: 520px) {
+    .rejilla { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
+  }
 </style>
