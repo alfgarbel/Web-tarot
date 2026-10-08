@@ -26,6 +26,7 @@ import { arcanos } from '../../data/arcanos';
             <a href={`/cartas/${a.slug}/`} class="item">
               <Carta arcano={a} tamano="pequena" />
               <span class="claves">{a.claves.join(', ')}</span>
+              <span class="respuesta" data-tipo={a.respuesta === 'Sí' ? 'si' : a.respuesta === 'No' ? 'no' : 'quizas'}>{a.respuesta}</span>
             </a>
           </li>
         ))
@@ -55,6 +56,7 @@ import { arcanos } from '../../data/arcanos';
   }
   .item:hover { transform: translateY(-8px); }
   .claves { font-size: 0.85rem; color: var(--texto-suave); text-align: center; }
+  .respuesta { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--veredicto); margin-top: -8px; }
   @media (max-width: 520px) {
     .rejilla { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
   }

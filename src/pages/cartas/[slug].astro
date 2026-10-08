@@ -56,7 +56,7 @@ const secciones = [
         }
       </div>
 
-      <section class="sino">
+      <section class="sino" data-tipo={arcano.respuesta === 'Sí' ? 'si' : arcano.respuesta === 'No' ? 'no' : 'quizas'}>
         <h2>Como respuesta de sí o no</h2>
         <p class="sino-respuesta">{arcano.respuesta}</p>
         <p>{arcano.siNo}</p>
@@ -101,14 +101,18 @@ const secciones = [
   .bloques section:first-child { grid-column: 1 / -1; }
   .bloques h2, .sino h2 { font-size: 1.6rem; }
   .bloques p { color: var(--texto-suave); }
+  .bloques section { border-top: 2px solid var(--marca); padding-top: 18px; }
+  .bloques section:nth-child(1) { --marca: var(--terracota); }
+  .bloques section:nth-child(2) { --marca: var(--romero); }
+  .bloques section:nth-child(3) { --marca: var(--azulejo); }
   .sino {
     margin-top: 64px;
     padding: 40px;
-    border: 1px solid var(--linea);
+    border: 1px solid color-mix(in srgb, var(--veredicto) 40%, transparent);
     border-radius: var(--radio);
-    background: rgba(59, 31, 74, 0.35);
+    background: linear-gradient(160deg, var(--tono-1), var(--tono-2));
   }
-  .sino-respuesta { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--oro-claro); margin-bottom: 16px; }
+  .sino-respuesta { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--veredicto); margin-bottom: 16px; }
   .sino p:not(.sino-respuesta) { color: var(--texto-suave); max-width: 54ch; margin-bottom: 28px; }
   .consejo {
     margin: 72px 0 0;

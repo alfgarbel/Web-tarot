@@ -69,7 +69,8 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
     </div>
   </section>
 
-  <section class="principios">
+  <div class="azulejos" aria-hidden="true"></div>
+  <section class="principios seccion-cal">
     <div class="contenedor principios-rejilla">
       <img
         class="principios-imagen revelar"
@@ -139,7 +140,9 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
   /* Promo de la tirada: abanico de cartas a la izquierda. */
   .tirada-promo {
     padding: 112px 0;
-    background: linear-gradient(180deg, var(--noche) 0%, var(--noche-2) 50%, var(--noche) 100%);
+    background:
+      radial-gradient(60% 80% at 25% 50%, rgba(46, 76, 140, 0.45), transparent 70%),
+      linear-gradient(180deg, var(--noche) 0%, var(--azulejo-noche) 50%, var(--noche) 100%);
   }
   .promo-rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .abanico {
@@ -197,13 +200,14 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
   }
 
   /* Principios: imagen grande y lista editorial. */
-  .principios { padding: 96px 0 120px; }
+  .principios { padding: 104px 0 120px; }
+  .principios-imagen { box-shadow: 0 30px 60px -30px rgba(43, 26, 44, 0.6); }
   .principios-rejilla { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: center; }
-  .principios-imagen { width: 100%; height: auto; border-radius: var(--radio); }
+  .principios-imagen { width: 100%; height: auto; border-radius: 999px 999px var(--radio) var(--radio); }
   dl { margin: 40px 0 0; display: grid; gap: 28px; }
-  dl div { border-left: 1px solid var(--oro); padding-left: 22px; }
+  dl div { border-left: 2px solid var(--terracota); padding-left: 22px; }
   dt { font-family: var(--serif); font-size: 1.45rem; margin-bottom: 4px; }
-  dd { margin: 0; color: var(--texto-suave); max-width: 46ch; }
+  dd { margin: 0; color: var(--tinta-suave); max-width: 46ch; }
   @media (max-width: 860px) {
     .principios { padding: 64px 0 80px; }
     .principios-rejilla { grid-template-columns: 1fr; gap: 40px; }

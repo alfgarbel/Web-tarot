@@ -5,7 +5,10 @@
 
 /*
   Noctámbula. Tema único de noche: la web se usa sobre todo de noche y desde el móvil.
-  Un solo acento (oro viejo) sobre una base morada.
+  Base morada con oro viejo para las acciones. El resto de colores sale del patio andaluz
+  de la foto original: cal de las paredes, azulejo azul, terracota y romero.
+  Regla: el oro es siempre el botón principal; terracota, azulejo y romero marcan
+  secciones claras y los tres veredictos (No, Quizás, Sí).
 */
 :root {
   --noche: #170c20;
@@ -14,6 +17,17 @@
   --morado-2: #4d2a60;
   --oro: #c9a45c;
   --oro-claro: #e3cc94;
+  --cal: #efe5d6;
+  --cal-2: #e3d4bf;
+  --tinta: #2b1a2c;
+  --tinta-suave: #6a5550;
+  --terracota: #b05d3b;
+  --terracota-claro: #e09673;
+  --azulejo: #2e4c8c;
+  --azulejo-noche: #121c38;
+  --azulejo-claro: #9fb4e6;
+  --romero: #66754f;
+  --romero-claro: #b3c48f;
   --texto: #eee6f2;
   --texto-suave: #b6a7c0;
   --linea: rgba(201, 164, 92, 0.26);
@@ -161,7 +175,7 @@ img { max-width: 100%; display: block; }
   border-radius: 6px;
   background:
     radial-gradient(120% 70% at 50% 45%, rgba(201, 164, 92, 0.16), transparent 70%),
-    linear-gradient(170deg, #2c1638 0%, #1a0d23 100%);
+    linear-gradient(170deg, var(--tono-1, #2c1638) 0%, var(--tono-2, #1a0d23) 100%);
   border: 1px solid var(--oro);
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -204,3 +218,39 @@ img { max-width: 100%; display: block; }
 .carta-pequena .carta-simbolo { font-size: 2.6rem; }
 .carta-pequena .carta-numero { font-size: 0.85rem; }
 .carta-pequena .carta-nombre { font-size: 0.95rem; }
+
+/* Sección clara de cal, como las paredes encaladas del patio. */
+.seccion-cal {
+  background: var(--cal);
+  color: var(--tinta);
+  color-scheme: light;
+}
+.seccion-cal h1, .seccion-cal h2, .seccion-cal h3 { color: var(--tinta); }
+.seccion-cal h1 em, .seccion-cal h2 em { color: var(--terracota); }
+.seccion-cal .suave { color: var(--tinta-suave); }
+.seccion-cal a { color: var(--terracota); }
+.seccion-cal .enlace-flecha { color: var(--tinta); border-color: rgba(176, 93, 59, 0.45); }
+.seccion-cal .enlace-flecha:hover { color: var(--terracota); border-color: var(--terracota); }
+.seccion-cal .boton.linea { color: var(--tinta); border-color: rgba(43, 26, 44, 0.3); }
+.seccion-cal .boton.linea:hover { color: var(--terracota); border-color: var(--terracota); }
+
+/* Cenefa de azulejo azul y cal: separa secciones como el zócalo del patio. */
+.azulejos {
+  height: 36px;
+  background-color: var(--cal);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--azulejo) 0 3px, transparent 3.6px),
+    radial-gradient(circle at 50% 50%, transparent 0 9px, var(--azulejo) 9.6px 10.8px, transparent 11.4px),
+    radial-gradient(circle at 0 0, var(--azulejo) 0 6px, transparent 6.6px),
+    radial-gradient(circle at 100% 0, var(--azulejo) 0 6px, transparent 6.6px),
+    radial-gradient(circle at 0 100%, var(--azulejo) 0 6px, transparent 6.6px),
+    radial-gradient(circle at 100% 100%, var(--azulejo) 0 6px, transparent 6.6px);
+  background-size: 36px 36px;
+  border-top: 3px solid var(--azulejo);
+  border-bottom: 3px solid var(--azulejo);
+}
+
+/* Color de cada veredicto. */
+[data-tipo='si'] { --veredicto: var(--romero-claro); --tono-1: #2f3a26; --tono-2: #151b11; }
+[data-tipo='no'] { --veredicto: var(--terracota-claro); --tono-1: #45231a; --tono-2: #1f0f0b; }
+[data-tipo='quizas'] { --veredicto: var(--azulejo-claro); --tono-1: #1d2d56; --tono-2: #0e1529; }

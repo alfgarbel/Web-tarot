@@ -9,7 +9,7 @@ interface Props {
 const { arcano, tamano = 'normal' } = Astro.props;
 ---
 
-<div class:list={['carta', tamano === 'pequena' && 'carta-pequena']} role="img" aria-label={`${arcano.romano}. ${arcano.nombre}`}>
+<div class:list={['carta', tamano === 'pequena' && 'carta-pequena']} data-tipo={arcano.respuesta === 'Sí' ? 'si' : arcano.respuesta === 'No' ? 'no' : 'quizas'} role="img" aria-label={`${arcano.romano}. ${arcano.nombre}`}>
   <span class="carta-numero">{arcano.romano}</span>
   <span class="carta-simbolo" aria-hidden="true">{arcano.simbolo}</span>
   <span class="carta-nombre">{arcano.nombre}</span>
