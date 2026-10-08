@@ -23,4 +23,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://arcanaia.es/sitemap-index.xml
+Sitemap: https://arcanaia.com/sitemap-index.xml

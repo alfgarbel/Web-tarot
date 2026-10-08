@@ -372,4 +372,6 @@ export const combinaciones: Combinacion[] = [
   },
 ];
 
-export const slugCombinacion = (c: Combinacion) => `${c.a}-y-${c.b}`;
+// Sin el artículo inicial de cada carta, para que las URL no pasen de 70 caracteres.
+const sinArticulo = (slug: string) => slug.replace(/^(el|la|los|las)-/, '');
+export const slugCombinacion = (c: Combinacion) => `${sinArticulo(c.a)}-y-${sinArticulo(c.b)}`;
