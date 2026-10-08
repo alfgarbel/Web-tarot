@@ -298,3 +298,6 @@ img { max-width: 100%; display: block; }
 }
 [data-baraja='ilustrada'] .carta-imagen { display: block; }
 [data-baraja='ilustrada'] .carta-arte .adorno { display: none; }
+[data-baraja='ilustrada'] .carta.sin-imagen .carta-arte .adorno { display: inline; }
+.carta-numero.largo { top: 7.9%; font-size: 6.6cqi; letter-spacing: 0.1em; }
+.carta-arte .motivo g :is(path, circle, polygon) { vector-effect: non-scaling-stroke; }

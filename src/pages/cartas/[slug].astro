@@ -3,15 +3,18 @@ import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
 import SelectorBaraja from '../../components/SelectorBaraja.astro';
 import { arcanos, type Arcano } from '../../data/arcanos';
+import { menores } from '../../data/menores';
+
+const todas = [...arcanos, ...menores];
 
 export function getStaticPaths() {
-  return arcanos.map((arcano) => ({ params: { slug: arcano.slug }, props: { arcano } }));
+  return [...arcanos, ...menores].map((arcano) => ({ params: { slug: arcano.slug }, props: { arcano } }));
 }
 
 const { arcano } = Astro.props as { arcano: Arcano };
-const i = arcanos.indexOf(arcano);
-const anterior = arcanos[i - 1];
-const siguiente = arcanos[i + 1];
+const i = todas.findIndex((a) => a.slug === arcano.slug);
+const anterior = todas[i - 1];
+const siguiente = todas[i + 1];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -31,7 +34,7 @@ const secciones = [
 
 <Base
   title={`${arcano.nombre} en el tarot: significado en el amor, el trabajo y sí o no | Arcanaia`}
-  description={`Qué significa ${arcano.nombre} (${arcano.romano}) en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, invertida y como respuesta de sí o no.`}
+  description={`Qué significa ${arcano.nombre}${arcano.palo ? '' : ` (${arcano.romano})`} en el tarot: ${arcano.claves.join(', ')}. Su lectura en el amor, el trabajo, invertida y como respuesta de sí o no.`}
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
@@ -68,8 +71,8 @@ const secciones = [
       <blockquote class="consejo">{arcano.consejo}</blockquote>
 
       <nav class="pasar" aria-label="Otras cartas">
-        {anterior ? <a href={`/cartas/${anterior.slug}/`} class="enlace-flecha">{anterior.romano}. {anterior.nombre}</a> : <span />}
-        {siguiente ? <a href={`/cartas/${siguiente.slug}/`} class="enlace-flecha">{siguiente.romano}. {siguiente.nombre}</a> : <span />}
+        {anterior ? <a href={`/cartas/${anterior.slug}/`} class="enlace-flecha">{anterior.palo ? anterior.nombre : `${anterior.romano}. ${anterior.nombre}`}</a> : <span />}
+        {siguiente ? <a href={`/cartas/${siguiente.slug}/`} class="enlace-flecha">{siguiente.palo ? siguiente.nombre : `${siguiente.romano}. ${siguiente.nombre}`}</a> : <span />}
       </nav>
     </div>
   </article>

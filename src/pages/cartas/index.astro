@@ -2,49 +2,76 @@
 import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
 import SelectorBaraja from '../../components/SelectorBaraja.astro';
-import { arcanos } from '../../data/arcanos';
+import { arcanos, type Arcano } from '../../data/arcanos';
+import { menores, palos } from '../../data/menores';
+
+const grupos: { id: string; titulo: string; texto: string; cartas: Arcano[] }[] = [
+  { id: 'mayores', titulo: 'Arcanos mayores', texto: 'Las veintidós cartas que marcan los grandes temas de la vida, del Loco al Mundo.', cartas: arcanos },
+  ...palos.map((p) => ({
+    id: p.palo,
+    titulo: p.nombre,
+    texto: `Elemento ${p.elemento.toLowerCase()}. Hablan ${p.tema.startsWith("el ") ? "del " + p.tema.slice(3) : "de " + p.tema}.`,
+    cartas: menores.filter((m) => m.palo === p.palo),
+  })),
+];
 ---
 
 <Base
-  title="Significado de las cartas del tarot: los 22 Arcanos Mayores | Arcanaia"
-  description="El significado de los 22 Arcanos Mayores del tarot: qué dice cada carta en el amor, el trabajo, al derecho y al revés, y su respuesta de sí o no."
+  title="Significado de las 78 cartas del tarot: arcanos mayores y menores | Arcanaia"
+  description="El significado de las 78 cartas del tarot, de los 22 arcanos mayores a los 56 menores: qué dice cada una en el amor, el trabajo, invertida y como respuesta de sí o no."
 >
   <section class="cabeza">
     <div class="contenedor">
-      <h1>Los veintidós <em>arcanos mayores</em></h1>
+      <h1>Las setenta y ocho <em>cartas del tarot</em></h1>
       <p class="sub">
-        Del Loco, que empieza sin mapa, al Mundo, que completa el camino. Elige una carta para leer qué dice en el amor, el
-        trabajo y la vida.
+        Veintidós arcanos mayores y cincuenta y seis menores, repartidos en cuatro palos. Elige una carta para leer qué dice
+        en el amor, el trabajo y la vida.
       </p>
+      <nav class="indice" aria-label="Grupos de cartas">
+        {grupos.map((g) => <a href={`#${g.id}`}>{g.titulo}</a>)}
+      </nav>
       <SelectorBaraja />
     </div>
   </section>
 
-  <section class="contenedor">
-    <ol class="rejilla">
-      {
-        arcanos.map((a) => (
-          <li>
-            <a href={`/cartas/${a.slug}/`} class="item">
-              <Carta arcano={a} tamano="pequena" />
-              <span class="claves">{a.claves.join(', ')}</span>
-              <span class="respuesta" data-tipo={a.respuesta === 'Sí' ? 'si' : a.respuesta === 'No' ? 'no' : 'quizas'}>{a.respuesta}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
+  {
+    grupos.map((g) => (
+      <section class="contenedor grupo" id={g.id}>
+        <div class="grupo-cabeza">
+          <h2>{g.titulo}</h2>
+          <p class="suave">{g.texto}</p>
+        </div>
+        <ol class="rejilla">
+          {g.cartas.map((a) => (
+            <li>
+              <a href={`/cartas/${a.slug}/`} class="item">
+                <Carta arcano={a} tamano="pequena" />
+                <span class="claves">{a.claves.join(', ')}</span>
+                <span class="respuesta" data-tipo={a.respuesta === 'Sí' ? 'si' : a.respuesta === 'No' ? 'no' : 'quizas'}>{a.respuesta}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
 </Base>
 
 <style>
   .cabeza { padding: 72px 0 24px; }
   .cabeza h1 { max-width: 14ch; }
   .sub { max-width: 56ch; font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 32px; }
+  .indice { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 28px; }
+  .indice a { color: var(--oro-claro); text-decoration: none; border-bottom: 1px solid var(--linea); font-size: 0.95rem; }
+  .indice a:hover { border-color: var(--oro); }
+  .grupo { scroll-margin-top: 96px; padding-top: 48px; }
+  .grupo-cabeza { display: flex; align-items: baseline; gap: 12px 32px; flex-wrap: wrap; border-top: 1px solid var(--linea-suave); padding-top: 28px; }
+  .grupo-cabeza h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .grupo-cabeza p { margin: 0; }
   .rejilla {
     list-style: none;
     padding: 0;
-    margin: 40px 0 80px;
+    margin: 36px 0 40px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 44px 24px;

@@ -14,6 +14,10 @@ export interface Arcano {
   trabajo: string;
   invertida: string;
   consejo: string;
+  /** Solo arcanos menores: su palo, el motivo de línea propio y que no tienen imagen ilustrada. */
+  palo?: string;
+  motivo?: string;
+  sinImagen?: boolean;
 }
 
 export const arcanos: Arcano[] = [
