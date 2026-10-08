@@ -23,8 +23,9 @@ interface Props {
 
 const { posiciones, preguntas = [], placeholder = '¿Qué necesito saber?', cierre = 'Para llevarte', respuesta, disposicion = 'fila' } = Astro.props;
 const cruz = disposicion === 'cruz';
-const numeros: Record<number, string> = { 1: 'una carta', 3: 'tres cartas', 10: 'diez cartas' };
+const numeros: Record<number, string> = { 1: 'una carta', 3: 'tres cartas', 4: 'cuatro cartas', 10: 'diez cartas' };
 const n = posiciones.length;
+const claves = posiciones.map((p) => p.clave);
 
 const datos = arcanos.map((a) => ({
   slug: a.slug,
@@ -134,7 +135,7 @@ const datos = arcanos.map((a) => ({
 
 {arcanos.map((a) => <template id={`carta-${a.slug}`}><Carta arcano={a} /></template>)}
 
-<script is:inline define:vars={{ datos, n }}>
+<script is:inline define:vars={{ datos, n, claves }}>
   const $ = (id) => document.getElementById(id);
   const pasos = ['paso-pregunta', 'paso-elegir', 'paso-resultado'].map($);
   const abanico = $('abanico');
@@ -142,7 +143,7 @@ const datos = arcanos.map((a) => ({
   const posiciones = [...$('lectura').children];
   const textos = $('textos') ? [...$('textos').children] : posiciones;
   const input = $('pregunta');
-  const total = n > 3 ? 18 : 12;
+  const total = n > 4 ? 18 : 12;
   let elegidas = [];
 
   const azar = (max) => {
@@ -214,7 +215,7 @@ const datos = arcanos.map((a) => ({
       : 'Acabas de hacer esta tirada. Esta fue tu lectura. Si tienes otra pregunta, escríbela y vuelve a barajar.';
     posiciones.forEach((li, i) => {
       const carta = elegidas[i];
-      const clave = Object.keys(carta.textos)[i];
+      const clave = claves[i];
       const bloque = textos[i];
       li.querySelector('.frente').replaceChildren($(`carta-${carta.slug}`).content.cloneNode(true));
       const titulo = bloque.querySelector('.carta-titulo');

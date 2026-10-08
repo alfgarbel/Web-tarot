@@ -46,6 +46,30 @@ const tiradas = [
   },
 ];
 
+const porTema = [
+  {
+    href: '/tarot-del-trabajo/',
+    titulo: 'Trabajo y dinero',
+    cartas: 3,
+    texto: 'Tu momento profesional, lo que te frena y hacia dónde va tu economía.',
+    tono: 'oro',
+  },
+  {
+    href: '/tarot-de-la-salud/',
+    titulo: 'Salud y bienestar',
+    cartas: 3,
+    texto: 'Tu energía, lo que necesitas y cómo cuidarte. Para escucharte, nunca para diagnosticar.',
+    tono: 'romero',
+  },
+  {
+    href: '/dos-caminos/',
+    titulo: 'Decidir entre dos caminos',
+    cartas: 4,
+    texto: 'La situación, lo que trae cada opción y la clave para elegir.',
+    tono: 'azulejo',
+  },
+];
+
 const extra = { href: '/compatibilidad/', titulo: 'Compatibilidad de signos', texto: 'Tu signo y el de la otra persona: cuánto encajáis, qué os une y dónde chocáis, con vuestras cartas del tarot.' };
 ---
 
@@ -61,27 +85,35 @@ const extra = { href: '/compatibilidad/', titulo: 'Compatibilidad de signos', te
   </section>
 
   <section class="contenedor">
-    <ol class="lista">
-      {
-        tiradas.map((t) => (
-          <li class="revelar" data-tono={t.tono}>
-            <a href={t.href} class="fila">
-              <span class="mazo" style={`--n:${Math.min(t.cartas, 5)}; --paso:${t.cartas > 3 ? 16 : 30}px; --abre:${t.cartas > 3 ? 7 : 9}deg`} aria-hidden="true">
-                {Array.from({ length: Math.min(t.cartas, 5) }, (_, i) => (
-                  <span class="dorso" style={`--i:${i}`} />
-                ))}
-              </span>
-              <span class="nombre">{t.titulo}</span>
-              <span class="detalle">
-                <span class="cuantas">{t.cartas === 1 ? 'Una carta' : t.cartas === 3 ? 'Tres cartas' : 'Diez cartas'}</span>
-                {t.texto}
-              </span>
-              <span class="flecha" aria-hidden="true">→</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
+    {
+      [
+        { titulo: 'Las tiradas', lista: tiradas },
+        { titulo: 'Por tema', lista: porTema },
+      ].map((grupo) => (
+        <>
+          <h2 class="grupo">{grupo.titulo}</h2>
+          <ol class="lista">
+            {grupo.lista.map((t) => (
+              <li class="revelar" data-tono={t.tono}>
+                <a href={t.href} class="fila">
+                  <span class="mazo" style={`--n:${Math.min(t.cartas, 5)}; --paso:${t.cartas > 3 ? 16 : 30}px; --abre:${t.cartas > 3 ? 7 : 9}deg`} aria-hidden="true">
+                    {Array.from({ length: Math.min(t.cartas, 5) }, (_, i) => (
+                      <span class="dorso" style={`--i:${i}`} />
+                    ))}
+                  </span>
+                  <span class="nombre">{t.titulo}</span>
+                  <span class="detalle">
+                    <span class="cuantas">{{ 1: 'Una carta', 3: 'Tres cartas', 4: 'Cuatro cartas', 10: 'Diez cartas' }[t.cartas]}</span>
+                    {t.texto}
+                  </span>
+                  <span class="flecha" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </>
+      ))
+    }
     <a href={extra.href} class="extra">
       <span class="extra-etiqueta">Y además</span>
       <span class="extra-titulo">{extra.titulo}</span>
@@ -93,7 +125,8 @@ const extra = { href: '/compatibilidad/', titulo: 'Compatibilidad de signos', te
 <style>
   .cabeza { padding: 72px 0 32px; }
   .sub { max-width: 52ch; font-size: 1.15rem; color: var(--texto-suave); }
-  .lista { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--linea-suave); }
+  .grupo { font-size: 0.85rem; font-family: var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro); margin: 56px 0 16px; }
+  .lista { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--linea-suave); }
   li[data-tono='terracota'] { --tono: var(--terracota-claro); }
   li[data-tono='oro'] { --tono: var(--oro-claro); }
   li[data-tono='azulejo'] { --tono: var(--azulejo-claro); }

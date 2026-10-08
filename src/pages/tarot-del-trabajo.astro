@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import Tirada from '../components/Tirada.astro';
+import Explicacion from '../components/Explicacion.astro';
+
+const faq = [
+  {
+    p: '¿Cómo funciona el tarot del trabajo y el dinero?',
+    r: 'Piensas en tu situación laboral o económica, barajas y eliges tres cartas. La primera describe tu momento, la segunda lo que te frena y la tercera hacia dónde va todo si sigues así.',
+  },
+  {
+    p: '¿Puedo preguntar por una entrevista o una oferta concreta?',
+    r: 'Sí. Escribe la pregunta antes de barajar y piensa en ella mientras eliges. Si necesitas un sí o un no directo, prueba también el tarot Sí o No.',
+  },
+  {
+    p: '¿Sirve para decisiones de dinero?',
+    r: 'Te ayuda a reflexionar, pero no sustituye el consejo de un profesional. Para inversiones, deudas o contratos, consulta siempre con alguien de confianza que sepa del tema.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, sin registro. Si repites la misma pregunta el mismo día, verás la misma lectura.',
+  },
+];
+---
+
+<Base
+  title="Tarot del trabajo y el dinero gratis | Arcanaia"
+  description="Tirada de tarot del trabajo y el dinero gratis: tres cartas para ver tu momento profesional, lo que te frena y hacia dónde va tu economía. Sin registro."
+>
+  <Tirada
+    posiciones={[
+      { clave: 'trabajoAhora', titulo: 'Tu momento' },
+      { clave: 'trabajoFreno', titulo: 'Lo que te frena' },
+      { clave: 'trabajoRumbo', titulo: 'Hacia dónde va' },
+    ]}
+    preguntas={['¿Conseguiré ese trabajo?', '¿Mejorará mi economía?', '¿Es momento de emprender?']}
+    placeholder="¿Qué pasa con mi trabajo?"
+    cierre="Para tu camino profesional"
+  >
+    <h1>Tarot del trabajo <em>y el dinero</em></h1>
+    <p class="sub">Tres cartas: tu momento, lo que te frena y hacia dónde va. Piensa en tu trabajo o en tu economía y baraja.</p>
+  </Tirada>
+
+  <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
+    <p class="suave">
+      La primera carta describe dónde estás ahora en lo profesional. La segunda señala el obstáculo: a veces es algo de
+      fuera y a veces está en ti. La tercera muestra la tendencia si nada cambia. Si no te gusta, vuelve a la segunda:
+      ahí está lo que puedes mover.
+    </p>
+  </Explicacion>
+</Base>

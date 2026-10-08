@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import Tirada from '../components/Tirada.astro';
+import Explicacion from '../components/Explicacion.astro';
+
+const faq = [
+  {
+    p: '¿Cómo funciona la tirada de los dos caminos?',
+    r: 'Antes de barajar, decide cuál de tus opciones es el primer camino y cuál el segundo. Después eliges cuatro cartas: la situación, lo que te trae cada camino y lo que te ayudará a decidir.',
+  },
+  {
+    p: '¿Y si tengo más de dos opciones?',
+    r: 'Quédate primero con las dos que más te tiran. Cuando hayas descartado una, puedes volver a hacer la tirada con la siguiente.',
+  },
+  {
+    p: '¿El tarot decide por mí?',
+    r: 'No. Te muestra lo que puede traer cada opción para que elijas con más claridad. La decisión siempre es tuya.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, sin registro. Si repites la misma pregunta el mismo día, verás la misma lectura.',
+  },
+];
+---
+
+<Base
+  title="Tarot de decisiones: elegir entre dos caminos | Arcanaia"
+  description="Tirada de tarot gratis para decidir entre dos opciones: la situación, lo que te trae cada camino y la clave para elegir. Sin registro."
+>
+  <Tirada
+    posiciones={[
+      { clave: 'presente', titulo: 'La situación' },
+      { clave: 'caminoOpcion', titulo: 'Primer camino' },
+      { clave: 'caminoOpcion', titulo: 'Segundo camino' },
+      { clave: 'caminoClave', titulo: 'La clave para elegir' },
+    ]}
+    preguntas={['¿Me quedo o me voy?', '¿Acepto la oferta o sigo donde estoy?', '¿Me mudo o espero?']}
+    placeholder="¿Me quedo o me voy?"
+    cierre="Elijas lo que elijas"
+  >
+    <h1>Decidir entre <em>dos caminos</em></h1>
+    <p class="sub">Escribe tus dos opciones. La primera que nombres será el primer camino y la segunda, el segundo. Luego baraja y elige cuatro cartas.</p>
+  </Tirada>
+
+  <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
+    <p class="suave">
+      La primera carta describe la situación en la que estás. La segunda y la tercera te muestran lo que trae cada
+      camino: compáralas sin prisa. La cuarta no elige por ti, pero te da la pista que necesitas para decidir.
+    </p>
+  </Explicacion>
+</Base>
