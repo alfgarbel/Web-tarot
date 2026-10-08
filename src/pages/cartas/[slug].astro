@@ -6,6 +6,7 @@ import { arcanos, type Arcano } from '../../data/arcanos';
 import { menores } from '../../data/menores';
 import { combinaciones, slugCombinacion } from '../../data/combinaciones';
 import { signos } from '../../data/signos';
+import { ampliados } from '../../data/ampliado';
 
 const todas = [...arcanos, ...menores];
 
@@ -23,6 +24,7 @@ const pares = combinaciones
   .map((c) => ({ href: `/combinaciones/${slugCombinacion(c)}/`, otra: nombreDe(c.a === arcano.slug ? c.b : c.a) }));
 const siguiente = todas[i + 1];
 
+const amp = ampliados[arcano.slug];
 const url = new URL(`/cartas/${arcano.slug}/`, Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -41,14 +43,14 @@ const jsonLd = {
     {
       // Las mismas respuestas que se ven en la ficha, en forma de pregunta.
       '@type': 'FAQPage',
-      mainEntity: [
+      mainEntity: (amp ? amp.faq.map((f) => [f.q, f.r]) : [
         [`¿Qué significa ${arcano.nombre} en el tarot?`, `${arcano.nombre} habla de ${arcano.claves.join(', ')}. ${arcano.general}`],
         [`¿Qué significa ${arcano.nombre} en el amor?`, arcano.amor],
         [`¿Qué significa ${arcano.nombre} en el trabajo y el dinero?`, arcano.trabajo],
         [`¿Qué significa ${arcano.nombre} en la salud?`, arcano.salud],
         [`¿Qué significa ${arcano.nombre} invertida?`, arcano.invertida],
         [`¿${arcano.nombre} es sí o no?`, `${arcano.respuesta}. ${arcano.siNo}`],
-      ].map(([q, r]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: r } })),
+      ]).map(([q, r]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: r } })),
     },
   ],
 };
@@ -80,16 +82,75 @@ const secciones = [
       <p class="claves">{arcano.claves.join(', ')}</p>
       <p class="general">{arcano.general}</p>
 
-      <div class="bloques">
-        {
-          secciones.map((s) => (
-            <section>
-              <h2>{s.titulo}</h2>
-              <p>{s.texto}</p>
+      {
+        amp && (
+          <>
+            <nav class="indice" aria-label="En esta ficha">
+              <a href="#imagen">La imagen</a>
+              <a href="#significado">Significado</a>
+              <a href="#amor">Amor</a>
+              <a href="#trabajo">Trabajo y dinero</a>
+              <a href="#como">Sentimiento, persona y futuro</a>
+              <a href="#invertida">Invertida</a>
+              <a href="#preguntas">Preguntas</a>
+            </nav>
+
+            <section class="largo" id="imagen">
+              <h2>La imagen y su simbolismo</h2>
+              {amp.imagen.map((p) => <p>{p}</p>)}
             </section>
-          ))
-        }
-      </div>
+
+            <section class="largo" id="significado">
+              <h2>Qué significa {arcano.nombre}</h2>
+              {amp.significado.map((p) => <p>{p}</p>)}
+            </section>
+
+            <section class="largo" id="amor">
+              <h2>{arcano.nombre} en el amor</h2>
+              <p>{arcano.amor}</p>
+              <div class="casos">
+                <div><h3>Si tienes pareja</h3><p>{amp.amor.pareja}</p></div>
+                <div><h3>Si estás sola</h3><p>{amp.amor.sola}</p></div>
+                <div><h3>Si piensas en tu ex</h3><p>{amp.amor.ex}</p></div>
+              </div>
+            </section>
+
+            <div class="bloques" id="trabajo">
+              <section><h2>En el trabajo</h2><p>{arcano.trabajo}</p><p>{amp.trabajo}</p></section>
+              <section><h2>En el dinero</h2><p>{amp.dinero}</p></section>
+              <section><h2>En la salud y el bienestar</h2><p>{arcano.salud}</p></section>
+            </div>
+
+            <section class="largo" id="como">
+              <h2>Como sentimiento, como persona y como futuro</h2>
+              <div class="casos">
+                <div><h3>Como sentimiento</h3><p>{amp.como.sentimiento}</p></div>
+                <div><h3>Como persona</h3><p>{amp.como.persona}</p></div>
+                <div><h3>Como futuro</h3><p>{amp.como.futuro}</p></div>
+              </div>
+            </section>
+
+            <section class="largo" id="invertida">
+              <h2>{arcano.nombre} invertida</h2>
+              <p>{arcano.invertida}</p>
+              {amp.invertida.map((p) => <p>{p}</p>)}
+            </section>
+          </>
+        )
+      }
+
+      {
+        !amp && (
+          <div class="bloques">
+            {secciones.map((s) => (
+              <section>
+                <h2>{s.titulo}</h2>
+                <p>{s.texto}</p>
+              </section>
+            ))}
+          </div>
+        )
+      }
 
       <section class="sino" data-tipo={arcano.respuesta === 'Sí' ? 'si' : arcano.respuesta === 'No' ? 'no' : 'quizas'}>
         <h2>Como respuesta de sí o no</h2>
@@ -121,6 +182,20 @@ const secciones = [
       }
 
       <blockquote class="consejo">{arcano.consejo}</blockquote>
+
+      {
+        amp && (
+          <section class="preguntas" id="preguntas">
+            <h2>Preguntas frecuentes sobre {arcano.nombre}</h2>
+            {amp.faq.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.r}</p>
+              </details>
+            ))}
+          </section>
+        )
+      }
 
       <nav class="pasar" aria-label="Otras cartas">
         {anterior ? <a href={`/cartas/${anterior.slug}/`} class="enlace-flecha">{anterior.palo ? anterior.nombre : `${anterior.romano}. ${anterior.nombre}`}</a> : <span />}
@@ -167,6 +242,31 @@ const secciones = [
   .bloques section:nth-child(3) { --marca: var(--oro); }
   .bloques section:nth-child(4) { --marca: var(--azulejo); grid-column: 1 / -1; }
   .pares { margin-top: 56px; }
+  .indice { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 40px; padding: 16px 0; border-top: 1px solid var(--linea-suave); border-bottom: 1px solid var(--linea-suave); font-size: 0.9rem; }
+  .indice a { color: var(--texto-suave); text-decoration: none; }
+  .indice a:hover { color: var(--oro-claro); }
+  .largo { margin-top: 56px; scroll-margin-top: 96px; }
+  .largo h2 { font-size: 1.8rem; }
+  .largo > p { color: var(--texto-suave); line-height: 1.75; }
+  .largo > p + p { margin-top: 0.8em; }
+  .casos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 28px; }
+  .casos div { border-top: 2px solid var(--terracota); padding-top: 14px; }
+  #como .casos div { border-top-color: var(--azulejo); }
+  .casos h3 { font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); margin: 0 0 8px; }
+  .casos p { color: var(--texto-suave); font-size: 0.98rem; margin: 0; }
+  #trabajo { scroll-margin-top: 96px; }
+  #trabajo section:first-child { grid-column: auto; }
+  #trabajo section:nth-child(3) { grid-column: 1 / -1; }
+  .bloques p + p { margin-top: 0.6em; }
+  .preguntas { margin-top: 72px; scroll-margin-top: 96px; }
+  .preguntas h2 { font-size: 1.6rem; }
+  .preguntas details { border-top: 1px solid var(--linea-suave); padding: 16px 0; }
+  .preguntas details:last-of-type { border-bottom: 1px solid var(--linea-suave); }
+  .preguntas summary { cursor: pointer; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .preguntas summary::after { content: '+'; color: var(--oro); font-size: 1.3rem; line-height: 1; transition: transform 0.3s var(--ease); }
+  .preguntas details[open] summary::after { transform: rotate(45deg); }
+  .preguntas summary::-webkit-details-marker { display: none; }
+  .preguntas details p { color: var(--texto-suave); margin: 10px 0 0; }
   .signo-carta { margin-top: 40px; color: var(--texto-suave); }
   .pares h2 { font-size: 1.6rem; }
   .pares ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -196,6 +296,7 @@ const secciones = [
     .ficha { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
     .lateral { position: static; justify-self: center; width: 220px; }
     .bloques { grid-template-columns: 1fr; }
+    .casos { grid-template-columns: 1fr; gap: 20px; }
     .sino { padding: 28px 22px; }
   }
 </style>

@@ -63,7 +63,7 @@ export const arcanos: Arcano[] = [
     claves: ['intuición', 'silencio', 'misterio'],
     respuesta: 'Quizás',
     siNo: 'Todavía no está claro, y la Sacerdotisa te pide paciencia. Hay algo que aún no sabes. Escucha tu intuición antes de decidir: ella ya intuye la respuesta.',
-    general: 'La Sacerdotisa guarda un libro cerrado en su regazo. Es la sabiduría silenciosa, la intuición y lo que se sabe sin poder explicarlo. Invita a observar, a esperar y a no forzar las cosas.',
+    general: 'La Sacerdotisa guarda en su regazo un rollo medio oculto por su manto. Es la sabiduría silenciosa, la intuición y lo que se sabe sin poder explicarlo. Invita a observar, a esperar y a no forzar las cosas.',
     amor: 'Sentimientos que no se dicen, una atracción discreta o un secreto. Escucha lo que sientes de verdad, no lo que crees que deberías sentir.',
     trabajo: 'Momento de estudiar, prepararte y observar antes de moverte. No compartas todavía tus planes.',
     salud: 'Escucha las señales de tu cuerpo y date tiempo para descansar en silencio. Si algo te inquieta, consúltalo con una profesional en lugar de quedarte con la duda.',
