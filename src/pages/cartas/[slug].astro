@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
+import SelectorBaraja from '../../components/SelectorBaraja.astro';
 import { arcanos, type Arcano } from '../../data/arcanos';
 
 export function getStaticPaths() {
@@ -37,6 +38,7 @@ const secciones = [
   <article class="contenedor ficha">
     <aside class="lateral">
       <Carta arcano={arcano} />
+      <div class="lateral-selector"><SelectorBaraja /></div>
     </aside>
 
     <div class="cuerpo">
@@ -84,6 +86,9 @@ const secciones = [
   }
   .lateral { position: sticky; top: 108px; }
   .lateral :global(.carta) { max-width: 300px; }
+  .lateral-selector { margin-top: 24px; max-width: 300px; }
+  .lateral-selector :global(.selector-baraja) { flex-direction: column; align-items: stretch; }
+  .lateral-selector :global(.selector-titulo) { margin-bottom: 4px; }
   .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 28px; }
   .migas a { color: var(--texto-suave); }
   .cuerpo { max-width: 680px; }

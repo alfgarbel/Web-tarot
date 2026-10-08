@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Carta from '../../components/Carta.astro';
+import SelectorBaraja from '../../components/SelectorBaraja.astro';
 import { arcanos } from '../../data/arcanos';
 ---
 
@@ -15,6 +16,7 @@ import { arcanos } from '../../data/arcanos';
         Del Loco, que empieza sin mapa, al Mundo, que completa el camino. Elige una carta para leer qué dice en el amor, el
         trabajo y la vida.
       </p>
+      <SelectorBaraja />
     </div>
   </section>
 
@@ -38,7 +40,7 @@ import { arcanos } from '../../data/arcanos';
 <style>
   .cabeza { padding: 72px 0 24px; }
   .cabeza h1 { max-width: 14ch; }
-  .sub { max-width: 56ch; font-size: 1.15rem; color: var(--texto-suave); }
+  .sub { max-width: 56ch; font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 32px; }
   .rejilla {
     list-style: none;
     padding: 0;

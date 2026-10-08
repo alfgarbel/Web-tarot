@@ -143,26 +143,27 @@ img { max-width: 100%; display: block; }
   .revelar.visible { opacity: 1; transform: none; }
 }
 
-/* Reverso de carta, compartido por la portada y la tirada. */
+/* Reverso de carta, compartido por la portada y la tirada. Sus colores dependen de la baraja. */
 .dorso {
   position: relative;
   aspect-ratio: 7 / 12;
   width: 100%;
   border-radius: 6px;
-  border: 1px solid var(--oro);
+  border: 1px solid var(--c-linea);
   background:
-    radial-gradient(circle at 50% 50%, transparent 0 17%, var(--oro) 17.5% 18.2%, transparent 18.7%),
-    radial-gradient(circle at 50% 50%, var(--oro) 0 4%, transparent 4.5%),
-    repeating-linear-gradient(45deg, rgba(201, 164, 92, 0.13) 0 1px, transparent 1px 10px),
-    repeating-linear-gradient(-45deg, rgba(201, 164, 92, 0.13) 0 1px, transparent 1px 10px),
-    #241130;
+    radial-gradient(circle at 50% 50%, transparent 0 17%, var(--c-linea) 17.5% 18.2%, transparent 18.7%),
+    radial-gradient(circle at 50% 50%, var(--c-linea) 0 4%, transparent 4.5%),
+    repeating-linear-gradient(45deg, var(--c-trama) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(-45deg, var(--c-trama) 0 1px, transparent 1px 10px),
+    var(--c-dorso);
   box-shadow: 0 24px 50px -22px rgba(5, 2, 8, 0.95);
 }
 .dorso::before {
   content: '';
   position: absolute;
   inset: 6px;
-  border: 1px solid var(--linea);
+  border: 1px solid var(--c-linea);
+  opacity: 0.45;
   border-radius: 3px;
 }
 
@@ -174,9 +175,10 @@ img { max-width: 100%; display: block; }
   max-width: 240px;
   border-radius: 6px;
   background:
-    radial-gradient(90% 45% at 50% 45%, rgba(201, 164, 92, 0.18), transparent 70%),
-    linear-gradient(170deg, #2c1638 0%, #1a0d23 100%);
-  color: var(--oro);
+    radial-gradient(90% 45% at 50% 45%, var(--c-brillo), transparent 70%),
+    var(--c-textura, none),
+    linear-gradient(170deg, var(--c-fondo-1) 0%, var(--c-fondo-2) 100%);
+  color: var(--c-linea);
   text-decoration: none;
   box-shadow: 0 24px 50px -24px rgba(5, 2, 8, 0.9);
   container-type: inline-size;
@@ -184,7 +186,7 @@ img { max-width: 100%; display: block; }
 .carta-arte { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .carta-arte path, .carta-arte circle, .carta-arte rect, .carta-arte polygon, .carta-arte ellipse {
   fill: none;
-  stroke: var(--oro);
+  stroke: var(--c-linea);
   stroke-width: 0.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -192,9 +194,9 @@ img { max-width: 100%; display: block; }
 .carta-arte .fino { stroke-width: 0.45; opacity: 0.7; }
 .carta-arte .arco { stroke-width: 0.5; opacity: 0.55; }
 .carta-arte .rayos { stroke-width: 0.5; opacity: 0.45; }
-.carta-arte .relleno { fill: var(--oro); stroke: none; }
-.carta-arte .motivo :is(path, circle, polygon, ellipse, rect) { stroke: var(--oro-claro); stroke-width: 1.7; }
-.carta-arte .motivo .f { fill: var(--oro-claro); }
+.carta-arte .relleno { fill: var(--c-linea); stroke: none; }
+.carta-arte .motivo :is(path, circle, polygon, ellipse, rect) { stroke: var(--c-motivo); stroke-width: 1.7; }
+.carta-arte .motivo .f { fill: var(--c-motivo); }
 .carta-arte .motivo .g { stroke-width: 2.4; }
 .carta-numero {
   position: absolute;
@@ -207,7 +209,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.2em;
   line-height: 1;
   padding-left: 0.2em;
-  color: var(--oro-claro);
+  color: var(--c-numero);
 }
 .carta-nombre {
   position: absolute;
@@ -220,7 +222,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--serif);
   font-style: italic;
   font-size: 9.5cqi;
-  color: var(--texto);
+  color: var(--c-texto);
   text-align: center;
   line-height: 1.1;
 }
@@ -261,3 +263,38 @@ img { max-width: 100%; display: block; }
 [data-tipo='si'] { --veredicto: var(--romero-claro); --tono-1: #2f3a26; --tono-2: #151b11; }
 [data-tipo='no'] { --veredicto: var(--terracota-claro); --tono-1: #45231a; --tono-2: #1f0f0b; }
 [data-tipo='quizas'] { --veredicto: var(--azulejo-claro); --tono-1: #1d2d56; --tono-2: #0e1529; }
+
+/*
+  Barajas. Línea dorada (por defecto), Azulejo e Ilustrada. Comparten marco y tipografía;
+  cambian color, dibujo o imagen. Se eligen con el selector y se guardan en el navegador.
+*/
+:root {
+  --c-fondo-1: #2c1638; --c-fondo-2: #1a0d23; --c-brillo: rgba(201, 164, 92, 0.18);
+  --c-linea: var(--oro); --c-motivo: var(--oro-claro); --c-numero: var(--oro-claro); --c-texto: var(--texto);
+  --c-dorso: #241130; --c-trama: rgba(201, 164, 92, 0.13);
+}
+/* Azulejo: cal y azul cobalto, como el zócalo del patio. */
+[data-baraja='azulejo'] {
+  --c-fondo-1: #f3eadc; --c-fondo-2: #e6d7c1; --c-brillo: rgba(46, 76, 140, 0.1);
+  --c-linea: #2e4c8c; --c-motivo: #22407d; --c-numero: var(--terracota); --c-texto: #2b1a2c;
+  --c-dorso: #efe5d6; --c-trama: rgba(46, 76, 140, 0.28);
+  --c-textura: radial-gradient(circle at 50% 50%, rgba(46, 76, 140, 0.07) 0 1.5px, transparent 2px) 0 0 / 14px 14px;
+}
+
+/* Ilustrada: la lámina pintada ocupa la ventana del marco y se ocultan el arco y el medallón. */
+.carta-imagen {
+  display: none;
+  position: absolute;
+  top: 14.2%;
+  bottom: 26.6%;
+  left: 8.6%;
+  right: 8.6%;
+  width: 82.8%;
+  height: 59.2%;
+  object-fit: cover;
+  border-radius: 2px;
+  outline: 1px solid var(--c-linea);
+  outline-offset: 2px;
+}
+[data-baraja='ilustrada'] .carta-imagen { display: block; }
+[data-baraja='ilustrada'] .carta-arte .adorno { display: none; }

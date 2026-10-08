@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Carta from '../components/Carta.astro';
+import SelectorBaraja from '../components/SelectorBaraja.astro';
 import { arcanos } from '../data/arcanos';
 
 const abanico = [-24, -16, -8, 0, 8, 16, 24];
@@ -56,6 +57,7 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
         <h2>Los veintidós <em>arcanos mayores</em></h2>
         <a href="/cartas/" class="enlace-flecha">Ver todos</a>
       </div>
+      <SelectorBaraja />
     </div>
     <div class="tira" role="list">
       {

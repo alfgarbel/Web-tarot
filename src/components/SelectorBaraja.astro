@@ -1,0 +1,65 @@
+---
+// Selector de baraja. Cambia el atributo data-baraja de <html> y lo recuerda en el navegador.
+const barajas = [
+  { id: 'linea', nombre: 'Línea dorada' },
+  { id: 'azulejo', nombre: 'Azulejo' },
+  { id: 'ilustrada', nombre: 'Ilustrada' },
+];
+---
+
+<div class="selector-baraja" role="group" aria-label="Elige baraja">
+  <span class="selector-titulo">Baraja</span>
+  {
+    barajas.map((b) => (
+      <button type="button" class="opcion-baraja" data-elegir={b.id} aria-pressed="false">
+        <span class:list={['muestra', `muestra-${b.id}`]} aria-hidden="true" />
+        {b.nombre}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  const marcar = () => {
+    const actual = document.documentElement.dataset.baraja || 'linea';
+    document.querySelectorAll<HTMLButtonElement>('.opcion-baraja').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.elegir === actual));
+    });
+  };
+  document.querySelectorAll<HTMLButtonElement>('.opcion-baraja').forEach((b) =>
+    b.addEventListener('click', () => {
+      const id = b.dataset.elegir!;
+      document.documentElement.dataset.baraja = id;
+      try {
+        localStorage.setItem('baraja', id);
+      } catch {}
+      marcar();
+    }),
+  );
+  marcar();
+</script>
+
+<style>
+  .selector-baraja { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .selector-titulo { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro); margin-right: 6px; }
+  .opcion-baraja {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--texto-suave);
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 6px 14px 6px 6px;
+    border: 1px solid var(--linea-suave);
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .opcion-baraja:hover { color: var(--texto); border-color: var(--linea); }
+  .opcion-baraja[aria-pressed='true'] { color: var(--texto); border-color: var(--oro); }
+  .muestra { width: 18px; height: 30px; border-radius: 2px; border: 1px solid var(--oro); display: block; }
+  .muestra-linea { background: radial-gradient(circle, transparent 0 4px, var(--oro) 4.5px 5px, transparent 5.5px), linear-gradient(170deg, #2c1638, #1a0d23); }
+  .muestra-azulejo { border-color: #2e4c8c; background: radial-gradient(circle, transparent 0 4px, #2e4c8c 4.5px 5.5px, transparent 6px), #efe5d6; }
+  .muestra-ilustrada { background: url('/barajas/ilustrada/la-luna.webp') center / cover; }
+</style>

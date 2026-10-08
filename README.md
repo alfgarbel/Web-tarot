@@ -27,3 +27,11 @@ npm run build    # genera la web en dist/
 1. En Cloudflare, Workers & Pages → Create → Pages → conectar este repositorio.
 2. Framework preset: **Astro**. Build command: `npm run build`. Output: `dist`.
 3. Cuando tengas dominio, cámbialo en `astro.config.mjs` (`site`).
+
+## Barajas
+
+La persona puede elegir entre tres barajas (se recuerda en su navegador):
+
+- **Línea dorada**: dibujo vectorial propio (`src/components/Carta.astro` y `src/data/motivos.ts`).
+- **Azulejo**: el mismo dibujo en cal y azul cobalto (variables en `src/styles/global.css`).
+- **Ilustrada**: 22 láminas pintadas generadas para esta web, en `public/barajas/ilustrada/`.

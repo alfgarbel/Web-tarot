@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Carta from '../components/Carta.astro';
+import SelectorBaraja from '../components/SelectorBaraja.astro';
 import { arcanos } from '../data/arcanos';
 
 const datos = arcanos.map(({ romano, nombre, slug, simbolo, respuesta, siNo, consejo }) => ({
@@ -66,6 +67,7 @@ const jsonLd = {
             {preguntas.map((p) => <button type="button" class="sugerencia">{p}</button>)}
           </div>
         </form>
+        <div class="elegir-baraja"><SelectorBaraja /></div>
       </div>
 
       <div class="paso oculto" id="paso-elegir" aria-live="polite">
@@ -248,6 +250,7 @@ const jsonLd = {
     cursor: pointer;
   }
   .sugerencia:hover { color: var(--oro-claro); }
+  .elegir-baraja { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--linea-suave); }
 
   .instruccion { font-family: var(--serif); font-style: italic; font-size: 2rem; text-align: center; margin: 0; }
   .abanico {
