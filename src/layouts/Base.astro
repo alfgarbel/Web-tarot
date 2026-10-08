@@ -13,6 +13,7 @@ const ogImage = new URL(image, Astro.site);
 const ruta = Astro.url.pathname;
 const enlaces = [
   { href: '/tiradas/', texto: 'Tiradas', tambien: ['/tarot-si-o-no/', '/tarot-del-amor/', '/volvera-mi-ex/', '/pasado-presente-futuro/', '/cruz-celta/', '/carta-del-dia/'] },
+  { href: '/compatibilidad/', texto: 'Signos', tambien: [] },
   { href: '/cartas/', texto: 'Los arcanos', tambien: [] },
 ];
 ---
@@ -26,7 +27,7 @@ const enlaces = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Noctámbula" />
+    <meta property="og:site_name" content="Arcanaia" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -41,7 +42,7 @@ const enlaces = [
       } catch (e) {}
       // Recuerda cada lectura en este navegador para que repetir la misma pregunta dé la misma respuesta.
       window.memoriaTirada = (() => {
-        const CLAVE = 'noctambula-lecturas';
+        const CLAVE = 'arcanaia-lecturas';
         const DIA = 24 * 60 * 60 * 1000;
         const RATO = 60 * 60 * 1000;
         const normalizar = (t) =>
@@ -76,7 +77,7 @@ const enlaces = [
   <body>
     <header class="cabecera">
       <div class="contenedor fila">
-        <a href="/" class="marca" aria-label="Noctámbula, inicio">Noctámbula</a>
+        <a href="/" class="marca" aria-label="Arcanaia, inicio">Arcanaia</a>
         <nav aria-label="Principal">
           {
             enlaces.map((e) => (
@@ -96,7 +97,7 @@ const enlaces = [
     <footer class="pie">
       <div class="contenedor">
         <div class="pie-fila">
-          <p class="marca-pie">Noctámbula</p>
+          <p class="marca-pie">Arcanaia</p>
           <nav aria-label="Pie">
             <a href="/tarot-del-amor/">Tarot del amor</a>
             <a href="/volvera-mi-ex/">¿Volverá mi ex?</a>
@@ -104,6 +105,7 @@ const enlaces = [
             <a href="/pasado-presente-futuro/">Pasado, presente y futuro</a>
             <a href="/cruz-celta/">Cruz celta</a>
             <a href="/carta-del-dia/">Carta del día</a>
+            <a href="/compatibilidad/">Compatibilidad de signos</a>
             <a href="/cartas/">Los 22 arcanos</a>
             <a href="/aviso-legal/">Aviso legal</a>
           </nav>

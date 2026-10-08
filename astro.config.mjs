@@ -3,6 +3,6 @@ import sitemap from '@astrojs/sitemap';
 
 // Cambiar por el dominio definitivo cuando exista.
 export default defineConfig({
-  site: 'https://noctambula.es',
+  site: 'https://arcanaia.es',
   integrations: [sitemap()],
 });

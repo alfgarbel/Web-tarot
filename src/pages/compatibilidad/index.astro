@@ -1,0 +1,177 @@
+---
+import Base from '../../layouts/Base.astro';
+import Explicacion from '../../components/Explicacion.astro';
+import { signos, compatibilidad, slugPareja } from '../../data/signos';
+
+const faq = [
+  {
+    p: '¿Cómo se calcula la compatibilidad entre signos?',
+    r: 'Nos fijamos en tres cosas: la distancia entre los dos signos en la rueda del zodiaco, sus elementos (fuego, tierra, aire y agua) y su ritmo (cardinal, fijo o mutable). El porcentaje resume cómo se combinan.',
+  },
+  {
+    p: '¿Un porcentaje bajo significa que la relación no funcionará?',
+    r: 'No. Un porcentaje bajo indica que habrá más diferencias que trabajar, no que la relación esté condenada. Muchas parejas con retos son las que más crecen juntas.',
+  },
+  {
+    p: '¿Qué pinta el tarot en la compatibilidad de signos?',
+    r: 'Cada signo tiene un arcano mayor asociado por la tradición: Aries el Emperador, Tauro el Sumo Sacerdote, y así hasta Piscis con la Luna. En cada pareja te mostramos las dos cartas.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, todas las combinaciones son gratis y no necesitas registrarte.',
+  },
+];
+
+const corto = (n: string) => n.slice(0, 3);
+---
+
+<Base
+  title="Compatibilidad de signos del zodiaco en el amor | Arcanaia"
+  description="Descubre la compatibilidad entre tu signo y el de tu pareja: porcentaje, elementos, ritmo y consejos para las 78 combinaciones del zodiaco, con sus cartas del tarot."
+>
+  <section class="cabeza">
+    <div class="contenedor rejilla-cabeza">
+      <div>
+        <h1>Compatibilidad <em>de signos</em></h1>
+        <p class="sub">Elige tu signo y el de la otra persona. Te contamos cómo encajáis en el amor, qué os une y dónde chocáis.</p>
+      </div>
+      <form class="elegir" id="elegir" action="/compatibilidad/aries-y-aries/">
+        <label>
+          <span>Tu signo</span>
+          <select id="signo-a">{signos.map((s) => <option value={s.slug}>{s.nombre}</option>)}</select>
+        </label>
+        <span class="y" aria-hidden="true">y</span>
+        <label>
+          <span>Su signo</span>
+          <select id="signo-b">{signos.map((s, i) => <option value={s.slug} selected={i === 4}>{s.nombre}</option>)}</select>
+        </label>
+        <button class="boton" type="submit">Ver compatibilidad</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="contenedor tabla-zona">
+    <h2 class="tabla-titulo">Todas las combinaciones</h2>
+    <p class="suave tabla-sub">Toca una casilla para leer la compatibilidad de esa pareja. Cuanto más dorada, más afinidad.</p>
+    <div class="tabla-marco">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th scope="col"><span class="oculto-visual">Signo</span></th>
+            {signos.map((s) => <th scope="col" title={s.nombre}>{corto(s.nombre)}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            signos.map((a) => (
+              <tr>
+                <th scope="row" title={a.nombre}>{corto(a.nombre)}</th>
+                {signos.map((b) => {
+                  const c = compatibilidad(a, b);
+                  return (
+                    <td style={`--afinidad:${(c.nota - 40) / 57}`}>
+                      <a href={`/compatibilidad/${slugPareja(a, b)}/`} aria-label={`${a.nombre} y ${b.nombre}: ${c.nota}%`}>
+                        {c.nota}
+                      </a>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <Explicacion titulo="Cómo leer la compatibilidad" faq={faq}>
+    <p class="suave">
+      Los astros no deciden por vosotros, pero sí describen el tono de la relación: qué fluye solo y qué hay que trabajar.
+      Los signos del mismo elemento suelen entenderse sin esfuerzo, los opuestos se atraen y los que forman cuadratura
+      viven una relación intensa que obliga a crecer.
+    </p>
+    <p class="suave">
+      Si quieres saber cómo está ahora mismo vuestra historia, prueba el <a href="/tarot-del-amor/">tarot del amor</a>.
+    </p>
+  </Explicacion>
+</Base>
+
+<script>
+  const form = document.getElementById('elegir') as HTMLFormElement;
+  const orden = [...(document.getElementById('signo-a') as HTMLSelectElement).options].map((o) => o.value);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const a = (document.getElementById('signo-a') as HTMLSelectElement).value;
+    const b = (document.getElementById('signo-b') as HTMLSelectElement).value;
+    const [x, y] = orden.indexOf(a) <= orden.indexOf(b) ? [a, b] : [b, a];
+    location.href = `/compatibilidad/${x}-y-${y}/`;
+  });
+</script>
+
+<style>
+  .cabeza {
+    padding: 72px 0 56px;
+    background: radial-gradient(60% 80% at 80% 40%, rgba(46, 76, 140, 0.35), transparent 70%);
+  }
+  .rejilla-cabeza { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+  .sub { font-size: 1.15rem; color: var(--texto-suave); max-width: 44ch; margin: 0; }
+  .elegir {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: end;
+    padding: 28px;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .elegir label { display: grid; gap: 8px; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--oro); }
+  .elegir select {
+    font: inherit;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--texto);
+    background: var(--noche-2);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    padding: 10px 12px;
+    width: 100%;
+  }
+  .elegir select:focus { outline: none; border-color: var(--oro); }
+  .y { font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--texto-suave); padding-bottom: 10px; }
+  .elegir .boton { grid-column: 1 / -1; justify-self: start; }
+
+  .tabla-zona { padding-top: 40px; padding-bottom: 96px; }
+  .tabla-titulo { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .tabla-sub { margin-bottom: 28px; }
+  .tabla-marco { overflow-x: auto; }
+  .tabla { border-collapse: separate; border-spacing: 3px; margin: 0 auto; }
+  .tabla th { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; color: var(--texto-suave); padding: 4px; text-align: center; }
+  .tabla td { padding: 0; }
+  .tabla td a {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 40px;
+    border-radius: var(--radio);
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--texto);
+    background: color-mix(in srgb, var(--oro) calc(var(--afinidad) * 70%), var(--noche-2));
+    transition: transform 0.2s var(--ease), outline-color 0.2s;
+    outline: 1px solid transparent;
+  }
+  .tabla td a:hover { transform: scale(1.08); outline-color: var(--oro-claro); }
+  .oculto-visual { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (max-width: 860px) {
+    .rejilla-cabeza { grid-template-columns: 1fr; gap: 32px; }
+    .cabeza { padding: 40px 0 32px; }
+    .elegir { padding: 20px; }
+    .elegir select { font-size: 1.2rem; }
+    .tabla { border-spacing: 2px; }
+    .tabla th { font-size: 0.6rem; padding: 2px; letter-spacing: 0; }
+    .tabla td a { width: 24px; height: 26px; font-size: 0.62rem; }
+  }
+</style>

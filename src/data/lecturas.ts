@@ -1,5 +1,5 @@
 // Textos de cada arcano según la posición que ocupa en una tirada.
-// Escritos a mano para Noctámbula: sin IA y con la misma voz que las fichas.
+// Textos fijos para Arcanaia, con la misma voz que las fichas. La web no genera lecturas al momento.
 
 export interface Lectura {
   /** Carta del día: el mensaje para hoy. */

@@ -46,12 +46,12 @@ const tiradas = [
   },
 ];
 
-const proximas = ['Compatibilidad'];
+const extra = { href: '/compatibilidad/', titulo: 'Compatibilidad de signos', texto: 'Tu signo y el de la otra persona: cuánto encajáis, qué os une y dónde chocáis, con vuestras cartas del tarot.' };
 ---
 
 <Base
-  title="Tiradas de tarot gratis: amor, sí o no y más | Noctámbula"
-  description="Todas las tiradas de tarot gratis de Noctámbula: tarot del amor, sí o no, pasado presente y futuro y carta del día. Sin registro y escritas a mano."
+  title="Tiradas de tarot gratis: amor, sí o no y más | Arcanaia"
+  description="Todas las tiradas de tarot gratis de Arcanaia: tarot del amor, sí o no, pasado presente y futuro y carta del día. Sin registro y escritas a mano."
 >
   <section class="cabeza">
     <div class="contenedor">
@@ -82,7 +82,11 @@ const proximas = ['Compatibilidad'];
         ))
       }
     </ol>
-    <p class="proximas"><span>Muy pronto</span> {proximas.join(' · ')}</p>
+    <a href={extra.href} class="extra">
+      <span class="extra-etiqueta">Y además</span>
+      <span class="extra-titulo">{extra.titulo}</span>
+      <span class="extra-texto">{extra.texto}</span>
+    </a>
   </section>
 </Base>
 
@@ -121,8 +125,29 @@ const proximas = ['Compatibilidad'];
   .cuantas { display: block; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tono); margin-bottom: 6px; }
   .flecha { font-size: 1.6rem; color: var(--tono); transition: transform 0.4s var(--ease); }
   .fila:hover .flecha { transform: translateX(6px); }
-  .proximas { margin: 36px 0 96px; color: var(--texto-suave); }
-  .proximas span { color: var(--oro); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; margin-right: 12px; }
+  .extra {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 40px;
+    align-items: center;
+    margin: 48px 0 96px;
+    padding: 32px 0;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    text-decoration: none;
+    color: var(--texto);
+    background: linear-gradient(110deg, rgba(46, 76, 140, 0.28), transparent 70%);
+    transition: border-color 0.3s;
+  }
+  .extra:hover { border-color: var(--oro); }
+  .extra-etiqueta { justify-self: center; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oro); }
+  .extra-titulo { font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.05; }
+  .extra-texto { color: var(--texto-suave); padding-right: 32px; }
+  @media (max-width: 820px) {
+    .extra { grid-template-columns: 1fr; gap: 8px; padding: 24px; }
+    .extra-etiqueta { justify-self: start; }
+    .extra-texto { padding-right: 0; }
+  }
   @media (max-width: 820px) {
     .fila { grid-template-columns: 96px 1fr; gap: 8px 24px; padding: 28px 0; }
     .mazo { grid-row: span 2; height: 84px; }

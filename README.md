@@ -1,4 +1,4 @@
-# Noctámbula
+# Arcanaia
 
 Web de tarot gratuita hecha con [Astro](https://astro.build). Las lecturas se montan con textos propios escritos de antemano (sin IA).
 

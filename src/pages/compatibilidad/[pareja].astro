@@ -1,0 +1,186 @@
+---
+import Base from '../../layouts/Base.astro';
+import Carta from '../../components/Carta.astro';
+import { arcanos } from '../../data/arcanos';
+import { parejas, compatibilidad, nombreElemento, nombreModalidad, signos, slugPareja, type Signo } from '../../data/signos';
+
+export function getStaticPaths() {
+  return parejas.map((p) => ({ params: { pareja: p.slug }, props: { a: p.a, b: p.b } }));
+}
+
+const { a, b } = Astro.props as { a: Signo; b: Signo };
+const c = compatibilidad(a, b);
+const mismo = a === b;
+const titulo = `${a.nombre} y ${b.nombre}`;
+const arcano = (s: Signo) => arcanos.find((x) => x.slug === s.arcano)!;
+
+const otras = (s: Signo) =>
+  signos.map((o) => ({ s: o, slug: slugPareja(s, o), nota: compatibilidad(s, o).nota }));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `Compatibilidad de ${titulo} en el amor`,
+  description: c.aspecto.texto,
+  inLanguage: 'es',
+  author: { '@type': 'Organization', name: 'Arcanaia' },
+};
+---
+
+<Base
+  title={`${titulo}: compatibilidad en el amor (${c.nota}%) | Arcanaia`}
+  description={`Compatibilidad de ${titulo} en el amor: ${c.nota}% de afinidad. Qué os une, dónde chocáis y un consejo para la pareja, con vuestras cartas del tarot.`}
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="cabeza">
+    <div class="contenedor">
+      <nav class="migas" aria-label="Ruta"><a href="/compatibilidad/">Compatibilidad de signos</a> <span aria-hidden="true">/</span> {titulo}</nav>
+      <div class="pareja">
+        {
+          [a, b].map((s) => (
+            <figure class="signo">
+              <a href={`/cartas/${s.arcano}/`} class="signo-carta" aria-label={`${arcano(s).nombre}, el arcano de ${s.nombre}`}>
+                <Carta arcano={arcano(s)} />
+              </a>
+              <figcaption>
+                <span class="signo-nombre">{s.nombre}</span>
+                <span class="signo-datos">{s.fechas}</span>
+                <span class="signo-datos">{nombreElemento(s.elemento)} · {nombreModalidad(s.modalidad)} · {s.regente}</span>
+              </figcaption>
+            </figure>
+          ))
+        }
+        <div class="centro">
+          <h1>{a.nombre} <em>y</em> {b.nombre}</h1>
+          <p class="nota" style={`--nota:${c.nota}`}><span>{c.nota}</span>%</p>
+          <p class="nivel">Afinidad {c.nivel.toLowerCase()} · {c.aspecto.nombre}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="contenedor cuerpo">
+    <section class="bloque principal">
+      <h2>Cómo encajáis</h2>
+      <p>{c.aspecto.texto}</p>
+    </section>
+    <div class="dos">
+      <section class="bloque" data-marca="terracota">
+        <h2>Vuestros elementos</h2>
+        <p>{c.elementos}</p>
+      </section>
+      <section class="bloque" data-marca="azulejo">
+        <h2>Vuestro ritmo</h2>
+        <p>{c.modalidades}</p>
+      </section>
+    </div>
+    {
+      !mismo && (
+        <div class="dos">
+          {[a, b].map((s) => (
+            <section class="bloque" data-marca="romero">
+              <h2>{s.nombre} en el amor</h2>
+              <p>{s.amor}</p>
+              <p class="suave">{s.necesita}</p>
+            </section>
+          ))}
+        </div>
+      )
+    }
+    {
+      mismo && (
+        <section class="bloque" data-marca="romero">
+          <h2>{a.nombre} en el amor</h2>
+          <p>{a.amor}</p>
+          <p class="suave">{a.necesita}</p>
+        </section>
+      )
+    }
+    <blockquote class="consejo">{c.aspecto.consejo}</blockquote>
+    <p class="cartas-nota suave">
+      Las cartas son los arcanos que la tradición asocia a cada signo: {arcano(a).nombre} para {a.nombre}{!mismo && <> y {arcano(b).nombre} para {b.nombre}</>}.
+      Si quieres saber cómo está ahora vuestra historia, haz el <a href="/tarot-del-amor/">tarot del amor</a>.
+    </p>
+
+    <section class="otras">
+      {
+        (mismo ? [a] : [a, b]).map((s) => (
+          <div>
+            <h2>{s.nombre} con otros signos</h2>
+            <ul>
+              {otras(s).map((o) => (
+                <li>
+                  <a href={`/compatibilidad/${o.slug}/`} aria-current={o.slug === slugPareja(a, b) ? 'page' : undefined}>
+                    <span>{o.s.nombre}</span>
+                    <span>{o.nota}%</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </section>
+  </article>
+</Base>
+
+<style>
+  .cabeza {
+    padding: 48px 0 72px;
+    background: radial-gradient(50% 70% at 50% 45%, rgba(77, 42, 96, 0.6), transparent 70%);
+  }
+  .migas { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 32px; }
+  .migas a { color: var(--texto-suave); }
+  .pareja { display: grid; grid-template-columns: 220px 1fr 220px; gap: 48px; align-items: center; }
+  .signo { margin: 0; display: grid; gap: 18px; justify-items: center; text-align: center; }
+  .signo:first-child { order: 0; }
+  .signo:nth-child(2) { order: 2; }
+  .centro { order: 1; text-align: center; }
+  .signo-carta { display: block; width: 100%; transition: transform 0.5s var(--ease); }
+  .signo-carta:hover { transform: translateY(-6px); }
+  .signo:first-child .signo-carta { transform: rotate(-4deg); }
+  .signo:nth-child(2) .signo-carta { transform: rotate(4deg); }
+  figcaption { display: grid; gap: 4px; }
+  .signo-nombre { font-family: var(--serif); font-size: 1.6rem; }
+  .signo-datos { font-size: 0.85rem; color: var(--texto-suave); }
+  .centro h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 24px; }
+  .nota { font-family: var(--serif); font-size: clamp(4.5rem, 10vw, 7.5rem); line-height: 1; margin: 0; color: var(--oro-claro); }
+  .nota span { font-variant-numeric: lining-nums; }
+  .nivel { margin-top: 14px; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); }
+
+  .cuerpo { max-width: 920px; padding-bottom: 64px; }
+  .bloque { border-top: 2px solid var(--marca, var(--oro)); padding-top: 18px; margin-top: 48px; }
+  .bloque[data-marca='terracota'] { --marca: var(--terracota); }
+  .bloque[data-marca='azulejo'] { --marca: var(--azulejo); }
+  .bloque[data-marca='romero'] { --marca: var(--romero); }
+  .bloque h2 { font-size: 1.6rem; }
+  .principal p { font-size: 1.2rem; line-height: 1.7; }
+  .bloque p:not(:first-of-type) { margin-top: 0.4em; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .dos .bloque p { color: var(--texto-suave); }
+  .dos .bloque p:first-of-type { color: var(--texto); }
+  .consejo {
+    margin: 72px 0 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    line-height: 1.25;
+  }
+  .consejo::before { content: '«'; color: var(--oro); }
+  .consejo::after { content: '»'; color: var(--oro); }
+  .cartas-nota { margin-top: 28px; max-width: 64ch; }
+  .otras { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--linea-suave); }
+  .otras h2 { font-size: 1.4rem; }
+  .otras ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .otras a { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--linea-suave); text-decoration: none; color: var(--texto-suave); }
+  .otras a:hover, .otras a[aria-current='page'] { color: var(--oro-claro); }
+  @media (max-width: 860px) {
+    .pareja { grid-template-columns: 1fr 1fr; gap: 24px 20px; align-items: start; }
+    .centro { order: -1; grid-column: 1 / -1; }
+    .signo:nth-child(2) { order: 1; }
+    .signo-carta { max-width: 150px; }
+    .signo-nombre { font-size: 1.3rem; }
+    .dos, .otras { grid-template-columns: 1fr; }
+  }
+</style>
