@@ -12,6 +12,11 @@ export interface Lectura {
   amorTu: string;
   amorOtra: string;
   amorRelacion: string;
+  /** ¿Volverá mi ex?: qué os separó, qué siente hoy y si volverá (con su respuesta). */
+  exSeparo: string;
+  exAhora: string;
+  exVuelta: string;
+  exRespuesta: 'Sí' | 'No' | 'Quizás';
 }
 
 export const lecturas: Record<string, Lectura> = {
@@ -23,6 +28,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Tienes ganas de vivir el amor sin tantas reglas. Quieres sentirte libre, aunque eso a veces te haga ir a ciegas.',
     amorOtra: 'La otra persona va a su aire. No es indiferencia: le cuesta comprometerse con algo que todavía no entiende.',
     amorRelacion: 'Lo vuestro está empezando o puede empezar de nuevo. Es una historia sin manual: funcionará si ninguno intenta controlarla.',
+    exSeparo: 'Os separó la necesidad de libertad. Uno de los dos no estaba listo para atarse y prefirió seguir su camino.',
+    exAhora: 'Piensa en ti con cariño, pero vive el presente sin hacer planes. No está mirando atrás, está mirando a su alrededor.',
+    exVuelta: 'Puede volver a aparecer, pero de forma imprevista y sin promesas. Si vuelve, será para empezar de cero, no para retomar lo de antes.',
+    exRespuesta: 'Quizás',
   },
   'el-mago': {
     dia: 'Tienes más recursos de los que crees. Hoy es buen día para empezar eso que llevas tiempo dejando para mañana.',
@@ -32,6 +41,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te sientes con ganas de seducir y de mover ficha. Tienes más poder en esta historia del que te das.',
     amorOtra: 'La otra persona sabe lo que quiere y sabe cómo decirlo. Fíjate en si sus palabras van acompañadas de hechos.',
     amorRelacion: 'La relación depende de la iniciativa. Si nadie da el paso, se queda en promesa; si alguien lo da, puede ir muy rápido.',
+    exSeparo: 'Os separó algo que se dijo, o algo que no se dijo a tiempo. Hubo promesas que no llegaron a cumplirse.',
+    exAhora: 'Tiene ganas de hablar contigo y está buscando la forma o la excusa. Sabe que aún tiene algo que decirte.',
+    exVuelta: 'Hay muchas posibilidades de que dé el primer paso. Cuando lo haga, fíjate en si sus palabras van acompañadas de hechos.',
+    exRespuesta: 'Sí',
   },
   'la-sacerdotisa': {
     dia: 'Hoy no hace falta decirlo todo. Escucha más de lo que hablas y presta atención a esa corazonada.',
@@ -41,6 +54,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Sientes más de lo que muestras. Te proteges guardando silencio, pero ese silencio también puede alejarte.',
     amorOtra: 'La otra persona es difícil de leer. Hay sentimientos que no expresa, y quizá alguno que no te ha contado.',
     amorRelacion: 'Lo vuestro tiene una parte callada. Hasta que alguien no hable con sinceridad, la relación no podrá avanzar.',
+    exSeparo: 'Os separaron los silencios. Había cosas que ninguno de los dos se atrevió a decir en voz alta.',
+    exAhora: 'Siente más de lo que muestra. Te recuerda en privado, pero no lo va a reconocer fácilmente.',
+    exVuelta: 'Todavía no está decidido. Hay algo oculto que tiene que salir a la luz antes de que pueda haber un regreso.',
+    exRespuesta: 'Quizás',
   },
   'la-emperatriz': {
     dia: 'Hoy toca cuidarte. Come rico, sal a que te dé el aire y deja que algo bonito te alegre el día.',
@@ -50,6 +67,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Tienes mucho amor para dar y te sientes atractiva. Asegúrate de que también te lo devuelven.',
     amorOtra: 'La otra persona se siente atraída por ti y por la calma que transmites. Le gusta estar a tu lado.',
     amorRelacion: 'Es una relación con mucho potencial para crecer: más ternura, más planes juntos, quizá más compromiso.',
+    exSeparo: 'Os separó el desequilibrio en los cuidados: uno daba mucho y el otro no sabía recibir, o al revés.',
+    exAhora: 'Echa de menos el cariño y la calma que había contigo. Te recuerda con ternura.',
+    exVuelta: 'Las cartas son favorables. Si vuelve, será porque ha entendido lo que perdió. Asegúrate de que esta vez te cuida como tú cuidas.',
+    exRespuesta: 'Sí',
   },
   'el-emperador': {
     dia: 'Hoy rinde el orden. Haz una lista, cumple lo que te propongas y no dejes que nadie decida por ti.',
@@ -59,6 +80,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Quieres seguridad y saber a qué atenerte. Estás menos dispuesta a aguantar relaciones a medias.',
     amorOtra: 'La otra persona es protectora, pero también puede ser rígida. Le cuesta mostrarse vulnerable.',
     amorRelacion: 'La relación busca bases firmes: hablar de planes, de compromiso y de reglas claras para los dos.',
+    exSeparo: 'Os separaron el orgullo y las ganas de tener el control. Ninguno quiso ceder.',
+    exAhora: 'Ha tomado una decisión y quiere mantenerse firme. Le cuesta reconocer que te echa de menos.',
+    exVuelta: 'Por ahora, no. Su orgullo pesa más que la nostalgia. Solo cambiaría si algo importante le hace replantearse sus reglas.',
+    exRespuesta: 'No',
   },
   'el-sumo-sacerdote': {
     dia: 'Hoy te viene bien un buen consejo. Pregunta a alguien con experiencia antes de decidir solo por tu cuenta.',
@@ -68,6 +93,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Buscas algo serio, con valores compartidos. Ya no te sirven los juegos.',
     amorOtra: 'La otra persona es tradicional en el amor. Le importa lo que piensen su familia y su entorno.',
     amorRelacion: 'Lo vuestro puede dar un paso formal: presentar a la familia, vivir juntos o hacer un compromiso.',
+    exSeparo: 'Os separaron diferencias de valores, o la presión de la familia y el entorno.',
+    exAhora: 'Te respeta y piensa en lo que significabais el uno para el otro. Busca consejo antes de dar ningún paso.',
+    exVuelta: 'Puede haber reconciliación, y además seria. Si vuelve, será con la intención de hacer las cosas bien.',
+    exRespuesta: 'Sí',
   },
   'los-enamorados': {
     dia: 'Hoy tendrás que elegir algo, aunque sea pequeño. Elige con el corazón, pero sin dejar la cabeza en casa.',
@@ -77,6 +106,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Estás enamorada o muy cerca de estarlo. También puede que dudes entre dos caminos.',
     amorOtra: 'La otra persona siente una atracción real por ti. Si duda, no es por falta de interés.',
     amorRelacion: 'Hay química y conexión de verdad. La relación necesita que los dos elijáis estar en ella.',
+    exSeparo: 'Os separó una elección: otra persona, otro camino o una duda que no supisteis resolver juntos.',
+    exAhora: 'Sigue habiendo atracción y sentimientos de verdad. Esta carta dice que el vínculo no se ha roto del todo.',
+    exVuelta: 'Hay una posibilidad real de que vuelva. Pero tendrá que elegirte de verdad, sin medias tintas, y tú tendrás que elegirle también.',
+    exRespuesta: 'Sí',
   },
   'el-carro': {
     dia: 'Hoy avanza. Concéntrate en una sola meta y no te distraigas con lo que no depende de ti.',
@@ -86,6 +119,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Tienes claro lo que quieres y vas a por ello. Cuidado con no atropellar los tiempos del otro.',
     amorOtra: 'La otra persona está centrada en sus metas. Puede parecer distante porque ahora va a toda velocidad.',
     amorRelacion: 'La relación avanza, pero necesita una dirección común. Hablad de hacia dónde queréis ir.',
+    exSeparo: 'Os separaron las prisas o las metas distintas. Cada uno tiraba hacia un lado.',
+    exAhora: 'Sus objetivos lo ocupan todo y va a toda velocidad. Ahora mismo no mira por el retrovisor.',
+    exVuelta: 'Lo más probable es que no. Esta carta habla de seguir adelante, y es un buen consejo también para ti.',
+    exRespuesta: 'No',
   },
   'la-justicia': {
     dia: 'Hoy cada cosa en su sitio. Si debes algo, págalo; si te deben algo, pídelo con calma.',
@@ -95,6 +132,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Buscas una relación equilibrada. No quieres dar más de lo que recibes.',
     amorOtra: 'La otra persona está pensando con la cabeza. Valora lo que aportas, pero también hace cuentas.',
     amorRelacion: 'La relación necesita equilibrio y sinceridad. Lo que no se diga ahora saldrá después.',
+    exSeparo: 'Os separó una injusticia, real o sentida. Alguien sintió que daba más de lo que recibía.',
+    exAhora: 'Está haciendo balance. Piensa con la cabeza en lo que hubo y en lo que costó.',
+    exVuelta: 'Depende de que se aclaren las cuentas pendientes. Si hay una conversación honesta, puede haber una segunda oportunidad.',
+    exRespuesta: 'Quizás',
   },
   'el-ermitano': {
     dia: 'Hoy busca un rato a solas. Las respuestas que buscas fuera están esperándote en silencio.',
@@ -104,6 +145,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te apetece estar contigo misma. Quizá no sea momento de buscar, sino de saber qué buscas.',
     amorOtra: 'La otra persona necesita espacio. Su distancia tiene más que ver con ella que contigo.',
     amorRelacion: 'La relación pasa por una pausa. Si es sana, saldrá más fuerte después de este silencio.',
+    exSeparo: 'Os separó la distancia emocional. Uno de los dos necesitaba estar solo para entenderse.',
+    exAhora: 'Necesita tiempo y espacio. No es rechazo hacia ti: está mirando hacia dentro.',
+    exVuelta: 'No en este momento. Si alguna vez vuelve, será después de un largo silencio. Usa ese tiempo para ti.',
+    exRespuesta: 'No',
   },
   'la-rueda-de-la-fortuna': {
     dia: 'Hoy algo puede cambiar de repente. Si te sorprende, no te resistas: puede ser a tu favor.',
@@ -113,6 +158,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Notas que algo se mueve en tu vida amorosa. Estás más abierta a lo que el destino traiga.',
     amorOtra: 'La otra persona está en un momento de cambios. Sus sentimientos también pueden girar.',
     amorRelacion: 'La relación entra en un ciclo nuevo. Un encuentro casual o una noticia puede cambiarlo todo.',
+    exSeparo: 'Os separaron las circunstancias: un cambio de vida, un traslado o un mal momento que coincidió.',
+    exAhora: 'Sus sentimientos están cambiando. Lo que sentía hace poco ya no es lo que siente ahora.',
+    exVuelta: 'La rueda gira y lo que se fue puede volver. Un encuentro casual o un mensaje inesperado puede ser el comienzo.',
+    exRespuesta: 'Sí',
   },
   'la-fuerza': {
     dia: 'Hoy gana la calma. Responde con suavidad y verás que tu paciencia pesa más que cualquier grito.',
@@ -122,6 +171,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Tienes paciencia y amor para dar. Sabes cuidar sin perderte por el camino.',
     amorOtra: 'La otra persona siente una pasión que intenta controlar. Hay más intensidad de la que muestra.',
     amorRelacion: 'Es una relación con fuerza y deseo. Con ternura y paciencia, puede superar sus tensiones.',
+    exSeparo: 'Os separaron las emociones a flor de piel: discusiones, celos o un deseo difícil de manejar.',
+    exAhora: 'Siente todavía mucha intensidad por ti, aunque intente contenerla.',
+    exVuelta: 'Puede volver, y la clave será la paciencia. Si vuelve, necesitaréis más calma y menos lucha.',
+    exRespuesta: 'Sí',
   },
   'el-colgado': {
     dia: 'Hoy no empujes. Si algo se atasca, cambia el punto de vista y verás una salida que no veías.',
@@ -131,6 +184,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te sientes en el aire, sin saber si avanzar o soltar. Quizá estás dando más de lo que recibes.',
     amorOtra: 'La otra persona está bloqueada o indecisa. Ahora mismo no puede darte una respuesta clara.',
     amorRelacion: 'La relación está en suspenso. Para salir de ahí, alguno de los dos tendrá que ver las cosas de otra forma.',
+    exSeparo: 'Os separó el estancamiento. La relación dejó de avanzar y alguien hizo un sacrificio que nadie vio.',
+    exAhora: 'Está en pausa, sin saber muy bien qué hacer. No puede darte una respuesta porque no la tiene.',
+    exVuelta: 'De momento está en el aire. Pregúntate si quieres seguir esperando o si es hora de mirar la historia de otra manera.',
+    exRespuesta: 'Quizás',
   },
   'la-muerte': {
     dia: 'Hoy suelta algo: una costumbre, un objeto o un pensamiento que ya no te ayuda. Dejarás sitio para lo nuevo.',
@@ -140,6 +197,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Estás cambiando por dentro y lo que antes querías ya no te encaja.',
     amorOtra: 'La otra persona está cerrando un capítulo. Puede que esté soltando el pasado o soltando esta historia.',
     amorRelacion: 'La relación tal y como era se termina. Puede acabar o puede transformarse en algo distinto.',
+    exSeparo: 'Os separó un final necesario. La relación había llegado a su término, aunque doliera.',
+    exAhora: 'Está cerrando el capítulo y transformándose. Ya no es la misma persona que conociste.',
+    exVuelta: 'Esta historia, tal y como era, no va a volver. Lo que sí llega es una etapa nueva para ti, más libre.',
+    exRespuesta: 'No',
   },
   'la-templanza': {
     dia: 'Hoy ve despacio. Mezcla trabajo y descanso a partes iguales y no te exijas resolverlo todo.',
@@ -149,6 +210,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Estás en paz contigo misma y eso se nota. No necesitas que nadie te complete.',
     amorOtra: 'La otra persona es paciente y conciliadora. Busca una relación sin dramas.',
     amorRelacion: 'La relación va a fuego lento. Con paciencia, puede convertirse en algo muy sano.',
+    exSeparo: 'Os separaron los extremos: demasiado de algo y demasiado poco de otra cosa.',
+    exAhora: 'Ha encontrado algo de paz y piensa en ti sin rencor.',
+    exVuelta: 'Puede volver, pero despacio. Si hay reencuentro, será poco a poco y con más equilibrio que antes.',
+    exRespuesta: 'Sí',
   },
   'el-diablo': {
     dia: 'Hoy observa qué te tienta y qué te ata. No hace falta luchar: basta con darte cuenta.',
@@ -158,6 +223,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Sientes una atracción muy intensa, quizá más pasión que amor. Pregúntate si te hace bien.',
     amorOtra: 'La otra persona siente deseo, pero puede haber celos o necesidad de control.',
     amorRelacion: 'Es una relación muy física o muy dependiente. Para que sea sana, necesitáis más libertad.',
+    exSeparo: 'Os separó una relación de dependencia, celos o control que acabó asfixiando a uno de los dos.',
+    exAhora: 'Sigue sintiendo una atracción muy fuerte, casi una necesidad. Le cuesta soltarte.',
+    exVuelta: 'Es probable que vuelva, porque el lazo es fuerte. Pero pregúntate si eso te haría bien o si te devolvería a lo mismo.',
+    exRespuesta: 'Sí',
   },
   'la-torre': {
     dia: 'Hoy puede caer algo que no se sostenía. Si pasa, no lo apuntales: deja que se derrumbe y mira lo que queda.',
@@ -167,6 +236,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te estás dando cuenta de una verdad que lo cambia todo. Ya no puedes seguir como antes.',
     amorOtra: 'La otra persona está pasando por una crisis. Puede reaccionar de forma impulsiva.',
     amorRelacion: 'La relación vive una sacudida. Si había mentiras, saldrán. Si había amor, sobrevivirá distinto.',
+    exSeparo: 'Os separó algo repentino: una verdad que salió a la luz, una crisis o una ruptura brusca.',
+    exAhora: 'Todavía está bajo el impacto de lo que pasó. Le cuesta pensar con claridad.',
+    exVuelta: 'No, al menos tal y como era. Lo que se derrumbó no se puede reconstruir igual. Si algún día hay algo, será muy distinto.',
+    exRespuesta: 'No',
   },
   'la-estrella': {
     dia: 'Hoy hay esperanza en el aire. Pide un deseo, en serio: tu ilusión es la que abre caminos.',
@@ -176,6 +249,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Vuelves a creer en el amor. Te sientes abierta, sincera y con ganas de ilusionarte.',
     amorOtra: 'La otra persona te ve con buenos ojos y siente algo limpio y sincero.',
     amorRelacion: 'La relación tiene futuro. Es un amor que cura, que ilusiona y que se construye con confianza.',
+    exSeparo: 'Os separó una herida que necesitaba sanar, una desilusión o una etapa difícil.',
+    exAhora: 'Te recuerda con cariño y con esperanza. Lo que siente es limpio.',
+    exVuelta: 'Las cartas son esperanzadoras. Si vuelve, será desde un lugar más sano y con ganas de hacerlo mejor.',
+    exRespuesta: 'Sí',
   },
   'la-luna': {
     dia: 'Hoy no te fíes de las primeras impresiones. Si algo te inquieta, espera a mañana antes de responder.',
@@ -185,6 +262,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Tienes dudas, inseguridad o miedo a que te hagan daño. Quizá estás imaginando más de lo que hay.',
     amorOtra: 'La otra persona no está siendo del todo clara. Puede que esté confundida o que oculte algo.',
     amorRelacion: 'La relación está en la penumbra. Hasta que no haya sinceridad, no sabréis qué hay de verdad.',
+    exSeparo: 'Os separaron las dudas, la desconfianza o algo que nunca quedó claro.',
+    exAhora: 'Está en plena confusión. No sabe bien lo que siente, y quizá oculta algo.',
+    exVuelta: 'No está nada claro. Antes de esperar su vuelta, busca hechos y no te dejes llevar por lo que imaginas.',
+    exRespuesta: 'Quizás',
   },
   'el-sol': {
     dia: 'Hoy es un buen día. Sonríe, sal a la luz y comparte tu alegría: se contagia.',
@@ -194,6 +275,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te sientes bien contigo y eso te hace irresistible. Estás preparada para un amor alegre.',
     amorOtra: 'La otra persona es feliz contigo y lo demuestra sin complicaciones.',
     amorRelacion: 'La relación es luminosa, sincera y divertida. Una de las mejores cartas para el amor.',
+    exSeparo: 'Os separó un malentendido que se hizo grande. En el fondo, había mucha alegría entre los dos.',
+    exAhora: 'Recuerda los buenos momentos y le hace feliz pensar en ti.',
+    exVuelta: 'Es una de las cartas más favorables. Si vuelve, la relación puede ser más sincera y alegre que nunca.',
+    exRespuesta: 'Sí',
   },
   'el-juicio': {
     dia: 'Hoy escucha esa llamada que llevas tiempo ignorando. Es buen día para retomar algo que dejaste a medias.',
@@ -203,6 +288,10 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Estás revisando tu historia amorosa y aprendiendo de ella. Te sientes lista para algo nuevo.',
     amorOtra: 'La otra persona está reflexionando sobre lo que pasó. Puede querer una segunda oportunidad.',
     amorRelacion: 'La relación tiene una segunda oportunidad si los dos perdonáis y empezáis desde un lugar nuevo.',
+    exSeparo: 'Os separó un error que los dos lamentáis. Quedó algo pendiente de perdonar.',
+    exAhora: 'Está reflexionando sobre lo que pasó y se pregunta si merecería otra oportunidad.',
+    exVuelta: 'Es la carta de las segundas oportunidades. Hay muchas posibilidades de que vuelva, siempre que haya perdón de verdad.',
+    exRespuesta: 'Sí',
   },
   'el-mundo': {
     dia: 'Hoy celebra lo que ya has conseguido. Un ciclo se cierra bien y te mereces reconocerlo.',
@@ -212,5 +301,9 @@ export const lecturas: Record<string, Lectura> = {
     amorTu: 'Te sientes completa. Sabes lo que vales y lo que quieres en el amor.',
     amorOtra: 'La otra persona se siente bien contigo y ve un futuro compartido.',
     amorRelacion: 'La relación está en plenitud. Es un amor maduro que puede dar un gran paso.',
+    exSeparo: 'Os separó el final natural de una etapa. La relación había cumplido su ciclo.',
+    exAhora: 'Se siente en paz con lo que vivisteis y está mirando hacia su futuro.',
+    exVuelta: 'Lo más probable es que no. Esta historia está completa. Quédate con lo aprendido: lo mejor está por llegar.',
+    exRespuesta: 'No',
   },
 };

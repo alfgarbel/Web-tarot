@@ -15,9 +15,11 @@ interface Props {
   preguntas?: string[];
   placeholder?: string;
   cierre?: string;
+  /** Si se indica, la última carta muestra una respuesta de sí, no o quizás tomada de este campo. */
+  respuesta?: 'exRespuesta';
 }
 
-const { posiciones, preguntas = [], placeholder = '¿Qué necesito saber?', cierre = 'Para llevarte' } = Astro.props;
+const { posiciones, preguntas = [], placeholder = '¿Qué necesito saber?', cierre = 'Para llevarte', respuesta } = Astro.props;
 const n = posiciones.length;
 
 const datos = arcanos.map((a) => ({
@@ -26,6 +28,7 @@ const datos = arcanos.map((a) => ({
   nombre: a.nombre,
   consejo: a.consejo,
   textos: Object.fromEntries(posiciones.map((p) => [p.clave, lecturas[a.slug][p.clave]])),
+  respuesta: respuesta ? lecturas[a.slug][respuesta] : null,
 }));
 ---
 
@@ -75,6 +78,7 @@ const datos = arcanos.map((a) => ({
                 <div class="cara frente" />
               </div>
               <div class="explicacion">
+                {i === n - 1 && respuesta && <p class="veredicto" />}
                 <a class="carta-titulo" href="/cartas/" />
                 <p class="texto" />
               </div>
@@ -180,6 +184,11 @@ const datos = arcanos.map((a) => ({
       titulo.textContent = `${carta.romano}. ${carta.nombre}`;
       titulo.href = `/cartas/${carta.slug}/`;
       li.querySelector('.texto').textContent = carta.textos[clave];
+      const veredicto = li.querySelector('.veredicto');
+      if (veredicto && carta.respuesta) {
+        veredicto.textContent = carta.respuesta;
+        veredicto.dataset.tipo = carta.respuesta === 'Sí' ? 'si' : carta.respuesta === 'No' ? 'no' : 'quizas';
+      }
       li.querySelector('.giro').classList.remove('girada');
       li.classList.remove('vista');
     });
@@ -363,6 +372,7 @@ const datos = arcanos.map((a) => ({
   }
   .carta-titulo:hover { color: var(--oro-claro); }
   .texto { font-size: 1.05rem; margin: 0; }
+  .veredicto { font-family: var(--serif); font-size: 3.4rem; line-height: 1; margin: 0 0 10px; color: var(--veredicto, var(--oro-claro)); }
   .explicacion { opacity: 0; transform: translateY(12px); transition: opacity 0.8s 0.5s var(--ease), transform 0.8s 0.5s var(--ease); }
   .vista .explicacion { opacity: 1; transform: none; }
 

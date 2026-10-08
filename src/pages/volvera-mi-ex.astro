@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Tirada from '../components/Tirada.astro';
+import Explicacion from '../components/Explicacion.astro';
+
+const faq = [
+  {
+    p: '¿Cómo funciona esta tirada?',
+    r: 'Piensas en esa persona, barajas y eliges tres cartas. La primera explica qué os separó, la segunda lo que siente hoy y la tercera responde con un sí, un no o un quizás y te cuenta por qué.',
+  },
+  {
+    p: '¿Cuánto tiempo tiene que haber pasado desde la ruptura?',
+    r: 'No hay un tiempo fijo. Eso sí, en los primeros días todo duele más y cuesta leer con calma. Si la ruptura es muy reciente, quizá te ayude más la carta del día.',
+  },
+  {
+    p: '¿Y si la respuesta es no?',
+    r: 'Un no del tarot no es una condena: habla de cómo están las cosas ahora. Lee la segunda carta con atención, porque suele explicar el motivo. Y recuerda que a veces un no también es una puerta que se abre para ti.',
+  },
+  {
+    p: '¿Puedo repetir la tirada?',
+    r: 'Si repites la misma pregunta el mismo día, las cartas te mostrarán la misma lectura. La primera suele ser la que más tiene que decirte.',
+  },
+  {
+    p: '¿Es gratis?',
+    r: 'Sí, siempre. No hace falta registrarse y tu pregunta solo se guarda en tu propio navegador.',
+  },
+];
+---
+
+<Base
+  title="¿Volverá mi ex? Tarot gratis con respuesta | Noctámbula"
+  description="Tirada de tarot gratis para saber si volverá tu ex: qué os separó, qué siente hoy y una respuesta de sí, no o quizás con su explicación. Sin registro."
+>
+  <Tirada
+    posiciones={[
+      { clave: 'exSeparo', titulo: 'Lo que os separó' },
+      { clave: 'exAhora', titulo: 'Lo que siente hoy' },
+      { clave: 'exVuelta', titulo: '¿Volverá?' },
+    ]}
+    respuesta="exRespuesta"
+    preguntas={['¿Volverá conmigo?', '¿Me echa de menos?', '¿Debería escribirle?']}
+    placeholder="¿Volverá conmigo?"
+    cierre="Para ti, pase lo que pase"
+  >
+    <h1>¿Volverá <em>mi ex?</em></h1>
+    <p class="sub">Tres cartas: lo que os separó, lo que siente hoy y si volverá. Piensa en esa persona y baraja.</p>
+  </Tirada>
+
+  <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
+    <p class="suave">
+      La primera carta mira atrás: no para culpar a nadie, sino para entender qué falló. La segunda habla de esa persona
+      hoy, de lo que siente aunque no lo diga. La tercera responde a tu pregunta con un sí, un no o un quizás, y explica
+      lo que haría falta para que pase.
+    </p>
+    <p class="suave">
+      Antes de cerrar la tirada, hazte otra pregunta: ¿quieres que vuelva, o quieres dejar de sentir lo que sientes? Son
+      cosas distintas. Si la respuesta no te gusta, prueba el <a href="/tarot-del-amor/">tarot del amor</a> pensando en
+      ti, o saca tu <a href="/carta-del-dia/">carta del día</a>.
+    </p>
+  </Explicacion>
+</Base>
