@@ -1,4 +1,5 @@
 ---
+import { existsSync } from 'node:fs';
 import '../styles/global.css';
 
 interface Props {
@@ -9,7 +10,10 @@ interface Props {
   migas?: { nombre: string; url: string }[];
 }
 
-const { title: tituloPedido, description: descripcionPedida, image = '/portada.webp', migas } = Astro.props;
+const { title: tituloPedido, description: descripcionPedida, image: imagenPedida, migas } = Astro.props;
+// Cada página tiene su imagen para compartir en public/og/ (se generan con OGsmith, ver scripts/og/).
+const rutaOg = `/og/${Astro.url.pathname === '/' ? 'inicio' : Astro.url.pathname.replace(/^\/|\/$/g, '')}.jpg`;
+const image = imagenPedida ?? (existsSync(`public${rutaOg}`) ? rutaOg : '/portada.webp');
 // Google corta los títulos hacia los 60 caracteres y las descripciones hacia los 160.
 const title = tituloPedido.length > 65 ? tituloPedido.replace(/ \| Arcanaia$/, '') : tituloPedido;
 const recortar = (t: string, max: number) => {
@@ -65,6 +69,9 @@ const enlaces = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    {image.endsWith('.jpg') && <meta property="og:image:width" content="1200" />}
+    {image.endsWith('.jpg') && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:image" content={ogImage} />
     <meta property="og:url" content={canonical} />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta property="og:locale" content="es_ES" />
