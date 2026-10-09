@@ -6,30 +6,30 @@ import Explicacion from '../components/Explicacion.astro';
 const faq = [
   {
     p: '¿Cómo funciona el tarot del amor?',
-    r: 'Piensas en tu situación sentimental, barajas y eliges tres cartas. La primera habla de ti, la segunda de la otra persona y la tercera de la relación: lo que hay entre vosotros y hacia dónde puede ir.',
+    r: 'Piensas en tu situación sentimental, barajas y eliges tres cartas. La primera es para ti, la segunda para la otra persona y la tercera para la relación, lo que hay entre vosotros y adónde puede ir.',
   },
   {
     p: '¿Sirve si no tengo pareja?',
-    r: 'Sí. Puedes pensar en alguien que te guste, en una historia que terminó o simplemente en el amor que quieres atraer. La segunda carta hablará entonces de quien está por llegar o de esa persona que tienes en mente.',
+    r: 'Sí. Piensa en alguien que te guste, en una historia que terminó o en el amor que te gustaría encontrar. La segunda carta se leerá entonces como esa persona que tienes en mente o la que está por llegar.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, siempre. No hace falta registrarse ni dejar ningún dato, y tu pregunta solo se guarda en tu propio navegador.',
+    r: 'Sí, siempre. No tienes que registrarte ni dejar ningún dato, y tu pregunta solo se guarda en tu navegador.',
   },
   {
     p: '¿Y si sale una carta difícil?',
-    r: 'Ninguna carta es una condena. La Torre o la Luna señalan algo que conviene mirar de frente, no un final escrito. Lee el texto con calma y quédate con lo que te ayude a decidir.',
+    r: 'Ninguna carta te condena a nada. La Torre o la Luna señalan algo que conviene mirar de frente. Lee el texto despacio y quédate con lo que te sirva para decidir.',
   },
   {
     p: '¿Puedo repetir la tirada?',
-    r: 'Puedes hacer todas las tiradas que quieras sobre temas distintos. Si repites la misma pregunta el mismo día, las cartas te mostrarán la misma lectura: la primera suele ser la que más tiene que decirte.',
+    r: 'Sobre temas distintos, todas las que quieras. Si repites la misma pregunta el mismo día, te saldrá la misma lectura, porque la primera suele ser la que más tiene que decirte.',
   },
 ];
 ---
 
 <Base
   title="Tarot del amor gratis: tirada de tres cartas | Arcanaia"
-  description="Tirada de tarot del amor gratis y sin registro: tres cartas para ver cómo estás tú, qué siente la otra persona y hacia dónde va vuestra relación."
+  description="Tirada de tarot del amor gratis y sin registro. Tres cartas para ver cómo estás tú, qué siente la otra persona y adónde va vuestra relación."
 >
   <Tirada
     posiciones={[
@@ -42,18 +42,18 @@ const faq = [
     cierre="Para tu corazón"
   >
     <h1>Tarot <em>del amor</em></h1>
-    <p class="sub">Tres cartas: tú, la otra persona y lo que hay entre los dos. Piensa en esa historia y baraja.</p>
+    <p class="sub">Tres cartas, una para ti, otra para la otra persona y otra para lo que hay entre las dos. Piensa en esa historia y baraja.</p>
   </Tirada>
 
   <Explicacion titulo="Cómo leer tu tirada del amor" faq={faq}>
     <p class="suave">
-      Lee las cartas en orden. La primera te muestra cómo llegas tú a esta historia: tus ganas, tus miedos y lo que
-      necesitas. La segunda habla de la otra persona, de lo que siente y de lo que quizá no dice. La tercera une las dos y
-      describe la relación en este momento.
+      Lee las cartas en orden. La primera te muestra cómo llegas tú a esta historia, con tus ganas y tus miedos. La
+      segunda es la otra persona, lo que siente y lo que quizá se calla. La tercera junta las dos y te enseña cómo está
+      la relación ahora mismo.
     </p>
     <p class="suave">
-      Si quieres una respuesta más directa a una sola pregunta, prueba el <a href="/tarot-si-o-no/">tarot Sí o No</a>.
-      Y si una carta te deja con ganas de saber más, toca su nombre para leer su significado completo.
+      Para una respuesta más directa a una sola pregunta, tienes el <a href="/tarot-si-o-no/">tarot Sí o No</a>. Y si
+      una carta te deja con ganas de más, toca su nombre y verás su significado completo.
     </p>
   </Explicacion>
 </Base>

@@ -6,30 +6,30 @@ import Explicacion from '../components/Explicacion.astro';
 const faq = [
   {
     p: '¿Qué es la tirada de pasado, presente y futuro?',
-    r: 'Es la tirada clásica de tres cartas. La primera muestra lo que te ha traído hasta aquí, la segunda cómo estás ahora y la tercera hacia dónde van las cosas si sigues por el mismo camino.',
+    r: 'Es la tirada clásica de tres cartas. La primera muestra lo que te ha traído hasta aquí, la segunda cómo estás ahora y la tercera adónde van las cosas si sigues igual.',
   },
   {
     p: '¿El futuro que sale es seguro?',
-    r: 'No. La carta del futuro describe una tendencia, no un destino fijo. Si no te gusta lo que ves, la carta del presente suele darte la pista de qué puedes cambiar.',
+    r: 'No. La carta del futuro marca por dónde van las cosas, y eso se puede torcer. Si no te gusta lo que ves, mira la del presente, que suele darte la pista de qué cambiar.',
   },
   {
     p: '¿Sobre qué puedo preguntar?',
-    r: 'Sobre cualquier tema: el trabajo, una amistad, una mudanza o tu vida en general. Si tu pregunta es de amor, la tirada del tarot del amor te dará una lectura más precisa.',
+    r: 'Sobre lo que quieras, ya sea el trabajo, una amistad, una mudanza o tu vida en general. Si es de amor, el tarot del amor te dará una lectura más afinada.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, y sin registro. Tu pregunta solo se guarda en tu propio navegador, para que la misma pregunta te dé la misma respuesta durante el día.',
+    r: 'Sí, y sin registro. Tu pregunta solo se guarda en tu navegador, para que la misma pregunta te dé la misma respuesta durante todo el día.',
   },
   {
     p: '¿Puedo repetir la tirada?',
-    r: 'Puedes hacer todas las tiradas que quieras sobre temas distintos. Si repites la misma pregunta el mismo día, las cartas te mostrarán la misma lectura: la primera suele ser la que más tiene que decirte.',
+    r: 'Puedes hacer todas las que quieras sobre temas distintos. Con la misma pregunta y el mismo día verás la misma lectura. La primera es la que cuenta.',
   },
 ];
 ---
 
 <Base
   title="Pasado, presente y futuro: tarot gratis de tres cartas | Arcanaia"
-  description="Tirada de tarot gratis de pasado, presente y futuro: tres cartas para entender de dónde vienes, dónde estás y hacia dónde vas. Sin registro."
+  description="Tirada de tarot gratis de pasado, presente y futuro. Tres cartas para entender de dónde vienes, dónde estás y adónde vas. Sin registro."
 >
   <Tirada
     posiciones={[
@@ -41,17 +41,17 @@ const faq = [
     placeholder="¿Hacia dónde voy?"
   >
     <h1>Pasado, presente <em>y futuro</em></h1>
-    <p class="sub">La tirada clásica de tres cartas. De dónde vienes, dónde estás y hacia dónde vas.</p>
+    <p class="sub">La tirada de toda la vida, con tres cartas. De dónde vienes, dónde estás y adónde vas.</p>
   </Tirada>
 
   <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
     <p class="suave">
-      Lee las tres cartas como una historia. El pasado explica el presente, y el presente da forma al futuro. Si la carta
-      del futuro te preocupa, vuelve a la del presente: ahí está lo que todavía puedes cambiar.
+      Lee las tres cartas como una historia. El pasado explica el presente, y el presente va dibujando el futuro. Si la
+      carta del futuro te preocupa, vuelve a la del presente. Lo que todavía puedes cambiar está ahí.
     </p>
     <p class="suave">
-      Cada carta tiene su significado completo en <a href="/cartas/">los veintidós arcanos</a>. Toca su nombre para
-      leerlo.
+      El significado completo de cada carta está en <a href="/cartas/">los veintidós arcanos</a>. Toca su nombre y lo
+      verás.
     </p>
   </Explicacion>
 </Base>

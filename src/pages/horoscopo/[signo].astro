@@ -38,7 +38,7 @@ const fechaTexto = ahora.toLocaleDateString('es-ES', { weekday: 'long', day: 'nu
 const faq = [
   {
     p: '¿Cómo se hace este horóscopo?',
-    r: `Cada día se elige un arcano mayor para ${s.nombre}. Todas las personas de ${s.nombre} ven la misma carta ese día, y mañana cambia. Cada signo recibe una carta distinta ese día.`,
+    r: `Cada día sale un arcano mayor para ${s.nombre}, el mismo para todo el signo, y al día siguiente cambia. Ese día ningún otro signo tiene la misma carta.`,
   },
   {
     p: '¿A qué hora cambia?',
@@ -46,7 +46,7 @@ const faq = [
   },
   {
     p: '¿Puedo ver el de otro signo?',
-    r: 'Sí, abajo tienes los doce. Si quieres una lectura solo para ti, saca tu carta del día.',
+    r: 'Claro, abajo están los doce. Y si prefieres una lectura solo tuya, saca tu carta del día.',
   },
 ];
 ---
@@ -95,8 +95,8 @@ const faq = [
 
   <Explicacion titulo={`El horóscopo de ${s.nombre} con el tarot`} faq={faq}>
     <p class="suave">
-      En lugar de calcular posiciones de planetas, cada día te damos una carta. Léela por la mañana como una propuesta
-      para la jornada, no como algo que va a pasar sí o sí.
+      Aquí no calculamos dónde están los planetas. Cada día te damos una carta y ya. Léela por la mañana como una idea
+      para el día, que no tiene por qué cumplirse sí o sí.
     </p>
   </Explicacion>
 </Base>

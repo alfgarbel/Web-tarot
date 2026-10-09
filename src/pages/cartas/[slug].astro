@@ -44,7 +44,7 @@ const jsonLd = {
       // Las mismas respuestas que se ven en la ficha, en forma de pregunta.
       '@type': 'FAQPage',
       mainEntity: (amp ? amp.faq.map((f) => [f.q, f.r]) : [
-        [`¿Qué significa ${arcano.nombre} en el tarot?`, `${arcano.nombre} habla de ${arcano.claves.join(', ')}. ${arcano.general}`],
+        [`¿Qué significa ${arcano.nombre} en el tarot?`, `Con ${arcano.nombre} salen temas como ${arcano.claves.join(', ')}. ${arcano.general}`],
         [`¿Qué significa ${arcano.nombre} en el amor?`, arcano.amor],
         [`¿Qué significa ${arcano.nombre} en el trabajo y el dinero?`, arcano.trabajo],
         [`¿Qué significa ${arcano.nombre} en la salud?`, arcano.salud],
@@ -175,8 +175,8 @@ const secciones = [
       {
         signosCarta.length > 0 && (
           <p class="signo-carta">
-            La tradición asocia esta carta a {signosCarta.map((x, k) => <>{k > 0 && ' y '}<a href={`/signos/${x.slug}/`}>{x.nombre}</a></>)}.
-            Mira también el <a href={`/horoscopo/${signosCarta[0].slug}/`}>horóscopo de hoy de {signosCarta[0].nombre}</a>.
+            Por tradición, esta carta va con {signosCarta.map((x, k) => <>{k > 0 && ' y '}<a href={`/signos/${x.slug}/`}>{x.nombre}</a></>)}.
+            Y si te apetece, echa un vistazo al <a href={`/horoscopo/${signosCarta[0].slug}/`}>horóscopo de hoy de {signosCarta[0].nombre}</a>.
           </p>
         )
       }

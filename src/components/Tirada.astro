@@ -63,7 +63,7 @@ const datos = arcanos.map((a) => ({
     </div>
 
     <div class="paso oculto" id="paso-elegir" aria-live="polite">
-      <p class="instruccion">Elige {numeros[n] ?? `${n} cartas`}, sin pensarlo mucho</p>
+      <p class="instruccion">Elige {numeros[n] ?? `${n} cartas`}, sin pensártelo mucho</p>
       <ol class:list={['huecos', { compactos: cruz }]} id="huecos">
         {posiciones.map((p, i) => <li><span class="hueco" /><span class="hueco-titulo">{cruz ? i + 1 : p.titulo}</span></li>)}
       </ol>
@@ -127,7 +127,7 @@ const datos = arcanos.map((a) => ({
           <button class="boton" id="otra" type="button">Preguntar otra cosa</button>
           <a class="enlace-flecha" href="/tiradas/">Ver todas las tiradas</a>
         </div>
-        <p class="nota">Las cartas recuerdan lo que les preguntas. Si repites la misma pregunta hoy, te darán la misma respuesta.</p>
+        <p class="nota">Tu navegador se acuerda de lo que preguntas. Si hoy repites la misma pregunta, te saldrán las mismas cartas.</p>
       </div>
     </div>
   </div>
@@ -211,8 +211,8 @@ const datos = arcanos.map((a) => ({
     const aviso = $('aviso');
     aviso.hidden = !repetida;
     aviso.textContent = pregunta
-      ? 'Ya les hiciste esta pregunta a las cartas hoy. Esta fue su respuesta, y sigue siendo la misma.'
-      : 'Acabas de hacer esta tirada. Esta fue tu lectura. Si tienes otra pregunta, escríbela y vuelve a barajar.';
+      ? 'Esta pregunta ya se la hiciste hoy a las cartas. Te contestaron esto y siguen pensando lo mismo.'
+      : 'Esta tirada la acabas de hacer y esta es tu lectura. Si tienes otra pregunta, escríbela y vuelve a barajar.';
     posiciones.forEach((li, i) => {
       const carta = elegidas[i];
       const clave = claves[i];

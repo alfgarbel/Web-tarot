@@ -6,19 +6,19 @@ import { signos, compatibilidad, slugPareja } from '../../data/signos';
 const faq = [
   {
     p: '¿Cómo se calcula la compatibilidad entre signos?',
-    r: 'Nos fijamos en tres cosas: la distancia entre los dos signos en la rueda del zodiaco, sus elementos (fuego, tierra, aire y agua) y su ritmo (cardinal, fijo o mutable). El porcentaje resume cómo se combinan.',
+    r: 'Miramos la distancia entre los dos signos en la rueda del zodiaco, sus elementos (fuego, tierra, aire y agua) y su ritmo (cardinal, fijo o mutable). El porcentaje junta todo eso en un número.',
   },
   {
     p: '¿Un porcentaje bajo significa que la relación no funcionará?',
-    r: 'No. Un porcentaje bajo indica que habrá más diferencias que trabajar, no que la relación esté condenada. Muchas parejas con retos son las que más crecen juntas.',
+    r: 'No. Un porcentaje bajo quiere decir que tendréis más diferencias que limar, y ya está. Muchas parejas que chocan bastante son las que más crecen juntas.',
   },
   {
     p: '¿Qué pinta el tarot en la compatibilidad de signos?',
-    r: 'Cada signo tiene un arcano mayor asociado por la tradición: Aries el Emperador, Tauro el Sumo Sacerdote, y así hasta Piscis con la Luna. En cada pareja te mostramos las dos cartas.',
+    r: 'Por tradición, cada signo va con un arcano mayor. Aries con el Emperador, Tauro con el Sumo Sacerdote, y así hasta Piscis con la Luna. En cada pareja te enseñamos las dos cartas.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, todas las combinaciones son gratis y no necesitas registrarte.',
+    r: 'Sí, todas las parejas son gratis y no hace falta registrarse.',
   },
 ];
 
@@ -33,7 +33,7 @@ const corto = (n: string) => n.slice(0, 3);
     <div class="contenedor rejilla-cabeza">
       <div>
         <h1>Compatibilidad <em>de signos</em></h1>
-        <p class="sub">Elige tu signo y el de la otra persona. Te contamos cómo encajáis en el amor, qué os une y dónde chocáis.</p>
+        <p class="sub">Elige tu signo y el de la otra persona. Te contamos cómo encajáis en el amor y dónde saltan las chispas, para bien y para mal.</p>
       </div>
       <form class="elegir" id="elegir" action="/compatibilidad/aries-y-aries/">
         <label>
@@ -52,7 +52,7 @@ const corto = (n: string) => n.slice(0, 3);
 
   <section class="contenedor tabla-zona">
     <h2 class="tabla-titulo">Todas las combinaciones</h2>
-    <p class="suave tabla-sub">Toca una casilla para leer la compatibilidad de esa pareja. Cuanto más dorada, más afinidad.</p>
+    <p class="suave tabla-sub">Toca una casilla y lee cómo se llevan esos dos signos. Cuanto más dorada, más afinidad.</p>
     <div class="tabla-marco">
       <table class="tabla">
         <thead>
@@ -86,12 +86,12 @@ const corto = (n: string) => n.slice(0, 3);
 
   <Explicacion titulo="Cómo leer la compatibilidad" faq={faq}>
     <p class="suave">
-      Los astros no deciden por vosotros, pero sí describen el tono de la relación: qué fluye solo y qué hay que trabajar.
-      Los signos del mismo elemento suelen entenderse sin esfuerzo, los opuestos se atraen y los que forman cuadratura
-      viven una relación intensa que obliga a crecer.
+      Los astros no deciden por vosotros, pero dan el tono de la relación, lo que sale solo y lo que cuesta más.
+      Los signos del mismo elemento se entienden sin esfuerzo y los opuestos se atraen. Los que forman cuadratura
+      viven algo intenso que les obliga a crecer.
     </p>
     <p class="suave">
-      Si quieres saber cómo está ahora mismo vuestra historia, prueba el <a href="/tarot-del-amor/">tarot del amor</a>.
+      ¿Y cómo está ahora mismo lo vuestro? Para eso tienes el <a href="/tarot-del-amor/">tarot del amor</a>.
     </p>
   </Explicacion>
 </Base>

@@ -6,26 +6,26 @@ import Explicacion from '../components/Explicacion.astro';
 const faq = [
   {
     p: '¿Cómo funciona la tirada de los dos caminos?',
-    r: 'Antes de barajar, decide cuál de tus opciones es el primer camino y cuál el segundo. Después eliges cuatro cartas: la situación, lo que te trae cada camino y lo que te ayudará a decidir.',
+    r: 'Antes de barajar, decide cuál de tus opciones es el primer camino y cuál el segundo. Después eliges cuatro cartas, que son la situación, lo que trae cada camino y la pista para decidir.',
   },
   {
     p: '¿Y si tengo más de dos opciones?',
-    r: 'Quédate primero con las dos que más te tiran. Cuando hayas descartado una, puedes volver a hacer la tirada con la siguiente.',
+    r: 'Quédate primero con las dos que más te tiran. Cuando descartes una, repite la tirada con la siguiente.',
   },
   {
     p: '¿El tarot decide por mí?',
-    r: 'No. Te muestra lo que puede traer cada opción para que elijas con más claridad. La decisión siempre es tuya.',
+    r: 'No. Te enseña lo que puede traer cada opción para que elijas sabiendo más. Decides tú.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, sin registro. Si repites la misma pregunta el mismo día, verás la misma lectura.',
+    r: 'Sí, sin registro. Con la misma pregunta y el mismo día, verás las mismas cartas.',
   },
 ];
 ---
 
 <Base
   title="Tarot de decisiones: elegir entre dos caminos | Arcanaia"
-  description="Tirada de tarot gratis para decidir entre dos opciones: la situación, lo que te trae cada camino y la clave para elegir. Sin registro."
+  description="Tirada de tarot gratis para decidir entre dos opciones. La situación, lo que trae cada camino y la pista para elegir. Sin registro."
 >
   <Tirada
     posiciones={[
@@ -39,13 +39,13 @@ const faq = [
     cierre="Elijas lo que elijas"
   >
     <h1>Decidir entre <em>dos caminos</em></h1>
-    <p class="sub">Escribe tus dos opciones. La primera que nombres será el primer camino y la segunda, el segundo. Luego baraja y elige cuatro cartas.</p>
+    <p class="sub">Escribe tus dos opciones en orden, porque la primera será el primer camino y la otra, el segundo. Luego baraja y elige cuatro cartas.</p>
   </Tirada>
 
   <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
     <p class="suave">
-      La primera carta describe la situación en la que estás. La segunda y la tercera te muestran lo que trae cada
-      camino: compáralas sin prisa. La cuarta no elige por ti, pero te da la pista que necesitas para decidir.
+      La primera carta describe la situación en la que estás. La segunda y la tercera muestran lo que trae cada camino, y
+      merece la pena compararlas despacio. La cuarta no elige por ti, pero te da una pista para decidir.
     </p>
   </Explicacion>
 </Base>

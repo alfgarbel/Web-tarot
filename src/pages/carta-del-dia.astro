@@ -17,22 +17,22 @@ const datos = arcanos.map((a) => ({
 const faq = [
   {
     p: '¿Qué es la carta del día?',
-    r: 'Es una sola carta que sacas por la mañana para orientar tu jornada. No predice lo que va a pasar: te propone una actitud o algo en lo que fijarte hoy.',
+    r: 'Es una sola carta que sacas por la mañana. No adivina lo que va a pasar. Te sugiere una actitud o algo en lo que fijarte hoy.',
   },
   {
     p: '¿Puedo sacar otra si no me gusta?',
-    r: 'Tu carta se queda guardada en este navegador hasta medianoche, para que puedas volver a leerla. Mañana tendrás una nueva.',
+    r: 'Tu carta se queda guardada en este navegador hasta medianoche, por si quieres volver a leerla. Mañana te toca otra.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, cada día y sin registro. Solo guardamos en tu propio navegador qué carta te salió hoy.',
+    r: 'Sí, todos los días y sin registro. Lo único que se guarda, y en tu navegador, es qué carta te salió hoy.',
   },
 ];
 ---
 
 <Base
   title="Carta del día: tu tarot diario gratis | Arcanaia"
-  description="Saca tu carta del día del tarot gratis: un arcano mayor y un mensaje para orientar tu jornada. Una carta nueva cada día, sin registro."
+  description="Saca gratis tu carta del día del tarot, un arcano mayor con unas líneas para empezar el día. Una carta nueva cada mañana, sin registro."
 >
   <section class="mesa">
     <div class="contenedor diario">
@@ -48,7 +48,7 @@ const faq = [
         <p class="antetitulo" id="fecha">Hoy</p>
         <h1>La carta <em>del día</em></h1>
         <div id="antes">
-          <p class="sub">Respira, piensa en el día que tienes por delante y descubre tu carta. Te acompañará hasta medianoche.</p>
+          <p class="sub">Piensa en el día que tienes por delante y dale la vuelta a tu carta. Es tuya hasta medianoche.</p>
           <button class="boton" id="descubrir" type="button">Descubrir mi carta</button>
           <div class="elegir-baraja"><SelectorBaraja /></div>
         </div>
@@ -69,9 +69,9 @@ const faq = [
 
   <Explicacion titulo="Cómo usar tu carta del día" faq={faq}>
     <p class="suave">
-      Sácala por la mañana y léela con calma. Durante el día, fíjate en si aparece lo que la carta propone: una
-      conversación, una decisión pequeña, un momento para ti. Por la noche, vuelve a leerla. Muchas veces se entiende
-      mejor al final del día.
+      Sácala por la mañana y léela tranquila. Durante el día, fíjate en si aparece lo que la carta sugiere, ya sea una
+      conversación, una decisión pequeña o un rato para ti. Por la noche, vuelve a leerla. Muchas veces se entiende mejor
+      cuando el día ya ha pasado.
     </p>
   </Explicacion>
 </Base>

@@ -6,11 +6,11 @@ import { arcanos, type Arcano } from '../../data/arcanos';
 import { menores, palos } from '../../data/menores';
 
 const grupos: { id: string; titulo: string; texto: string; cartas: Arcano[] }[] = [
-  { id: 'mayores', titulo: 'Arcanos mayores', texto: 'Las veintidós cartas que marcan los grandes temas de la vida, del Loco al Mundo.', cartas: arcanos },
+  { id: 'mayores', titulo: 'Arcanos mayores', texto: 'Las veintidós cartas de los asuntos gordos de la vida, del Loco al Mundo.', cartas: arcanos },
   ...palos.map((p) => ({
     id: p.palo,
     titulo: p.nombre,
-    texto: `Elemento ${p.elemento.toLowerCase()}. Hablan ${p.tema.startsWith("el ") ? "del " + p.tema.slice(3) : "de " + p.tema}.`,
+    texto: `Elemento ${p.elemento.toLowerCase()}. Tratan ${p.tema.startsWith("el ") ? "del " + p.tema.slice(3) : "de " + p.tema}.`,
     cartas: menores.filter((m) => m.palo === p.palo),
   })),
 ];
@@ -24,8 +24,8 @@ const grupos: { id: string; titulo: string; texto: string; cartas: Arcano[] }[] 
     <div class="contenedor">
       <h1>Las setenta y ocho <em>cartas del tarot</em></h1>
       <p class="sub">
-        Veintidós arcanos mayores y cincuenta y seis menores, repartidos en cuatro palos. Elige una carta para leer qué dice
-        en el amor, el trabajo y la vida.
+        Veintidós arcanos mayores y cincuenta y seis menores, en cuatro palos. Pincha en cualquiera y verás qué dice del
+        amor, del trabajo y de todo lo demás.
       </p>
       <nav class="indice" aria-label="Grupos de cartas">
         {grupos.map((g) => <a href={`#${g.id}`}>{g.titulo}</a>)}

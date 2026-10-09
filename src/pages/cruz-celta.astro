@@ -6,30 +6,30 @@ import Explicacion from '../components/Explicacion.astro';
 const faq = [
   {
     p: '¿Qué es la cruz celta?',
-    r: 'Es la tirada de tarot más conocida para leer una situación a fondo. Usa diez cartas: seis forman una cruz que describe el momento presente y cuatro, en columna, hablan de ti, de tu entorno, de lo que esperas y de cómo puede terminar.',
+    r: 'Es la tirada de tarot más conocida para leer una situación a fondo. Lleva diez cartas. Seis forman una cruz con lo que pasa ahora y cuatro, en columna, tratan de ti, de tu entorno, de lo que esperas y de cómo puede terminar.',
   },
   {
     p: '¿Cuándo conviene hacerla?',
-    r: 'Cuando la pregunta es importante y tiene muchas caras: un cambio de trabajo, una relación complicada o una decisión que te quita el sueño. Para preguntas rápidas, el tarot Sí o No o la carta del día funcionan mejor.',
+    r: 'Cuando la pregunta es importante y tiene muchas caras, como un cambio de trabajo o una relación complicada que te quita el sueño. Para preguntas rápidas van mejor el tarot Sí o No o la carta del día.',
   },
   {
     p: '¿En qué orden se leen las cartas?',
-    r: 'Del 1 al 10. Primero la situación y lo que se cruza en ella, luego la raíz, el pasado, lo que buscas y lo que se acerca. Después, de abajo arriba, la columna de la derecha: tú, tu entorno, tus esperanzas y miedos, y el desenlace.',
+    r: 'Del 1 al 10. Primero la situación y lo que se cruza en ella, luego la raíz, el pasado, lo que buscas y lo que se acerca. Después viene la columna de la derecha, de abajo arriba, con tú, tu entorno, tus esperanzas y miedos, y el desenlace.',
   },
   {
     p: '¿Puedo repetir la tirada?',
-    r: 'Si repites la misma pregunta el mismo día, las cartas te mostrarán la misma lectura. La primera suele ser la que más tiene que decirte.',
+    r: 'Si haces la misma pregunta el mismo día, saldrán las mismas cartas. Con diez, además, tienes tela para un buen rato.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, siempre y sin registro. Tu pregunta solo se guarda en tu propio navegador.',
+    r: 'Sí, siempre y sin registro. Tu pregunta solo se guarda en tu navegador.',
   },
 ];
 ---
 
 <Base
   title="Cruz celta: tirada de tarot gratis de diez cartas | Arcanaia"
-  description="Tirada de la cruz celta gratis: diez cartas para leer a fondo una situación, con su significado en cada posición. Sin registro y con textos escritos a mano."
+  description="Tirada de la cruz celta gratis. Diez cartas para leer a fondo una situación, con el significado de cada posición. Sin registro y con textos escritos a mano."
 >
   <Tirada
     disposicion="cruz"
@@ -50,18 +50,18 @@ const faq = [
     cierre="Para el camino"
   >
     <h1>La cruz <em>celta</em></h1>
-    <p class="sub">La tirada más completa: diez cartas para mirar una situación desde todos sus ángulos. Tómate tu tiempo, piensa en tu pregunta y baraja.</p>
+    <p class="sub">La tirada más completa, con diez cartas para mirar una situación por todos lados. Tómate tu tiempo, piensa en tu pregunta y baraja.</p>
   </Tirada>
 
   <Explicacion titulo="Cómo leer la cruz celta" faq={faq}>
     <p class="suave">
-      Las seis cartas de la cruz describen el momento: en el centro está la situación (1) y, atravesada, lo que se cruza
-      en ella (2). Debajo, la raíz del asunto (3); a la izquierda, lo que acaba de pasar (4); arriba, lo que buscas (5); y
-      a la derecha, lo que se acerca (6).
+      Las seis cartas de la cruz cuentan lo que pasa ahora. En el centro está la situación (1) y, atravesada, lo que se
+      cruza en ella (2). Debajo queda la raíz del asunto (3) y a la izquierda lo que acaba de pasar (4). Arriba, lo que
+      buscas (5), y a la derecha, lo que se acerca (6).
     </p>
     <p class="suave">
-      La columna de la derecha se lee de abajo arriba: tú (7), tu entorno (8), tus esperanzas y miedos (9) y el desenlace
-      (10). Si el desenlace no te gusta, vuelve a las cartas 2 y 7: ahí suele estar lo que puedes cambiar.
+      La columna de la derecha se lee de abajo arriba. Tú (7), tu entorno (8), tus esperanzas y miedos (9) y el desenlace
+      (10). Si el desenlace no te gusta, vuelve a las cartas 2 y 7, que es donde suele estar lo que puedes cambiar.
     </p>
   </Explicacion>
 </Base>

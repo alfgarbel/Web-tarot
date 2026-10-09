@@ -10,15 +10,15 @@ const lista = combinaciones.map((c) => ({ href: `/combinaciones/${slugCombinacio
 const faq = [
   {
     p: '¿Cómo se lee una combinación de dos cartas?',
-    r: 'Primero lee cada carta por separado. Después fíjate en qué tienen en común y en qué se contradicen: una carta suave puede calmar a una dura, y una dura puede dar urgencia a una suave. El significado conjunto nace de ese diálogo.',
+    r: 'Primero lee cada carta por separado. Luego mira en qué coinciden y en qué chocan. Una carta suave calma a una dura, y una dura le mete prisa a una suave. De ese tira y afloja sale el significado de las dos juntas.',
   },
   {
     p: '¿Importa el orden en que salen?',
-    r: 'En una tirada con posiciones, sí: la carta del pasado no pesa igual que la del futuro. Aquí te damos el sentido general de la pareja; luego ajústalo a la posición en la que cayó cada una.',
+    r: 'En una tirada con posiciones, sí, porque la carta del pasado pesa distinto que la del futuro. Aquí tienes el sentido general de la pareja. Después ajústalo según dónde cayó cada una.',
   },
   {
     p: '¿Por qué solo hay arcanos mayores?',
-    r: 'Son las combinaciones que más se consultan y las que usan nuestras tiradas. Para los arcanos menores, lee la ficha de cada carta y aplica la misma idea.',
+    r: 'Porque son las parejas que más se buscan y las que salen en nuestras tiradas. Con los arcanos menores, lee la ficha de cada carta y haz lo mismo.',
   },
 ];
 ---
@@ -29,7 +29,7 @@ const faq = [
 >
   <section class="cabeza contenedor">
     <h1>Combinaciones <em>de cartas</em></h1>
-    <p class="sub">Dos cartas juntas no suman, conversan. Aquí tienes las parejas de arcanos mayores que más se consultan y lo que dicen cuando salen a la vez.</p>
+    <p class="sub">Dos cartas juntas se cuentan cosas entre ellas. Aquí tienes las parejas de arcanos mayores que más se consultan y lo que dicen cuando salen a la vez.</p>
   </section>
 
   <section class="contenedor zona">
@@ -48,8 +48,8 @@ const faq = [
   </section>
 
   <Explicacion titulo="Cómo leer dos cartas juntas" faq={faq}>
-    <p>En una tirada, las cartas se influyen. La Torre junto a La Estrella no es solo un golpe: es un golpe que deja paso a la esperanza. El Sol junto a La Luna habla de algo que empieza a aclararse.</p>
-    <p>Cuando te salgan dos cartas que te cuesta relacionar, busca su combinación aquí y después vuelve a la <a href="/cartas/">ficha de cada una</a> para leerla en su posición.</p>
+    <p>En una tirada, unas cartas tiñen a otras. La Torre al lado de La Estrella sigue siendo un golpe, pero uno que deja sitio a la esperanza. El Sol con La Luna es algo que empieza a aclararse.</p>
+    <p>Si te salen dos cartas y no sabes cómo juntarlas, busca aquí su combinación y luego vuelve a la <a href="/cartas/">ficha de cada una</a> para leerla en su posición.</p>
   </Explicacion>
 </Base>
 

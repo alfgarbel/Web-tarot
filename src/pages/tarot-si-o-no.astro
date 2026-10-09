@@ -19,19 +19,19 @@ const preguntas = ['¿Volverá mi ex?', '¿Me quiere de verdad?', '¿Debo escrib
 const faq = [
   {
     p: '¿Cómo funciona el tarot Sí o No?',
-    r: 'Piensas una pregunta que se pueda responder con sí o con no, barajas y eliges una carta de los 22 Arcanos Mayores. Cada carta tiene una respuesta (sí, no o quizás) y una explicación que te ayuda a entender el porqué.',
+    r: 'Piensas una pregunta que se conteste con sí o con no, barajas y eliges una de las cartas de los 22 Arcanos Mayores. Cada una trae su respuesta (sí, no o quizás) y un par de frases que explican el porqué.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí. Puedes hacer la tirada tantas veces como quieras, sin registrarte y sin dejar tus datos.',
+    r: 'Sí. Tira las veces que quieras, sin registrarte y sin dejar ningún dato.',
   },
   {
     p: '¿Puedo preguntar varias veces lo mismo?',
-    r: 'Las cartas recuerdan lo que les preguntas durante 24 horas en tu navegador. Si repites la misma pregunta el mismo día, verás la misma respuesta: la primera suele ser la que más tiene que decirte.',
+    r: 'Tu navegador guarda lo que preguntas durante 24 horas. Si repites la misma pregunta ese día, te sale la misma respuesta, y es lo lógico, porque la primera suele ser la que más tiene que decirte.',
   },
   {
     p: '¿Qué significa un «quizás»?',
-    r: 'Que la situación todavía no está decidida o que falta información. Lee la explicación de la carta: te dirá qué observar o esperar.',
+    r: 'Que la cosa todavía no está decidida o que falta información. Lee la explicación de la carta, que te cuenta en qué fijarte o qué esperar.',
   },
 ];
 
@@ -56,7 +56,7 @@ const jsonLd = {
     <div class="contenedor">
       <div class="paso" id="paso-pregunta">
         <h1>Tarot <em>Sí o No</em></h1>
-        <p class="sub">Piensa una pregunta que se responda con un sí o un no. Respira y baraja.</p>
+        <p class="sub">Piensa algo que se pueda contestar con un sí o un no. Respira y baraja.</p>
         <form class="formulario" id="formulario">
           <label for="pregunta">Tu pregunta <span class="suave">(opcional, solo queda en tu navegador)</span></label>
           <div class="campo">
@@ -71,7 +71,7 @@ const jsonLd = {
       </div>
 
       <div class="paso oculto" id="paso-elegir" aria-live="polite">
-        <p class="instruccion">Elige la carta que te llame</p>
+        <p class="instruccion">Quédate con la carta que más te llame</p>
         <div class="abanico" id="abanico"></div>
       </div>
 
@@ -92,7 +92,7 @@ const jsonLd = {
               <button class="boton" id="otra" type="button">Preguntar otra cosa</button>
               <a class="enlace-flecha" id="enlace-carta" href="/cartas/">Leer la carta completa</a>
             </div>
-            <p class="nota">Si repites la misma pregunta hoy, las cartas te darán la misma respuesta.</p>
+            <p class="nota">Si hoy vuelves a hacer la misma pregunta, te saldrá la misma respuesta.</p>
           </div>
         </div>
       </div>
@@ -106,13 +106,13 @@ const jsonLd = {
     <div class="contenedor estrecho">
       <h2>Cómo leer tu respuesta</h2>
       <p class="suave">
-        El tarot no decide por ti: te ayuda a mirar la situación con más claridad. Por eso cada respuesta viene con una
-        explicación. Un «sí» de la Torre no se vive igual que un «sí» del Sol, y un «no» del Ermitaño a veces solo
-        significa «todavía no».
+        El tarot no decide por ti. Lo que hace es ayudarte a ver la situación desde otro sitio, y por eso cada respuesta
+        lleva su explicación. Un «sí» de la Torre se vive muy distinto que un «sí» del Sol, y un «no» del Ermitaño muchas
+        veces quiere decir «todavía no».
       </p>
       <p class="suave">
-        En esta tirada usamos los 22 Arcanos Mayores, las cartas más simbólicas de la baraja. Si quieres conocer cada una
-        a fondo, visita <a href="/cartas/">el significado de los arcanos</a>.
+        Aquí solo entran los 22 Arcanos Mayores, las cartas con más carga simbólica de la baraja. Si te pica la curiosidad
+        por alguna, tienes <a href="/cartas/">el significado de los arcanos</a> uno por uno.
       </p>
 
       <h2 class="faq-titulo">Preguntas frecuentes</h2>
@@ -187,8 +187,8 @@ const jsonLd = {
     const aviso = $('aviso');
     aviso.hidden = !repetida;
     aviso.textContent = pregunta
-      ? 'Ya les hiciste esta pregunta a las cartas hoy. Esta fue su respuesta, y sigue siendo la misma.'
-      : 'Acabas de sacar una carta. Si tienes otra pregunta, escríbela y vuelve a barajar.';
+      ? 'Esta pregunta ya se la hiciste hoy a las cartas. Te contestaron esto y siguen pensando lo mismo.'
+      : 'Ya has sacado una carta. Si tienes otra pregunta, escríbela y vuelve a barajar.';
     const molde = document.getElementById(`carta-${carta.slug}`);
     $('frente').replaceChildren(molde.content.cloneNode(true));
     const veredicto = $('veredicto');

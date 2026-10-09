@@ -6,45 +6,45 @@ import Explicacion from '../components/Explicacion.astro';
 const faq = [
   {
     p: '¿El tarot puede decirme si estoy enferma?',
-    r: 'No. El tarot no diagnostica ni sustituye a un médico. Esta tirada habla de tu energía y tu bienestar emocional, y te propone formas sencillas de cuidarte. Si algo te preocupa de tu salud, consulta siempre con un profesional.',
+    r: 'No. El tarot no diagnostica ni sustituye a un médico. Esta tirada mira cómo andas de fuerzas y de ánimo, y te propone formas sencillas de cuidarte. Si algo te preocupa de tu salud, consulta siempre con un profesional.',
   },
   {
     p: '¿Cómo funciona la tirada?',
-    r: 'Eliges tres cartas. La primera describe tu energía ahora, la segunda lo que necesitas y la tercera una forma de cuidarte en los próximos días.',
+    r: 'Eliges tres cartas. La primera describe cómo estás ahora, la segunda lo que necesitas y la tercera una forma de cuidarte estos días.',
   },
   {
     p: '¿Es gratis?',
-    r: 'Sí, sin registro. Tu pregunta solo se guarda en tu navegador.',
+    r: 'Sí, sin registro. Tu pregunta no sale de tu navegador.',
   },
 ];
 ---
 
 <Base
   title="Tarot de la salud y el bienestar gratis | Arcanaia"
-  description="Tirada de tarot de la salud y el bienestar: tres cartas sobre tu energía, lo que necesitas y cómo cuidarte. Gratis, sin registro y sin sustituir al médico."
+  description="Tirada de tarot de la salud y el bienestar. Tres cartas sobre cómo estás, lo que necesitas y cómo cuidarte. Gratis, sin registro y sin sustituir al médico."
 >
   <Tirada
     posiciones={[
-      { clave: 'saludEnergia', titulo: 'Tu energía' },
+      { clave: 'saludEnergia', titulo: 'Cómo andas' },
       { clave: 'saludNecesitas', titulo: 'Lo que necesitas' },
       { clave: 'saludCuidarte', titulo: 'Cómo cuidarte' },
     ]}
-    preguntas={['¿Cómo está mi energía?', '¿Qué necesito para descansar mejor?', '¿Cómo puedo cuidarme más?']}
+    preguntas={['¿Cómo ando de fuerzas?', '¿Qué necesito para descansar mejor?', '¿Cómo puedo cuidarme más?']}
     placeholder="¿Qué necesito para sentirme mejor?"
     cierre="Para cuidarte"
   >
     <h1>Tarot de la salud <em>y el bienestar</em></h1>
-    <p class="sub">Tres cartas sobre tu energía, lo que necesitas y cómo cuidarte. No es un diagnóstico: es un momento para escucharte.</p>
+    <p class="sub">Tres cartas sobre cómo estás, lo que necesitas y cómo cuidarte. Nada de diagnósticos. Es un rato para pararte a ver cómo te sientes.</p>
   </Tirada>
 
   <Explicacion titulo="Cómo leer tu tirada" faq={faq}>
     <p class="suave">
-      Esta tirada no habla de enfermedades: habla de cómo te sientes y de lo que te puede ayudar a estar mejor. Toma sus
-      consejos como una invitación a parar, descansar y tratarte con cariño.
+      Esta tirada no va de enfermedades. Va de cómo te sientes y de lo que te puede ayudar a estar mejor. Toma sus
+      consejos como una excusa para parar, descansar y tratarte con cariño.
     </p>
     <p class="suave">
-      Si tienes molestias, síntomas o cualquier duda sobre tu salud, acude a un profesional sanitario. El tarot puede
-      acompañarte, pero nunca sustituye a un médico.
+      Si tienes molestias o cualquier duda sobre tu salud, ve al médico. El tarot te puede hacer compañía, pero ahí no
+      pinta nada.
     </p>
   </Explicacion>
 </Base>

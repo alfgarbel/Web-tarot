@@ -3,416 +3,416 @@ import type { Ampliado } from './tipo';
 export const espadas: Record<string, Ampliado> = {
   'as-de-espadas': {
     imagen: [
-      'Una mano sale de una nube blanca y empuña una espada vertical. En la punta lleva una corona dorada de la que cuelgan una rama de olivo y una hoja de palma, y alrededor caen gotas de luz sobre unas montañas desnudas. La espada es la mente que corta lo confuso, la corona habla de victoria y las montañas recuerdan que la verdad no siempre es cómoda.',
+      'De una nube blanca sale una mano que empuña una espada vertical. En la punta lleva una corona dorada con una rama de olivo y una hoja de palma colgando, y a su alrededor caen gotas de luz sobre unas montañas peladas. La espada es la mente que corta lo confuso. La corona anuncia una victoria, y las montañas dejan claro que la verdad no siempre es cómoda.',
     ],
     significado: [
-      'Al derecho, el As de Espadas es ese momento en el que algo por fin encaja. Puede ser una frase que te abre los ojos, una idea que se te ocurre en la ducha o la decisión que llevabas semanas rumiando y que de repente ves clarísima.',
-      'También habla de poner las cartas sobre la mesa. Si tienes pendiente una conversación incómoda, la carta te anima a tenerla. La espada tiene dos filos: úsala para aclarar, no para herir.',
+      'Al derecho, el As de Espadas es ese momento en el que algo por fin encaja. Una frase que te abre los ojos, una idea que te viene en la ducha, o esa decisión que llevabas semanas rumiando y que de repente ves clarísima.',
+      'También va de poner las cartas sobre la mesa. ¿Tienes pendiente una conversación incómoda? Tenla. Eso sí, la espada corta por los dos lados, así que úsala para aclarar y no para herir.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, toca hablar de lo que de verdad importa. Una charla honesta despejará malentendidos que llevaban tiempo flotando.',
-      sola: 'Si estás sola, tienes muy claro lo que buscas y lo que no. Esa claridad te ayudará a reconocer enseguida a quien merece tu tiempo.',
-      ex: 'Si piensas en tu ex, el As te ayuda a ver la relación tal como fue, sin idealizarla. Puede llegar una conversación que cierre dudas, más que un regreso.',
+      pareja: 'Toca hablar de lo que importa. Una charla sincera despejará malentendidos que llevaban tiempo flotando en casa.',
+      sola: 'Tienes muy claro lo que buscas y lo que no. Eso te ayudará a ver enseguida quién merece tu tiempo.',
+      ex: 'El As te deja ver la relación tal como fue, sin adornarla. Puede llegar una conversación que cierre dudas, más que una vuelta.',
     },
-    trabajo: 'En el trabajo trae una idea con fuerza, un examen que sale bien o la oportunidad de demostrar lo que sabes. Buen momento para presentar un proyecto o negociar con argumentos.',
-    dinero: 'En lo económico pide números claros. Revisa contratos, compara presupuestos y decide con datos; una decisión bien pensada ahora te ahorrará disgustos más adelante.',
+    trabajo: 'Llega una idea con fuerza, un examen que sale bien o la ocasión de demostrar lo que sabes. Si tenías un proyecto que presentar o algo que negociar, hazlo ahora y con argumentos.',
+    dinero: 'Aquí hacen falta números claros. Revisa contratos, compara presupuestos y decide con datos. Pensarlo bien ahora te ahorrará disgustos más adelante.',
     como: {
-      sentimiento: 'La otra persona te ve con mucha claridad y valora tu sinceridad. Siente respeto e interés, aunque quizá lo exprese de forma más racional que romántica.',
-      persona: 'Representa a alguien lúcido, directo y con las ideas muy claras, que prefiere una verdad incómoda a una mentira amable.',
-      futuro: 'En la posición de futuro anuncia una decisión firme o una noticia que lo aclara todo. Te tocará elegir, y tendrás la cabeza despejada para hacerlo.',
+      sentimiento: 'Te ve con mucha claridad y valora que seas sincera. Siente respeto e interés, aunque lo exprese de forma más racional que romántica.',
+      persona: 'Alguien lúcido y directo, con las ideas muy claras, que prefiere una verdad incómoda a una mentira amable.',
+      futuro: 'Viene una decisión firme o una noticia que lo aclara todo. Te tocará elegir, y tendrás la cabeza despejada para hacerlo.',
     },
     invertida: [
-      'Invertido, el As de Espadas habla de confusión, de ideas que no terminan de concretarse o de palabras que salen más afiladas de la cuenta. En el amor avisa de discusiones en las que se dice demasiado o de malentendidos que nadie aclara. En el trabajo, de proyectos que arrancan sin un plan sólido. Antes de actuar, para y ordena lo que piensas.',
+      'Invertido, el As de Espadas trae confusión, ideas que no acaban de concretarse o palabras que salen más afiladas de la cuenta. En el amor avisa de discusiones en las que se dice demasiado o de malentendidos que nadie aclara. En el trabajo, de proyectos que arrancan sin un plan sólido. Antes de mover ficha, para y ordena lo que piensas.',
     ],
     faq: [
       {
         q: '¿El As de Espadas es un sí o un no?',
-        r: 'Es un sí, siempre que la decisión nazca de pensar con claridad. Primero ordena tus ideas y luego avanza.',
+        r: 'Es un sí, siempre que la decisión salga de pensar con la cabeza fría. Ordena primero tus ideas y luego avanza.',
       },
       {
         q: '¿Qué significa el As de Espadas en el amor?',
-        r: 'Habla de una conversación sincera que aclara la relación o de saber exactamente qué quieres. No es una carta muy romántica, pero sí muy honesta.',
+        r: 'Una conversación sincera que aclara la relación, o saber exactamente qué quieres. Romántica, poco. Honesta, mucho.',
       },
       {
         q: '¿El As de Espadas es una carta buena?',
-        r: 'Sí, es una carta positiva de claridad, verdad y nuevos comienzos mentales. Solo pide cuidado con usar las palabras como armas.',
+        r: 'Sí. Es una carta positiva, de verdades dichas a la cara y de ideas nuevas. Solo hay que tener cuidado de no usar las palabras como armas.',
       },
     ],
   },
 
   'dos-de-espadas': {
     imagen: [
-      'Una mujer con los ojos vendados está sentada en un banco de piedra, vestida de blanco, con los brazos cruzados sobre el pecho y una espada en cada mano. A su espalda se extiende el mar con algunas rocas y, arriba a la derecha, brilla una luna creciente. La venda es la decisión de no mirar, los brazos cruzados protegen el corazón y el agua tranquila oculta emociones que se mueven por debajo, bajo una luna que habla de intuición.',
+      'Una mujer vestida de blanco y con los ojos vendados está sentada en un banco de piedra, con los brazos cruzados sobre el pecho y una espada en cada mano. Detrás se extiende el mar con algunas rocas y, arriba a la derecha, brilla una luna creciente. La venda es la decisión de no mirar y los brazos cruzados protegen el corazón. El agua parece tranquila, pero por debajo se mueven emociones, y la luna apunta a la intuición.',
     ],
     significado: [
-      'Al derecho, el Dos de Espadas es la carta del punto muerto. Aparece cuando tienes dos ofertas encima de la mesa y no te decides, o cuando prefieres no pensar en algo porque cualquier respuesta te va a costar.',
-      'La carta no te juzga por esa pausa, pero avisa de que no puede durar siempre: mantener los brazos cruzados cansa. Pedir opinión a alguien de confianza o escribir lo que sientes te ayudará a quitarte la venda.',
+      'Al derecho, el Dos de Espadas es la carta del punto muerto. Sale cuando tienes dos ofertas encima de la mesa y no te decides, o cuando prefieres no pensar en algo porque cualquier respuesta te va a costar.',
+      'Nadie te juzga por esa pausa, pero no puede durar siempre. Tener los brazos cruzados todo el rato cansa. Pedir opinión a alguien de confianza o escribir lo que sientes te ayudará a quitarte la venda.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede que haya un tema que los dos evitáis. La relación parece tranquila por fuera, pero está tensa por dentro.',
-      sola: 'Si estás sola, quizá dudas entre dos personas o te proteges tanto que no dejas entrar a nadie. Bajar un poco la guardia no significa perder el control.',
-      ex: 'Si piensas en tu ex, estás entre volver a escribirle o pasar página del todo. La respuesta será más clara cuando dejes de mirar solo lo que te conviene ver.',
+      pareja: 'Puede que haya un tema que los dos evitáis. Por fuera la relación parece tranquila, pero por dentro hay tensión.',
+      sola: 'Quizá dudas entre dos personas, o te proteges tanto que no dejas entrar a nadie. Bajar un poco la guardia no significa perder el control.',
+      ex: 'Estás entre volver a escribirle o pasar página del todo. Lo verás más claro cuando dejes de mirar solo lo que te conviene ver.',
     },
-    trabajo: 'En el trabajo señala negociaciones paradas, decisiones aplazadas o dos caminos que no sabes comparar. Antes de elegir, pide los datos que te faltan: condiciones, plazos, sueldo real.',
-    dinero: 'En el dinero habla de gastos que vas posponiendo o de una elección entre dos opciones parecidas. Pon cifras en un papel y compáralas.',
+    trabajo: 'Negociaciones paradas, decisiones aplazadas o dos caminos que no sabes comparar. Antes de elegir, pide los datos que te faltan, como las condiciones, los plazos o el sueldo real.',
+    dinero: 'Hay gastos que vas posponiendo, o tienes que elegir entre dos opciones parecidas. Pon las cifras en un papel y compáralas.',
     como: {
-      sentimiento: 'La otra persona tiene sentimientos, pero los guarda bajo llave. Duda, se protege y prefiere no mostrarse hasta estar segura de lo que quiere.',
-      persona: 'Representa a alguien prudente y reservado, que evita los conflictos y tarda en decidir.',
-      futuro: 'En la posición de futuro anuncia una elección que vas a tener que hacer. Cuanto más te prepares ahora, menos te costará cuando llegue.',
+      sentimiento: 'Siente cosas, pero las guarda bajo llave. Duda, se protege y prefiere no mostrarse hasta estar segura de lo que quiere.',
+      persona: 'Alguien prudente y reservado, que huye de los conflictos y tarda en decidirse.',
+      futuro: 'Vas a tener que elegir. Cuanto más te prepares ahora, menos te costará cuando llegue el día.',
     },
     invertida: [
-      'Invertido, el Dos de Espadas indica que la decisión ya no puede esperar o que tienes tanta información que te abruma. En el amor puede salir a la luz una verdad que se evitaba. En el trabajo, avisa de presiones para decidir rápido. Prioriza lo esencial y no dejes que otras personas elijan por ti.',
+      'Invertido, el Dos de Espadas indica que la decisión ya no puede esperar, o que tienes tanta información que te abruma. En el amor puede salir a la luz una verdad que se evitaba. En el trabajo avisa de presiones para decidir rápido. Quédate con lo esencial y no dejes que otros elijan por ti.',
     ],
     faq: [
       {
         q: '¿El Dos de Espadas es un sí o un no?',
-        r: 'Es un quizás. La respuesta existe, pero todavía no te atreves a mirarla de frente.',
+        r: 'Es un quizás. La respuesta está ahí, pero todavía no te atreves a mirarla de frente.',
       },
       {
         q: '¿Qué significa el Dos de Espadas en el amor?',
-        r: 'Habla de sentimientos protegidos o de una elección que se aplaza. Invita a abrirte un poco para saber de verdad qué quieres.',
+        r: 'Sentimientos muy protegidos o una elección que se va aplazando. Para saber qué quieres tendrás que bajar un poco la guardia.',
       },
       {
         q: '¿Por qué la mujer del Dos de Espadas lleva los ojos vendados?',
-        r: 'La venda simboliza la decisión de no mirar algo que duele o que asusta. También sugiere que la respuesta tendrá que venir de dentro antes que de fuera.',
+        r: 'La venda es la decisión de no mirar algo que duele o que asusta. También sugiere que la respuesta tendrá que salir de dentro antes que de fuera.',
       },
     ],
   },
 
   'tres-de-espadas': {
     imagen: [
-      'Un gran corazón rojo flota en el aire atravesado por tres espadas. Detrás, unas nubes grises descargan una lluvia fina que lo cubre todo. Las espadas son pensamientos o palabras que duelen, y la lluvia representa el llanto que limpia y deja paso a algo nuevo.',
+      'Un gran corazón rojo flota en el aire, atravesado por tres espadas. Detrás, unas nubes grises descargan una lluvia fina que lo cubre todo. Las espadas son pensamientos o palabras que duelen, y la lluvia es el llanto que limpia y deja sitio a algo nuevo.',
     ],
     significado: [
-      'Al derecho, el Tres de Espadas habla de una pena que se nota. Puede ser una ruptura, una traición, un comentario que te ha dolido más de lo que esperabas o enterarte de algo que preferirías no saber. Es la carta de releer un mensaje que te ha dejado helada.',
-      'A pesar de su imagen, la carta no se queda en el dolor. Te pide que lo reconozcas en lugar de taparlo, porque lo que se nombra se puede trabajar. Hablarlo, escribirlo o darte permiso para estar triste unos días es parte del camino.',
+      'Al derecho, el Tres de Espadas es una pena que se nota. Una ruptura, una traición, un comentario que te ha dolido más de lo que esperabas o enterarte de algo que preferirías no saber. Es releer un mensaje que te ha dejado helada.',
+      'Pese a la imagen, la carta no se queda en el dolor. Mejor reconocerlo que taparlo, porque lo que se nombra se puede trabajar. Hablarlo, escribirlo o pasarte unos días triste forma parte del proceso.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede haber una decepción, celos o palabras que han hecho daño. No es necesariamente el final, pero sí un momento para hablar con el corazón en la mano.',
-      sola: 'Si estás sola, quizá sigues cargando con una herida antigua. Cuidarla ahora te dejará más ligera para lo que venga después.',
-      ex: 'Si piensas en tu ex, la carta señala que la ruptura todavía duele. Es más un momento para soltar y entender que para volver.',
+      pareja: 'Puede haber una decepción, celos o palabras que han hecho daño. No tiene por qué ser el final, pero toca hablar con el corazón en la mano.',
+      sola: 'Quizá sigues cargando con una herida antigua. Si la cuidas ahora, irás más ligera a lo que venga después.',
+      ex: 'La ruptura todavía duele. Más que volver, ahora toca entender lo que pasó y dejarlo ir.',
     },
-    trabajo: 'En el trabajo puede indicar un desacuerdo que te ha afectado, una crítica dura o un proyecto que no salió como esperabas. Saca lo que puedas aprender de ello y no te lo tomes como un juicio sobre tu valía.',
-    dinero: 'En lo económico puede reflejar una pérdida o un gasto inesperado que te ha disgustado. Revisa qué falló, ajusta y no tomes decisiones importantes en caliente.',
+    trabajo: 'Un desacuerdo que te ha afectado, una crítica dura o un proyecto que no salió como esperabas. Aprende lo que puedas de ello y no te lo tomes como un juicio sobre lo que vales.',
+    dinero: 'Una pérdida o un gasto inesperado que te ha sentado mal. Mira qué falló, ajusta y no tomes decisiones gordas en caliente.',
     como: {
-      sentimiento: 'La otra persona está dolida o decepcionada. Puede sentir tristeza por lo ocurrido, aunque no siempre sepa cómo expresarlo.',
-      persona: 'Representa a alguien que atraviesa un mal momento emocional o que todavía arrastra heridas del pasado.',
-      futuro: 'En la posición de futuro avisa de un momento triste o de una verdad difícil. Prepararte y rodearte de apoyo hará que pase antes.',
+      sentimiento: 'Está dolida o decepcionada. Siente tristeza por lo que pasó, aunque no siempre sepa cómo decirlo.',
+      persona: 'Alguien que está pasando un mal momento o que todavía arrastra heridas del pasado.',
+      futuro: 'Avisa de un rato triste o de una verdad difícil. Si te preparas y te rodeas de gente que te quiere, pasará antes.',
     },
     invertida: [
-      'Invertido, el Tres de Espadas indica que empiezas a sanar, aunque todavía queda algo de pena por mirar. Lo peor ya ha pasado y poco a poco el corazón se recompone. En el amor puede hablar de perdonar, de reconciliarte contigo misma después de una ruptura o, en algunos casos, de un dolor que se guarda sin expresarlo. En el trabajo, de superar una decepción y volver a confiar en tus capacidades. Cada herida tiene su ritmo.',
+      'Invertido, el Tres de Espadas indica que empiezas a curarte, aunque todavía queda algo de pena por mirar. Lo peor ya ha pasado y el corazón se va recomponiendo. En el amor puede tratarse de perdonar, de hacer las paces contigo misma después de una ruptura o, a veces, de un dolor que se guarda sin decirlo. En el trabajo, de superar una decepción y volver a fiarte de lo que sabes hacer. Cada herida lleva su ritmo.',
     ],
     faq: [
       {
         q: '¿El Tres de Espadas significa ruptura?',
-        r: 'Puede indicarla, pero no siempre. Habla de dolor emocional, que a veces es una ruptura y otras una decepción, una discusión o un desengaño.',
+        r: 'Puede, pero no siempre. Es dolor emocional, y eso a veces es una ruptura y otras una decepción, una discusión o un desengaño.',
       },
       {
         q: '¿El Tres de Espadas es un sí o un no?',
-        r: 'Es un no en este momento. Primero toca cuidarte y dejar que la herida cierre.',
+        r: 'Ahora mismo es un no. Primero toca cuidarte y dejar que la herida cierre.',
       },
       {
         q: '¿Qué significa el Tres de Espadas como sentimiento?',
-        r: 'Indica que la otra persona se siente herida o triste. Puede que necesite espacio antes de hablar con calma de lo que ocurrió.',
+        r: 'Que la otra persona se siente herida o triste. Puede que necesite un tiempo antes de poder hablar tranquila de lo que pasó.',
       },
     ],
   },
 
   'cuatro-de-espadas': {
     imagen: [
-      'Dentro de una iglesia, la figura de un caballero yace sobre un sepulcro con las manos juntas en actitud de oración. Tres espadas cuelgan en la pared apuntando hacia abajo y una cuarta descansa en horizontal a lo largo del sepulcro. En la parte superior hay una vidriera de colores. Todo transmite silencio: las espadas guardadas son batallas en pausa, la postura del caballero es descanso y la vidriera recuerda que, en la quietud, también entra la luz.',
+      'Dentro de una iglesia, la figura de un caballero yace sobre un sepulcro con las manos juntas, como rezando. Tres espadas cuelgan en la pared apuntando hacia abajo y una cuarta descansa en horizontal a lo largo del sepulcro. Arriba hay una vidriera de colores. Todo está en silencio. Las espadas guardadas son batallas en pausa, el caballero descansa, y por la vidriera entra luz incluso en la quietud.',
     ],
     significado: [
-      'Al derecho, el Cuatro de Espadas te pide parar. Aparece cuando encadenas un problema con otro o necesitas unos días para ti antes de decidir nada. No es rendirse, es recargar.',
-      'También habla de retirarte un poco del ruido para pensar. Un fin de semana fuera o decir que no a algún plan puede ser justo lo que necesitas. Cuando vuelvas, verás las cosas con otros ojos.',
+      'Al derecho, el Cuatro de Espadas te dice que pares. Sale cuando encadenas un problema con otro o necesitas unos días para ti antes de decidir nada. No te estás rindiendo, estás recargando pilas.',
+      'También va de apartarte un poco del ruido para pensar. Un fin de semana fuera o decir que no a algún plan puede ser justo lo que necesitas. Cuando vuelvas, verás las cosas con otros ojos.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede ser buen momento para bajar la intensidad y daros un respiro. Una tregua tranquila puede hacer más que cualquier discusión.',
-      sola: 'Si estás sola, la carta sugiere una etapa de pausa para conocerte mejor. No hay prisa: lo que llegue después lo recibirás más entera.',
-      ex: 'Si piensas en tu ex, conviene dejar reposar la historia. No es momento de escribir ni de decidir nada, sino de recuperar tu calma.',
+      pareja: 'Os vendría bien bajar la intensidad y daros un respiro. Una tregua tranquila puede arreglar más que cualquier discusión.',
+      sola: 'Una temporada de pausa para conocerte mejor. Lo que llegue después te pillará más entera.',
+      ex: 'Deja reposar la historia. Ni escribas ni decidas nada por ahora. Primero recupera la calma.',
     },
-    trabajo: 'En el trabajo señala vacaciones, un periodo más tranquilo o la necesidad de bajar el ritmo para no quemarte. También puede ser buen momento para planificar con calma, estudiar o preparar un proyecto sin presiones.',
-    dinero: 'En lo económico pide no mover grandes cantidades ahora. Mantén lo que tienes estable y revisa tus cuentas con calma antes de cualquier gasto importante.',
+    trabajo: 'Vacaciones, una temporada más tranquila o la necesidad de bajar el ritmo para no quemarte. También sirve para planificar, estudiar o preparar un proyecto sin presiones.',
+    dinero: 'Mejor no mover grandes cantidades ahora. Mantén estable lo que tienes y repasa tus cuentas antes de cualquier gasto importante.',
     como: {
-      sentimiento: 'La otra persona necesita espacio y tiempo para ordenar lo que siente. No es falta de interés, sino cansancio o necesidad de calma.',
-      persona: 'Representa a alguien tranquilo, reflexivo, que se toma su tiempo y valora los momentos de soledad.',
-      futuro: 'En la posición de futuro anuncia una pausa necesaria. Será un tiempo para descansar y volver con más fuerza.',
+      sentimiento: 'Necesita tiempo y algo de distancia para ordenar lo que siente. Está cansada, más que desinteresada.',
+      persona: 'Alguien tranquilo y reflexivo, que se toma su tiempo y disfruta de estar a solas.',
+      futuro: 'Viene una pausa que te hace falta. Descansarás y volverás con más fuerza.',
     },
     invertida: [
-      'Invertido, el Cuatro de Espadas puede hablar de agotamiento acumulado porque no te has permitido parar, o al revés, de ganas de volver a la acción después de un buen descanso. En el amor puede señalar una distancia que se alarga más de la cuenta o el momento de retomar el contacto. En el trabajo, de volver con energía a un proyecto o de un ritmo que ya no se sostiene.',
+      'Invertido, el Cuatro de Espadas puede ser agotamiento acumulado porque no te has dejado parar, o lo contrario, ganas de volver a la acción después de un buen descanso. En el amor puede señalar una distancia que se alarga más de la cuenta, o que ya toca retomar el contacto. En el trabajo, volver con fuerzas a un proyecto o un ritmo que ya no se aguanta.',
     ],
     faq: [
       {
         q: '¿El Cuatro de Espadas es un sí o un no?',
-        r: 'Es un quizás, y de momento conviene no forzarlo. Tras un respiro sabrás mucho mejor qué hacer.',
+        r: 'Es un quizás, y de momento mejor no forzarlo. Después de un respiro sabrás mucho mejor qué hacer.',
       },
       {
         q: '¿Qué significa el Cuatro de Espadas en el amor?',
-        r: 'Habla de una pausa o una tregua en la relación. Es un tiempo para recuperar la calma, no necesariamente un final.',
+        r: 'Una pausa o una tregua en la relación. Sirve para recuperar la calma y no tiene por qué ser un final.',
       },
       {
         q: '¿El Cuatro de Espadas es una carta de muerte?',
-        r: 'No, aunque aparezca un sepulcro. Simboliza descanso, recogimiento y recuperación, no un final físico.',
+        r: 'No, aunque salga un sepulcro. Se lee como descanso, recogimiento y recuperación, nada de un final físico.',
       },
     ],
   },
 
   'cinco-de-espadas': {
     imagen: [
-      'En primer plano, un joven con una media sonrisa recoge espadas del suelo: lleva dos al hombro, sostiene una tercera y dos más quedan caídas a sus pies. Más atrás, dos figuras se alejan hacia la orilla, una de ellas cabizbaja y con la cara entre las manos. El cielo está revuelto, con nubes desgarradas por el viento. Es la imagen de una victoria que deja a todos peor, de una pelea que se gana a costa de perder algo más importante.',
+      'En primer plano, un joven con media sonrisa recoge espadas del suelo. Lleva dos al hombro, sostiene una tercera y otras dos se le quedan caídas a los pies. Más atrás, dos figuras se alejan hacia la orilla, y una va cabizbaja, con la cara entre las manos. El cielo está revuelto, con nubes que el viento deshilacha. Es una victoria que deja a todos peor, una pelea ganada a costa de perder algo que importaba más.',
     ],
     significado: [
-      'Al derecho, el Cinco de Espadas habla de discusiones en las que alguien quiere tener razón a toda costa. Puede ser una pelea familiar por un tema tonto o alguien del trabajo que se apunta un tanto que no es suyo. Lo que queda después es tensión y orgullo herido.',
-      'También te invita a mirar desde qué lado estás. A veces eres quien recoge las espadas y otras quien se aleja dolida. En ambos casos, ceder no es perder, sino saber qué quieres proteger.',
+      'Al derecho, el Cinco de Espadas sale en discusiones donde alguien quiere tener razón a toda costa. Una pelea familiar por una tontería, o ese compañero que se apunta un tanto que no es suyo. Después solo quedan tensión y orgullo herido.',
+      'Fíjate también en qué lado estás. Unas veces eres quien recoge las espadas y otras quien se va dolida. En los dos casos, ceder puede ser la forma de proteger lo que más te importa.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede haber peleas por orgullo o reproches que se repiten. Soltar un detalle sin importancia cuida más el vínculo que quedar por encima.',
-      sola: 'Si estás sola, cuidado con relaciones donde todo es un pulso. Busca a alguien con quien no tengas que estar a la defensiva.',
-      ex: 'Si piensas en tu ex, la carta recuerda las tensiones que hubo. Volver por orgullo o por ganar la última palabra no suele salir bien.',
+      pareja: 'Peleas por orgullo o reproches que vuelven una y otra vez. Dejar pasar un detalle sin importancia cuida más la relación que quedar por encima.',
+      sola: 'Ojo con las relaciones en las que todo es un pulso. Busca a alguien con quien no tengas que estar a la defensiva.',
+      ex: 'Vuelven a la memoria las tensiones que hubo. Volver por orgullo o por quedarte con la última palabra no suele salir bien.',
     },
-    trabajo: 'En el trabajo señala competencia poco limpia, ambiente tenso o luchas de poder. Defiende tu trabajo sin rebajarte a las mismas artimañas.',
-    dinero: 'En lo económico avisa de disputas por dinero, deudas entre conocidos o tratos poco equitativos. Deja las cosas por escrito y no prestes lo que no puedes perder.',
+    trabajo: 'Competencia poco limpia, ambiente tenso, luchas de poder. Defiende tu trabajo sin rebajarte a las mismas artimañas.',
+    dinero: 'Avisa de broncas por dinero, deudas entre conocidos o tratos desiguales. Deja las cosas por escrito y no prestes lo que no puedes permitirte perder.',
     como: {
-      sentimiento: 'La otra persona puede sentirse a la defensiva, resentida o con ganas de demostrar que tiene razón. Hay orgullo de por medio.',
-      persona: 'Representa a alguien competitivo, que no lleva bien perder y que a veces confunde firmeza con dureza.',
-      futuro: 'En la posición de futuro avisa de un conflicto. Si eliges bien tus batallas, saldrás con menos heridas.',
+      sentimiento: 'Puede estar a la defensiva, resentida o con ganas de demostrar que tiene razón. Hay orgullo de por medio.',
+      persona: 'Alguien competitivo, que lleva fatal perder y que a veces confunde firmeza con dureza.',
+      futuro: 'Se acerca un conflicto. Si eliges bien qué batallas das, saldrás con menos heridas.',
     },
     invertida: [
-      'Invertido, el Cinco de Espadas habla de ganas de hacer las paces, de dejar atrás un enfrentamiento o de alejarte de una situación que te desgasta. En el amor sugiere una reconciliación después de una pelea o la decisión de no seguir en una dinámica de reproches. En el trabajo, el final de una tensión o la salida de un entorno conflictivo. A veces, irte también es una forma de ganar.',
+      'Invertido, el Cinco de Espadas trae ganas de hacer las paces, de dejar atrás un enfrentamiento o de apartarte de algo que te desgasta. En el amor apunta a una reconciliación después de una pelea, o a la decisión de cortar con los reproches. En el trabajo, el final de una tensión o la salida de un entorno conflictivo. Irte también puede ser una forma de ganar.',
     ],
     faq: [
       {
         q: '¿El Cinco de Espadas es un sí o un no?',
-        r: 'Es un no, al menos no de esta forma. Ganar así costaría más de lo que aporta.',
+        r: 'Es un no, al menos por este camino. Ganar así te costaría más de lo que te da.',
       },
       {
         q: '¿Qué significa el Cinco de Espadas en el amor?',
-        r: 'Habla de discusiones, orgullo y ganas de tener la razón. Invita a hablar con calma antes de que la distancia crezca.',
+        r: 'Discusiones, orgullo y ganas de llevar razón. Mejor hablarlo tranquilamente antes de que la distancia crezca.',
       },
       {
         q: '¿El Cinco de Espadas significa traición?',
-        r: 'Puede señalar juego sucio o falta de respeto, pero sobre todo habla de conflictos donde nadie gana. Mira el contexto de la tirada antes de pensar en una traición.',
+        r: 'Puede señalar juego sucio o falta de respeto, aunque sobre todo son conflictos donde nadie gana. Mira el resto de la tirada antes de pensar en una traición.',
       },
     ],
   },
 
   'seis-de-espadas': {
     imagen: [
-      'Un barquero empuja con una pértiga una barca en la que viajan una mujer cubierta con un manto y un niño. Delante de ellos, clavadas en la barca, van seis espadas. El agua está agitada en un lado y tranquila en el otro, y al fondo se ve una orilla serena. La barca es el paso de una etapa a otra, las espadas son lo que todavía se lleva consigo y el agua en calma anuncia que lo que viene es más ligero.',
+      'Un barquero empuja con una pértiga una barca en la que van una mujer tapada con un manto y un niño. Delante, clavadas en la barca, viajan seis espadas. Por un lado el agua está agitada y por el otro tranquila, y al fondo se ve una orilla serena. La barca es el paso de una etapa a otra. Las espadas son lo que todavía se lleva consigo, y el agua en calma anuncia que lo que viene pesa menos.',
     ],
     significado: [
-      'Al derecho, el Seis de Espadas habla de alejarte de algo que te pesaba. Puede ser una mudanza, un cambio de trabajo, dejar una relación o simplemente salir de una época difícil. No es una huida, sino un traslado consciente hacia algo más sano.',
-      'El cambio no siempre es alegre y la mujer viaja con cierta nostalgia. Lo importante es que la barca avanza y la vida recupera un ritmo más amable.',
+      'Al derecho, el Seis de Espadas es alejarte de algo que te pesaba. Una mudanza, un cambio de trabajo, dejar una relación o salir sin más de una época difícil. Es un traslado elegido hacia algo más sano, nada de una huida.',
+      'El cambio no siempre es alegre, y la mujer viaja con cierta nostalgia. Pero la barca avanza y la vida va recuperando un ritmo más amable.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, anuncia el final de una etapa complicada. Las aguas se calman y podéis empezar a disfrutar de una relación más tranquila.',
-      sola: 'Si estás sola, te estás preparando para algo más sano. Lo que dejaste atrás te ha enseñado qué no quieres repetir.',
-      ex: 'Si piensas en tu ex, la carta indica que te estás alejando de esa historia. Mirar atrás con cariño está bien, pero el camino va hacia delante.',
+      pareja: 'Se acaba una temporada complicada. Las aguas se calman y podéis empezar a disfrutar de una relación más tranquila.',
+      sola: 'Te estás preparando para algo más sano. Lo que dejaste atrás te enseñó lo que no quieres repetir.',
+      ex: 'Te estás alejando de esa historia. Mirar atrás con cariño está bien, mientras sigas remando hacia delante.',
     },
-    trabajo: 'En el trabajo puede indicar un traslado, un cambio de puesto o la salida de un ambiente complicado. Vas en buena dirección, aunque el cambio requiera un periodo de adaptación.',
-    dinero: 'En lo económico anuncia una mejora gradual después de un bache. No esperes milagros inmediatos, pero las cosas van poco a poco a mejor.',
+    trabajo: 'Un traslado, un cambio de puesto o salir de un ambiente complicado. Vas bien encaminada, aunque te toque un periodo de adaptación.',
+    dinero: 'Mejora gradual después de un bache. No esperes milagros de un día para otro, pero las cosas van a mejor.',
     como: {
-      sentimiento: 'La otra persona busca calma y estabilidad contigo. Puede sentir alivio, aunque todavía arrastre algo de su pasado.',
-      persona: 'Representa a alguien que ha pasado por momentos difíciles y que busca un entorno más tranquilo.',
-      futuro: 'En la posición de futuro anuncia un cambio a mejor. Te alejarás de lo que te hacía daño y encontrarás más paz.',
+      sentimiento: 'Contigo busca calma y estabilidad. Siente alivio, aunque todavía arrastre algo de su pasado.',
+      persona: 'Alguien que lo ha pasado mal y ahora busca un entorno más tranquilo.',
+      futuro: 'Un cambio a mejor. Te irás alejando de lo que te hacía daño y estarás más en paz.',
     },
     invertida: [
-      'Invertido, el Seis de Espadas indica que te cuesta soltar el pasado o que un cambio se retrasa más de lo esperado. Algo te retiene: miedo, obligaciones o la esperanza de que todo vuelva a ser como antes. En el amor, puede hablar de volver a una situación que ya habías superado. En el trabajo, de un traslado bloqueado o de no atreverte a dar el paso. Pregúntate qué necesitas dejar en la orilla para poder partir.',
+      'Invertido, el Seis de Espadas indica que te cuesta dejar atrás el pasado o que un cambio se retrasa más de la cuenta. Algo te retiene, ya sea el miedo, las obligaciones o la esperanza de que todo vuelva a ser como antes. En el amor puede ser volver a una situación que ya habías superado. En el trabajo, un traslado bloqueado o no atreverte a dar el paso. Pregúntate qué tienes que dejar en la orilla para poder salir.',
     ],
     faq: [
       {
         q: '¿El Seis de Espadas es un sí o un no?',
-        r: 'Es un sí, aunque a un ritmo pausado. Te lleva hacia una situación más serena.',
+        r: 'Es un sí, aunque sin correr. Te lleva hacia una situación más serena.',
       },
       {
         q: '¿El Seis de Espadas significa un viaje?',
-        r: 'Puede indicar un viaje o una mudanza, sobre todo si cruza agua. Pero también habla de un viaje interior, de pasar de una etapa difícil a otra más serena.',
+        r: 'Puede indicar un viaje o una mudanza, sobre todo si hay agua de por medio. También se lee como un viaje por dentro, de una época difícil a otra más tranquila.',
       },
       {
         q: '¿Qué significa el Seis de Espadas en el amor?',
-        r: 'Anuncia dejar atrás una etapa complicada y entrar en aguas más tranquilas. Es una carta de alivio y de avance.',
+        r: 'Que dejas atrás una temporada complicada y entras en aguas más tranquilas. Es una carta de alivio y de avance.',
       },
     ],
   },
 
   'siete-de-espadas': {
     imagen: [
-      'Un hombre se aleja de un campamento de tiendas de campaña caminando de puntillas, con cinco espadas en los brazos y mirando hacia atrás. Detrás de él quedan dos espadas clavadas en el suelo. El cielo es amarillo y, a lo lejos, se distinguen algunas figuras junto a las tiendas. Su gesto sugiere astucia y prisa por no ser visto, y las dos espadas que deja muestran que no puede llevárselo todo.',
+      'Un hombre se aleja de puntillas de un campamento, con cinco espadas en los brazos y mirando hacia atrás. Detrás deja dos espadas clavadas en el suelo. El cielo es amarillo y, a lo lejos, se distinguen algunas figuras junto a las tiendas. Su gesto es astuto, con prisa por que no lo vean, y las dos espadas que deja muestran que no puede llevárselo todo.',
     ],
     significado: [
-      'Al derecho, el Siete de Espadas habla de estrategia, de moverte con discreción y, a veces, de cosas que se hacen a escondidas. Puede aparecer cuando sospechas que alguien no te está contando toda la verdad, cuando lees un contrato con letra pequeña o cuando sientes que necesitas proteger tus planes antes de contarlos.',
-      'También puede hablarte a ti. Quizá estás evitando una conversación, esquivando responsabilidades o justificando algo que en el fondo sabes que no está bien. Ser lista y ser honesta no son incompatibles.',
+      'Al derecho, el Siete de Espadas trata de estrategia, de moverte con discreción y también de cosas que se hacen a escondidas. Sale cuando sospechas que alguien no te cuenta toda la verdad, cuando lees un contrato con letra pequeña o cuando prefieres guardarte tus planes hasta tenerlos atados.',
+      'Puede ir por ti. Quizá estás evitando una conversación, escaqueándote de algo o justificando lo que en el fondo sabes que no está bien. Se puede ser lista y honesta a la vez.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede haber secretos, medias verdades o la sensación de que algo no encaja. Confía en lo que notas y pregunta con calma, sin acusar.',
-      sola: 'Si estás sola, cuidado con quien promete mucho y concreta poco. Observa los hechos más que las palabras.',
-      ex: 'Si piensas en tu ex, quizá hay cosas que nunca se dijeron. Volver sin aclararlas solo repetiría las mismas dudas.',
+      pareja: 'Secretos, medias verdades o la sensación de que algo no encaja. Fíate de lo que notas y pregunta sin acusar.',
+      sola: 'Cuidado con quien promete mucho y concreta poco. Mira lo que hace más que lo que dice.',
+      ex: 'Quizá hay cosas que nunca se dijeron. Volver sin aclararlas solo repetiría las mismas dudas.',
     },
-    trabajo: 'En el trabajo pide actuar con inteligencia y no enseñar todas tus cartas. Vigila acuerdos poco claros, reparte bien la información y documenta lo que haces.',
-    dinero: 'En lo económico avisa de engaños, letras pequeñas o tratos que parecen demasiado buenos. Lee dos veces antes de firmar y no compartas datos bancarios a la ligera.',
+    trabajo: 'Toca jugar con cabeza y no enseñar todas tus cartas. Vigila los acuerdos poco claros, cuida a quién cuentas qué y deja constancia de lo que haces.',
+    dinero: 'Engaños, letra pequeña o tratos que parecen demasiado buenos. Lee dos veces antes de firmar y no des tus datos bancarios a la ligera.',
     como: {
-      sentimiento: 'La otra persona puede estar guardándose algo o no mostrando del todo lo que siente. Hay interés, pero con reservas.',
-      persona: 'Representa a alguien estratégico y hábil, que sabe moverse, aunque no siempre lo cuente todo.',
-      futuro: 'En la posición de futuro avisa de que conviene estar atenta. Algo puede no ser lo que parece, así que revisa bien antes de confiar.',
+      sentimiento: 'Se está guardando algo o no enseña del todo lo que siente. Hay interés, pero con reservas.',
+      persona: 'Alguien estratégico y hábil, que sabe moverse aunque no siempre lo cuente todo.',
+      futuro: 'Mejor estar atenta. Algo puede no ser lo que parece, así que revisa bien antes de confiar.',
     },
     invertida: [
-      'Invertido, el Siete de Espadas indica que la verdad sale a la luz o que decides dejar de cargar con algo que no te corresponde. Puede ser una confesión, un engaño descubierto o la decisión de jugar limpio. En el amor sugiere conversaciones sinceras después de un tiempo de dudas. En el trabajo, aclarar malentendidos o dejar atrás estrategias que ya no sirven. Asumir lo que te toca te quita un peso de encima.',
+      'Invertido, el Siete de Espadas indica que la verdad sale a la luz o que dejas de cargar con algo que no te toca. Una confesión, un engaño descubierto o la decisión de jugar limpio. En el amor llegan conversaciones sinceras después de un tiempo de dudas. En el trabajo se aclaran malentendidos o abandonas estrategias que ya no sirven. Asumir lo que te toca te quita un peso de encima.',
     ],
     faq: [
       {
         q: '¿El Siete de Espadas significa infidelidad?',
-        r: 'Puede señalar secretos o engaños, pero no siempre infidelidad. Lo más prudente es observar los hechos y preguntar con calma antes de sacar conclusiones.',
+        r: 'Puede señalar secretos o engaños, pero no siempre una infidelidad. Lo más prudente es mirar los hechos y preguntar antes de sacar conclusiones.',
       },
       {
         q: '¿El Siete de Espadas es un sí o un no?',
-        r: 'Es un no mientras falte transparencia. Comprueba bien qué hay detrás antes de seguir.',
+        r: 'Es un no mientras haya cosas ocultas. Comprueba bien qué hay detrás antes de seguir.',
       },
       {
         q: '¿Qué significa el Siete de Espadas como persona?',
-        r: 'Representa a alguien astuto y estratégico, que sabe moverse con discreción. Puede ser hábil, aunque no siempre transparente.',
+        r: 'Es alguien astuto y estratégico, que se mueve con discreción. Hábil, sí, aunque no siempre transparente.',
       },
     ],
   },
 
   'ocho-de-espadas': {
     imagen: [
-      'Una mujer con los ojos vendados y el cuerpo atado está de pie en un terreno encharcado, rodeada de ocho espadas clavadas en el suelo. Las espadas no la encierran del todo: hay huecos por los que podría salir. Al fondo, sobre una colina, se ve un castillo. La venda y las ataduras son los miedos y creencias que la paralizan, y los huecos entre las espadas recuerdan que la salida existe aunque ahora no la vea.',
+      'Una mujer con los ojos vendados y el cuerpo atado está de pie en un terreno encharcado, rodeada de ocho espadas clavadas en el suelo. Las espadas no la encierran del todo, quedan huecos por los que podría salir. Al fondo, sobre una colina, hay un castillo. La venda y las cuerdas son los miedos y las ideas que la paralizan, y los huecos dejan ver que la salida existe aunque ella no la vea.',
     ],
     significado: [
-      'Al derecho, el Ocho de Espadas habla de sentirte atrapada. Puede ser un trabajo que odias pero del que no te atreves a salir, una relación en la que sientes que no tienes opciones o el miedo a lo que dirán si cambias de vida. La carta señala que buena parte de esa prisión está hecha de pensamientos.',
-      'No se trata de culparte, sino de darte cuenta de que hay salidas. Hablarlo con alguien que te vea desde fuera o dar un paso pequeño puede cambiarlo todo.',
+      'Al derecho, el Ocho de Espadas es sentirte atrapada. Un trabajo que odias y del que no te atreves a salir, una relación en la que crees que no tienes opciones o el miedo al qué dirán si cambias de vida. Buena parte de esa cárcel está hecha de pensamientos.',
+      'Tampoco se trata de echarte la culpa. Hay salidas. Contárselo a alguien que lo vea desde fuera o dar un paso pequeño puede cambiarlo todo.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, quizá sientes que no puedes expresar lo que necesitas. Hablar con sinceridad puede abrir puertas que creías cerradas.',
-      sola: 'Si estás sola, puede que tus inseguridades te frenen a la hora de conocer a alguien. Cuestiona la idea de que no mereces algo bonito.',
-      ex: 'Si piensas en tu ex, la carta habla de sentirte atada a esa historia. Soltarla es posible, aunque ahora no veas cómo.',
+      pareja: 'Quizá sientes que no puedes decir lo que necesitas. Hablarlo con sinceridad puede abrir puertas que creías cerradas.',
+      sola: 'Puede que tus inseguridades te frenen a la hora de conocer a alguien. Pon en duda esa idea de que no te toca nada bonito.',
+      ex: 'Te sientes atada a esa historia. Se puede salir de ahí, aunque ahora no veas cómo.',
     },
-    trabajo: 'En el trabajo señala un empleo que sientes como una jaula o un proyecto bloqueado por miedos. Hay más alternativas de las que crees: actualiza el currículum, pregunta, infórmate.',
-    dinero: 'En lo económico puede reflejar la sensación de estar atrapada por deudas o gastos fijos. Haz un plan realista y busca asesoramiento; la salida suele empezar por ordenar los números.',
+    trabajo: 'Un empleo que vives como una jaula o un proyecto bloqueado por miedos. Hay más alternativas de las que crees. Actualiza el currículum, pregunta, infórmate.',
+    dinero: 'Te sientes atrapada por deudas o gastos fijos. Haz un plan realista y pide consejo a quien sepa. La salida suele empezar por ordenar los números.',
     como: {
-      sentimiento: 'La otra persona se siente bloqueada, con miedo a mostrar lo que siente o atrapada en sus propias dudas.',
-      persona: 'Representa a alguien que se pone límites a sí mismo, inseguro o muy condicionado por lo que piensan los demás.',
-      futuro: 'En la posición de futuro avisa de un bloqueo pasajero. Si cambias la forma de mirarlo, encontrarás la salida.',
+      sentimiento: 'Está bloqueada, con miedo a enseñar lo que siente o enredada en sus propias dudas.',
+      persona: 'Alguien inseguro, que se pone sus propios límites y se deja condicionar mucho por lo que piensan los demás.',
+      futuro: 'Un bloqueo pasajero. Si cambias la forma de mirarlo, encontrarás la salida.',
     },
     invertida: [
-      'Invertido, el Ocho de Espadas es una buena noticia: te liberas de una creencia que te limitaba y empiezas a ver con claridad. La venda cae y las ataduras se aflojan. En el amor puede indicar que te atreves a pedir lo que necesitas o a salir de una relación que te ahogaba. En el trabajo, buscar nuevas oportunidades o recuperar la confianza para cambiar de rumbo. Cada paso pequeño cuenta.',
+      'Invertido, el Ocho de Espadas es buena noticia. Te quitas de encima una idea que te limitaba y empiezas a ver claro. La venda cae y las cuerdas se aflojan. En el amor puede ser que por fin te atrevas a pedir lo que necesitas o a salir de una relación que te ahogaba. En el trabajo, buscar otras oportunidades o recuperar la confianza para cambiar de rumbo. Cada paso pequeño cuenta.',
     ],
     faq: [
       {
         q: '¿El Ocho de Espadas es un sí o un no?',
-        r: 'Es un no mientras el miedo dirija tus pasos. Si cambias tu forma de verlo, la respuesta también puede moverse.',
+        r: 'Es un no mientras sea el miedo quien decide. Si cambias tu forma de verlo, la respuesta también puede moverse.',
       },
       {
         q: '¿Qué significa el Ocho de Espadas en el amor?',
-        r: 'Habla de sentirte sin opciones o frenada por miedos. Invita a cuestionar lo que te impide avanzar.',
+        r: 'Sentirte sin opciones o frenada por miedos. Pregúntate qué es lo que te impide avanzar.',
       },
       {
         q: '¿Qué significa el Ocho de Espadas como sentimiento?',
-        r: 'La otra persona se siente bloqueada o insegura. Puede tener sentimientos, pero le cuesta expresarlos.',
+        r: 'Que la otra persona está bloqueada o insegura. Siente cosas, pero le cuesta decirlas.',
       },
     ],
   },
 
   'nueve-de-espadas': {
     imagen: [
-      'Una mujer se incorpora en la cama, de noche, con la cara entre las manos. Detrás de ella, nueve espadas cuelgan en horizontal sobre un fondo negro. Su colcha está decorada con rosas y símbolos astrológicos, y en el lateral de la cama se ve una talla en la que una figura vence a otra. La oscuridad y las espadas representan los pensamientos que no dejan dormir, mientras que las rosas de la colcha recuerdan que, aunque ahora no lo parezca, hay belleza y calma a su alcance.',
+      'Es de noche. Una mujer se incorpora en la cama con la cara entre las manos, y detrás de ella nueve espadas cuelgan en horizontal sobre un fondo negro. La colcha lleva rosas y símbolos astrológicos, y en el lateral de la cama hay una talla en la que una figura vence a otra. La oscuridad y las espadas son los pensamientos que no dejan dormir. Las rosas de la colcha están ahí para recordar que la calma queda a mano, aunque ahora no lo parezca.',
     ],
     significado: [
-      'Al derecho, el Nueve de Espadas habla de preocupación, de darle vueltas a todo y de los miedos que crecen de noche. Es esa sensación de despertarte a las tres de la madrugada pensando en lo que dijiste, en lo que harás o en lo que podría salir mal.',
-      'Esa angustia es real, pero muchos de esos temores pesan más en tu cabeza que en la realidad. Compartir lo que te inquieta ayuda a ponerlos en su sitio.',
+      'Al derecho, el Nueve de Espadas es la preocupación, darle vueltas a todo y esos miedos que crecen de noche. Te despiertas a las tres de la madrugada pensando en lo que dijiste, en lo que harás o en todo lo que podría salir mal.',
+      'La angustia es real, pero muchos de esos temores pesan más en tu cabeza que fuera de ella. Contar lo que te inquieta ayuda a ponerlo en su sitio.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, quizá te preocupa perderla o piensas demasiado en cada gesto. Contar lo que sientes ayuda más que imaginar lo peor.',
-      sola: 'Si estás sola, puede que las inseguridades te quiten energía. Sé tan amable contigo como lo serías con una amiga.',
-      ex: 'Si piensas en tu ex, la carta habla de noches dándole vueltas a lo que pasó. No te tortures con lo que pudo haber sido.',
+      pareja: 'Quizá te da miedo perder a tu pareja o analizas cada gesto. Contar lo que sientes ayuda más que imaginarte lo peor.',
+      sola: 'Las inseguridades te están dejando sin fuerzas. Trátate igual de bien que tratarías a una amiga.',
+      ex: 'Noches dándole vueltas a lo que pasó. No te tortures con lo que pudo haber sido.',
     },
-    trabajo: 'En el trabajo señala estrés, plazos que agobian y noches pensando en un problema. Ordena las tareas, divide lo grande en partes pequeñas y pide ayuda si la necesitas.',
-    dinero: 'En lo económico refleja preocupación por gastos o deudas. Mirar los números de frente, aunque asuste, suele ser menos angustioso que imaginarlos.',
+    trabajo: 'Estrés, plazos que agobian y noches pensando en un problema. Ordena las tareas, parte lo grande en trozos pequeños y pide ayuda si la necesitas.',
+    dinero: 'Te preocupan los gastos o las deudas. Mirar los números de frente, aunque asuste, suele agobiar menos que imaginarlos.',
     como: {
-      sentimiento: 'La otra persona está preocupada o insegura. Piensa mucho en la relación y quizá teme perderte o equivocarse.',
-      persona: 'Representa a alguien sensible, que se preocupa mucho y tiende a darle vueltas a todo.',
-      futuro: 'En la posición de futuro avisa de un periodo de preocupación. Prepararte y apoyarte en otras personas hará que pese menos.',
+      sentimiento: 'Está preocupada o insegura. Piensa mucho en la relación y quizá le asusta perderte o equivocarse.',
+      persona: 'Alguien sensible, que se preocupa mucho y le da mil vueltas a todo.',
+      futuro: 'Se acerca una temporada de preocupaciones. Si te preparas y te apoyas en los tuyos, pesará menos.',
     },
     invertida: [
-      'Invertido, el Nueve de Espadas indica que la preocupación empieza a ceder o que te animas a contar lo que te quita el sueño. Es como si por fin amaneciera. En el amor puede hablar de aclarar miedos con la otra persona o de dejar de imaginar lo peor. En el trabajo, de encontrar soluciones a un problema que te agobiaba. Si la angustia sigue siendo intensa, la carta te anima a no cargarla sola.',
+      'Invertido, el Nueve de Espadas indica que la preocupación empieza a aflojar o que te animas a contar lo que te quita el sueño. Es como si por fin amaneciera. En el amor puede ser aclarar miedos con la otra persona o dejar de imaginarte lo peor. En el trabajo, encontrar salida a un problema que te agobiaba. Y si la angustia sigue siendo fuerte, no la cargues sola.',
     ],
     faq: [
       {
         q: '¿El Nueve de Espadas es un sí o un no?',
-        r: 'Es un no por ahora, porque la preocupación está nublando la respuesta. Con calma, la situación se verá distinta.',
+        r: 'Por ahora es un no, porque la preocupación te está nublando la respuesta. Cuando te serenes, lo verás distinto.',
       },
       {
         q: '¿Qué significa el Nueve de Espadas en el amor?',
-        r: 'Habla de inseguridades, miedo a perder a alguien o pensar demasiado. Ponerlo en palabras ayuda a soltarlo.',
+        r: 'Inseguridades, miedo a perder a alguien o pensar demasiado. Ponerlo en palabras ayuda a quitarle peso.',
       },
       {
         q: '¿El Nueve de Espadas es la peor carta del tarot?',
-        r: 'Impresiona, pero no es una condena. Habla de miedos que la mente agranda y que, muchas veces, no llegan a cumplirse.',
+        r: 'Impresiona, pero no te condena a nada. Son miedos que la mente agranda y que muchas veces ni llegan a cumplirse.',
       },
     ],
   },
 
   'diez-de-espadas': {
     imagen: [
-      'Un hombre yace boca abajo en la orilla, con diez espadas clavadas en la espalda y un paño rojo sobre el cuerpo. El cielo está negro, pero en el horizonte asoma una franja amarilla de amanecer sobre un agua en calma. Su mano derecha hace un gesto de bendición. La imagen es dura a propósito: muestra que algo ha llegado hasta el final, pero el amanecer y el agua tranquila anuncian que después del fondo empieza otra etapa.',
+      'Un hombre yace boca abajo en la orilla, con diez espadas clavadas en la espalda y un paño rojo sobre el cuerpo. El cielo está negro, pero en el horizonte asoma una franja amarilla de amanecer sobre un agua en calma. Su mano derecha hace un gesto de bendición. La imagen es dura a propósito. Algo ha llegado hasta el final, y el amanecer y el agua quieta anuncian que después del fondo empieza otra cosa.',
     ],
     significado: [
-      'Al derecho, el Diez de Espadas habla de un final que ya no tiene vuelta atrás. Puede ser una relación que termina, un trabajo que se acaba o una situación que llevabas tiempo sosteniendo y que por fin se derrumba. Es esa sensación de haber tocado fondo y no poder más.',
-      'Aunque duele, la carta también libera. Lo que se cierra del todo deja espacio para algo nuevo, y ya no tienes que seguir luchando por algo que no daba más de sí. Mira hacia ese amanecer que asoma.',
+      'Al derecho, el Diez de Espadas es un final sin vuelta atrás. Una relación que termina, un trabajo que se acaba o algo que llevabas tiempo sosteniendo y que por fin se derrumba. Has tocado fondo y no puedes más.',
+      'Duele, pero también libera. Lo que se cierra del todo deja sitio a algo nuevo, y ya no tienes que seguir peleando por algo que no daba más de sí. Mira ese amanecer que asoma.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede señalar el final de la relación o de una forma de relacionaros que ya no funciona. Después del cansancio llegará la calma.',
-      sola: 'Si estás sola, la carta indica que dejas atrás un patrón que te hacía daño. Lo que venga después será diferente.',
-      ex: 'Si piensas en tu ex, el mensaje es claro: esa historia ha terminado. Cerrarla del todo te ayudará a seguir adelante.',
+      pareja: 'Puede ser el final de la relación o de una manera de estar juntos que ya no funciona. Después del cansancio llegará la calma.',
+      sola: 'Dejas atrás un patrón que te hacía daño. Lo que venga después será distinto.',
+      ex: 'Esa historia ha terminado, así de claro. Cerrarla del todo te ayudará a seguir adelante.',
     },
-    trabajo: 'En el trabajo puede señalar un proyecto que se cierra, un despido o una situación laboral que ya no se sostiene. Es momento de recoger, aprender lo que puedas y prepararte para empezar de nuevo.',
-    dinero: 'En lo económico refleja una pérdida o un bache serio. Toca hacer balance, recortar lo que sobra y reconstruir paso a paso, pidiendo asesoramiento si lo necesitas.',
+    trabajo: 'Un proyecto que se cierra, un despido o una situación laboral que ya no se aguanta. Recoge, aprende lo que puedas y prepárate para empezar de nuevo.',
+    dinero: 'Una pérdida o un bache serio. Haz balance, recorta lo que sobra y reconstruye paso a paso, con ayuda de alguien que sepa si hace falta.',
     como: {
-      sentimiento: 'La otra persona puede sentir que la relación ha llegado a su fin o estar emocionalmente agotada. Necesita cerrar antes de seguir.',
-      persona: 'Representa a alguien que ha pasado por un momento muy duro y que todavía se está recuperando.',
-      futuro: 'En la posición de futuro anuncia el cierre definitivo de una etapa. Duele, pero abre la puerta a un nuevo comienzo.',
+      sentimiento: 'Siente que la relación ha llegado a su fin, o está agotada por dentro. Necesita cerrar antes de seguir.',
+      persona: 'Alguien que lo ha pasado muy mal y todavía se está recuperando.',
+      futuro: 'Se cierra una etapa para siempre. Duele, pero deja la puerta abierta a empezar de nuevo.',
     },
     invertida: [
-      'Invertido, el Diez de Espadas indica que te levantas despacio, recuperas fuerzas y empiezas a mirar hacia delante. Lo peor ha pasado y, aunque quedan heridas, vuelves a ponerte en pie. En el amor puede hablar de superar una ruptura o de reconstruirte después de una relación difícil. En el trabajo, de recuperarte de un revés y buscar nuevas oportunidades. A veces también avisa de resistirte a un final que ya es inevitable.',
+      'Invertido, el Diez de Espadas indica que te levantas despacio, recuperas fuerzas y empiezas a mirar hacia delante. Lo peor ha pasado y, aunque quedan heridas, vuelves a ponerte en pie. En el amor puede ser superar una ruptura o rehacerte después de una relación difícil. En el trabajo, recuperarte de un revés y buscar otras oportunidades. También puede avisar de que te estás resistiendo a un final que ya no tiene remedio.',
     ],
     faq: [
       {
         q: '¿El Diez de Espadas significa muerte?',
-        r: 'No, no habla de muerte física. Simboliza el final de una etapa o situación, con la promesa de un nuevo comienzo.',
+        r: 'No, nada de muerte física. Es el final de una etapa o de una situación, con la promesa de empezar otra.',
       },
       {
         q: '¿El Diez de Espadas es un sí o un no?',
-        r: 'Es un no, porque esa etapa ya se ha cerrado. Aun así, después del fondo empieza la subida.',
+        r: 'Es un no, porque eso ya se ha cerrado. Aun así, después del fondo empieza la subida.',
       },
       {
         q: '¿Qué significa el Diez de Espadas en el amor?',
-        r: 'Indica una ruptura o el final de un patrón que hacía daño. Duele, pero también libera.',
+        r: 'Una ruptura o el final de un patrón que hacía daño. Duele, pero también libera.',
       },
     ],
   },
 
   'sota-de-espadas': {
     imagen: [
-      'Una figura joven está de pie sobre un terreno irregular, sosteniendo una espada en alto con las dos manos y mirando hacia un lado. El viento mueve las nubes y dobla los árboles, y en el cielo vuelan algunos pájaros. Su postura es de alerta: observa, escucha y está preparada para reaccionar. La espada levantada es la mente curiosa y el viento, las ideas y las noticias que no dejan de moverse.',
+      'Una figura joven está de pie sobre un terreno irregular, con una espada en alto agarrada con las dos manos y la mirada hacia un lado. El viento mueve las nubes y dobla los árboles, y por el cielo vuelan algunos pájaros. Está alerta, observa y escucha, lista para reaccionar. La espada levantada es la mente curiosa, y el viento, las ideas y noticias que no paran de moverse.',
     ],
     significado: [
-      'Al derecho, la Sota de Espadas habla de curiosidad, de ganas de aprender y de estar atenta a todo lo que pasa. Puede aparecer cuando empiezas un curso, cuando investigas algo antes de decidir o cuando recibes un mensaje que conviene leer con calma.',
-      'También puede señalar vigilancia o cierta desconfianza. Está bien hacer preguntas y no dar nada por sentado, pero sin convertirlo todo en un interrogatorio. La carta te anima a usar tu agudeza para entender, no para sospechar de todo.',
+      'Al derecho, la Sota de Espadas es curiosidad, ganas de aprender y estar pendiente de todo lo que pasa. Sale cuando empiezas un curso, cuando investigas algo antes de decidir o cuando te llega un mensaje que hay que leer despacio.',
+      'También puede señalar vigilancia o algo de desconfianza. Hacer preguntas y no dar nada por sentado está bien, pero sin convertirlo todo en un interrogatorio. Usa esa agudeza para entender las cosas, no para sospechar de todo el mundo.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede haber muchas conversaciones, preguntas o algún malentendido. Hablar está bien, siempre que no se convierta en control.',
-      sola: 'Si estás sola, quizá conozcas a alguien a través de una conversación interesante. Deja que la curiosidad te guíe, sin prisas.',
-      ex: 'Si piensas en tu ex, puede llegar algún mensaje o noticia. Léelo con calma antes de reaccionar.',
+      pareja: 'Muchas conversaciones, muchas preguntas o algún malentendido. Hablar está bien, siempre que no se convierta en control.',
+      sola: 'Quizá conozcas a alguien gracias a una conversación interesante. Déjate llevar por la curiosidad.',
+      ex: 'Puede llegar algún mensaje o alguna noticia. Léelo tranquila antes de reaccionar.',
     },
-    trabajo: 'En el trabajo señala aprender algo nuevo, investigar o preparar una propuesta. Tu capacidad de observación será muy útil, y es buen momento para formarte o hacer preguntas.',
-    dinero: 'En lo económico pide informarte bien antes de gastar o invertir. Compara opciones, lee las condiciones y no te fíes de lo primero que te digan.',
+    trabajo: 'Aprender algo nuevo, investigar o preparar una propuesta. Tu capacidad de observación te va a venir muy bien, y si tenías pensado formarte o hacer preguntas, adelante.',
+    dinero: 'Infórmate bien antes de gastar o invertir. Compara, lee las condiciones y no te fíes de lo primero que te digan.',
     como: {
-      sentimiento: 'La otra persona siente curiosidad por ti y quiere conocerte mejor, aunque también puede estar observando con cierta cautela.',
-      persona: 'Representa a alguien joven de espíritu, curioso, rápido de mente y muy observador, que hace muchas preguntas y no se conforma con respuestas fáciles.',
-      futuro: 'En la posición de futuro anuncia noticias, mensajes o un aprendizaje nuevo. Mantente atenta a lo que llegue.',
+      sentimiento: 'Le despiertas curiosidad y quiere conocerte mejor, aunque también te observa con cierta cautela.',
+      persona: 'Alguien curioso, rápido de mente y muy observador, que pregunta mucho y no se conforma con respuestas fáciles.',
+      futuro: 'Vienen noticias, mensajes o algo nuevo que aprender. Estate atenta a lo que llegue.',
     },
     invertida: [
-      'Invertida, la Sota de Espadas habla de cotilleos, palabras dichas sin pensar o ideas que se quedan en nada. Puede señalar a alguien que habla más de la cuenta o a una mente dispersa que salta de una cosa a otra. En el amor, cuidado con los malentendidos por mensajes o con la desconfianza excesiva. En el trabajo, avisa de rumores o de proyectos que no se concretan. Antes de hablar, pregúntate si lo que vas a decir ayuda.',
+      'Invertida, la Sota de Espadas trae cotilleos, palabras dichas sin pensar o ideas que se quedan en nada. Puede ser alguien que habla más de la cuenta o una mente dispersa que salta de una cosa a otra. En el amor, cuidado con los malentendidos por mensajes y con desconfiar demasiado. En el trabajo avisa de rumores o de proyectos que no se concretan. Antes de hablar, pregúntate si lo que vas a decir sirve de algo.',
     ],
     faq: [
       {
@@ -421,115 +421,115 @@ export const espadas: Record<string, Ampliado> = {
       },
       {
         q: '¿Qué significa la Sota de Espadas como persona?',
-        r: 'Representa a alguien curioso, observador y con mente rápida. Puede ser muy agudo, aunque a veces algo desconfiado.',
+        r: 'Alguien curioso, observador y rápido de mente. Puede ser muy agudo, aunque a ratos algo desconfiado.',
       },
       {
         q: '¿Qué significa la Sota de Espadas en el amor?',
-        r: 'Habla de conversaciones, preguntas y algo de cautela. Invita a comunicarte sin caer en el control.',
+        r: 'Conversaciones, preguntas y algo de cautela. Habla todo lo que quieras, pero sin caer en el control.',
       },
     ],
   },
 
   'caballo-de-espadas': {
     imagen: [
-      'Un caballero con armadura cabalga a toda velocidad sobre un caballo blanco, con la espada levantada por delante. El viento sacude las nubes y dobla los árboles, y en el cielo vuelan algunos pájaros. Todo en la carta transmite movimiento y empuje. La espada en alto es la determinación de quien sabe lo que quiere, y el galope muestra la prisa por conseguirlo, a veces sin mirar a los lados.',
+      'Un caballero con armadura cabalga a toda velocidad sobre un caballo blanco, con la espada levantada por delante. El viento sacude las nubes y dobla los árboles, y por el cielo vuelan algunos pájaros. Todo en la carta es movimiento y empuje. La espada en alto es la determinación de quien sabe lo que quiere, y el galope, la prisa por conseguirlo, a veces sin mirar a los lados.',
     ],
     significado: [
-      'Al derecho, el Caballo de Espadas habla de ir directo a por lo que quieres. Es la energía de quien tiene una idea clara y no quiere esperar: mandar el correo ya, decir lo que piensas en la reunión o tomar una decisión de un día para otro.',
-      'Esa rapidez es su gran virtud y también su riesgo. La carta te anima a actuar con convicción, pero te recuerda que ir tan deprisa puede hacer que atropelles a otras personas o que pases por alto detalles importantes. Avanza, pero respira antes de hablar.',
+      'Al derecho, el Caballo de Espadas es ir directa a por lo que quieres. Tienes una idea clara y no quieres esperar. Mandas el correo ya, dices lo que piensas en la reunión o decides algo de un día para otro.',
+      'Esa rapidez es su gran virtud y también su peligro. Actúa con convicción, pero ten en cuenta que a tanta velocidad puedes atropellar a alguien o pasar por alto detalles importantes. Avanza, pero respira antes de hablar.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede haber mucha intensidad o discusiones rápidas. Disfruta de la energía, pero escucha también lo que la otra persona necesita.',
-      sola: 'Si estás sola, puede aparecer alguien directo y apasionado, o una relación que avanza muy deprisa. Ve con ilusión, pero con los ojos abiertos.',
-      ex: 'Si piensas en tu ex, cuidado con los impulsos. Un mensaje enviado en caliente puede complicar más las cosas.',
+      pareja: 'Mucha intensidad o discusiones que saltan rápido. Disfruta del empuje, pero escucha también lo que necesita la otra persona.',
+      sola: 'Puede aparecer alguien directo y apasionado, o una relación que va muy deprisa. Ve con ilusión y con los ojos abiertos.',
+      ex: 'Cuidado con los impulsos. Un mensaje mandado en caliente puede liarlo todo más.',
     },
-    trabajo: 'En el trabajo señala iniciativa, debates y decisiones rápidas. Es buen momento para defender tus ideas con convicción, siempre que lo hagas con respeto y con los datos en la mano.',
-    dinero: 'En lo económico avisa de decisiones precipitadas. Puede haber oportunidades rápidas, pero conviene pensarlo dos veces antes de lanzarse.',
+    trabajo: 'Iniciativa, debates y decisiones rápidas. Defiende tus ideas con convicción, siempre con respeto y con los datos en la mano.',
+    dinero: 'Avisa de decisiones precipitadas. Pueden salir oportunidades rápidas, pero piénsalo dos veces antes de lanzarte.',
     como: {
-      sentimiento: 'La otra persona siente un interés intenso y quiere avanzar rápido. Puede ser muy directa con lo que quiere.',
-      persona: 'Representa a alguien decidido, rápido y apasionado por sus ideas, que va de frente aunque a veces le falte paciencia.',
-      futuro: 'En la posición de futuro anuncia cambios rápidos o una situación que se acelera. Prepárate para moverte con agilidad.',
+      sentimiento: 'Tiene un interés fuerte y quiere avanzar rápido. Puede ser muy directa con lo que quiere.',
+      persona: 'Alguien decidido, rápido y apasionado por sus ideas, que va de frente aunque le falte paciencia.',
+      futuro: 'Cambios rápidos o una situación que se acelera. Prepárate para moverte con agilidad.',
     },
     invertida: [
-      'Invertido, el Caballo de Espadas habla de precipitación, de discusiones por impaciencia o de mucha energía sin un rumbo claro. Puede señalar a alguien que habla antes de pensar o que corre sin saber hacia dónde. En el amor, avisa de peleas por cosas pequeñas o de relaciones que avanzan demasiado rápido. En el trabajo, de decisiones apresuradas o conflictos por falta de tacto. Antes de lanzarte, define bien tu objetivo.',
+      'Invertido, el Caballo de Espadas es precipitación, discusiones por impaciencia o mucho empuje sin rumbo claro. Puede ser alguien que habla antes de pensar o que corre sin saber hacia dónde. En el amor avisa de peleas por tonterías o de relaciones que van demasiado rápido. En el trabajo, de decisiones apresuradas o roces por falta de tacto. Antes de lanzarte, ten muy claro adónde vas.',
     ],
     faq: [
       {
         q: '¿El Caballo de Espadas es un sí o un no?',
-        r: 'Es un sí, y llega deprisa. Eso sí, conviene no arrollar a nadie en la carrera.',
+        r: 'Es un sí, y llega deprisa. Eso sí, procura no arrollar a nadie por el camino.',
       },
       {
         q: '¿Qué significa el Caballo de Espadas como persona?',
-        r: 'Representa a alguien decidido, directo y rápido. Tiene mucha energía, aunque a veces le falta paciencia.',
+        r: 'Alguien decidido, directo y rápido. Tiene mucho empuje, aunque le falta paciencia.',
       },
       {
         q: '¿Qué significa el Caballo de Espadas en el amor?',
-        r: 'Habla de pasión, intensidad o una relación que avanza deprisa. Invita a disfrutar sin dejar de escuchar a la otra persona.',
+        r: 'Pasión, intensidad o una relación que avanza deprisa. Disfrútalo sin dejar de escuchar a la otra persona.',
       },
     ],
   },
 
   'reina-de-espadas': {
     imagen: [
-      'Una reina está sentada de perfil en un trono de piedra decorado con mariposas y una cabeza alada. Con la mano derecha sostiene una espada recta y extiende la izquierda abierta, como quien invita a hablar. Su corona también lleva mariposas, a su alrededor flotan nubes y en lo alto vuela un pájaro. La espada es su juicio claro, la mano abierta muestra que está dispuesta a escuchar y las mariposas hablan de transformación y de una mente libre.',
+      'Una reina está sentada de perfil en un trono de piedra decorado con mariposas y una cabeza alada. En la mano derecha sostiene una espada recta y extiende la izquierda abierta, como dando pie a que le hablen. Su corona también lleva mariposas, a su alrededor flotan nubes y en lo alto vuela un pájaro. La espada es su buen juicio, la mano abierta dice que está dispuesta a escuchar y las mariposas son cambio y una mente libre.',
     ],
     significado: [
-      'Al derecho, la Reina de Espadas habla de ver las cosas tal como son y de no dejarte engañar. Es la carta de quien ha vivido lo suficiente como para saber qué quiere y qué no, y lo dice con claridad. Puede aparecer cuando pones límites en una relación, cuando te niegas a aceptar menos de lo que mereces o cuando decides con la cabeza fría.',
-      'También habla de independencia y de honestidad. No se trata de ser dura, sino de ser clara. Decir la verdad con respeto es un regalo para los demás.',
+      'Al derecho, la Reina de Espadas es ver las cosas tal como son y no dejarte engañar. Es la carta de quien ha vivido lo bastante para saber qué quiere y qué no, y lo dice sin rodeos. Sale cuando marcas un límite en una relación, cuando no aceptas menos de lo que te corresponde o cuando decides con la cabeza fría.',
+      'También tiene que ver con la independencia y con la sinceridad. Se puede ser clara sin ser dura. Decir la verdad con respeto es un regalo para los demás.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, la carta habla de saber lo que quieres y pedirlo con claridad. Una relación basada en la honestidad sale reforzada.',
-      sola: 'Si estás sola, puede indicar una etapa de independencia que te sienta muy bien. No tienes prisa por compartirte con cualquiera.',
-      ex: 'Si piensas en tu ex, la carta te pide ver la historia sin idealizarla. Lo que decidas, hazlo desde la claridad y no desde la nostalgia.',
+      pareja: 'Saber lo que quieres y pedirlo con claridad. Una relación en la que se dicen las cosas sale reforzada.',
+      sola: 'Una temporada de independencia que te sienta muy bien. No tienes ninguna prisa por compartirte con cualquiera.',
+      ex: 'Mira la historia sin adornarla. Decidas lo que decidas, que sea con la cabeza clara y no por nostalgia.',
     },
-    trabajo: 'En el trabajo señala profesionalidad, buen juicio y comunicación clara. Tu capacidad de ir al grano te hace ganar respeto. Buen momento para negociar.',
-    dinero: 'En lo económico pide decidir con lógica y no con impulsos. Revisa tus cuentas con objetividad y no te dejes convencer por promesas fáciles.',
+    trabajo: 'Profesionalidad, buen juicio y comunicación clara. Ir al grano te hace ganar respeto, y es buen momento para negociar.',
+    dinero: 'Decide con lógica y no por impulso. Repasa tus cuentas con objetividad y no te dejes convencer por promesas fáciles.',
     como: {
-      sentimiento: 'La otra persona te respeta y valora tu inteligencia, aunque puede mostrarse algo reservada o analítica con sus emociones.',
-      persona: 'Representa a alguien lúcido, independiente y sincero, que dice las cosas claras y no se deja manipular.',
-      futuro: 'En la posición de futuro anuncia una etapa de claridad e independencia. Tomarás decisiones con la cabeza y te sentarán bien.',
+      sentimiento: 'Te respeta y valora tu inteligencia, aunque con sus emociones puede mostrarse algo reservada o analítica.',
+      persona: 'Alguien lúcido, independiente y sincero, que dice las cosas claras y no se deja manipular.',
+      futuro: 'Vienen tiempos de independencia y de ideas claras. Decidirás con la cabeza y te sentará bien.',
     },
     invertida: [
-      'Invertida, la Reina de Espadas habla de frialdad, palabras demasiado cortantes o una desconfianza que te aísla. Puede señalar a alguien que usa la crítica para hacer daño o que se ha cerrado tanto que nadie llega a su corazón. En el amor, avisa de distancias emocionales o de reproches que duelen. En el trabajo, de ambientes tensos o de juicios demasiado severos. Recupera la claridad, pero añade un poco de calidez.',
+      'Invertida, la Reina de Espadas es frialdad, palabras demasiado cortantes o una desconfianza que te aísla. Puede ser alguien que usa la crítica para hacer daño o que se ha cerrado tanto que nadie le llega al corazón. En el amor avisa de distancia emocional o de reproches que duelen. En el trabajo, de ambientes tensos o de juicios muy severos. Mantén la claridad, pero ponle un poco de calidez.',
     ],
     faq: [
       {
         q: '¿La Reina de Espadas es un sí o un no?',
-        r: 'Es un sí, cuando la decisión se toma con lucidez. Tu propio criterio es la mejor guía.',
+        r: 'Es un sí cuando la decisión se toma con lucidez. Tu propio criterio es la mejor guía.',
       },
       {
         q: '¿Qué significa la Reina de Espadas como persona?',
-        r: 'Representa a alguien lúcido, independiente y sincero. Sabe lo que quiere y no se deja engañar.',
+        r: 'Alguien lúcido, independiente y sincero. Sabe lo que quiere y no se deja engañar.',
       },
       {
         q: '¿Qué significa la Reina de Espadas en el amor?',
-        r: 'Habla de saber lo que quieres y no conformarte con menos. Puede indicar independencia o una relación basada en la honestidad.',
+        r: 'Saber lo que quieres y no conformarte con menos. Puede ser independencia o una relación en la que se va con la verdad por delante.',
       },
     ],
   },
 
   'rey-de-espadas': {
     imagen: [
-      'Un rey está sentado de frente en su trono, con la espada recta en la mano derecha. Viste una túnica azul y un manto morado, y el respaldo del trono está decorado con mariposas y lunas crecientes. Detrás se ven nubes, algunos árboles y pájaros en el cielo. Su postura firme habla de autoridad, la espada recta de justicia y razón, y las mariposas de una mente capaz de transformar ideas en decisiones.',
+      'Un rey está sentado de frente en su trono, con la espada recta en la mano derecha. Viste túnica azul y manto morado, y el respaldo del trono lleva mariposas y lunas crecientes. Detrás se ven nubes, algunos árboles y pájaros en el cielo. Su postura firme marca autoridad, la espada recta es justicia y razón, y las mariposas, una mente capaz de convertir ideas en decisiones.',
     ],
     significado: [
-      'Al derecho, el Rey de Espadas habla de decidir con la razón, de analizar los datos y de actuar con justicia. Es la carta que aparece cuando necesitas pensar con frialdad antes de un juicio, una negociación o una decisión importante. También puede representar a alguien con autoridad intelectual que te ayuda a ver las cosas con claridad.',
-      'La carta te anima a confiar en tu capacidad de análisis y a explicar tus motivos con argumentos. Pero también te recuerda que la lógica no lo es todo: escuchar a las personas y entender lo que sienten forma parte de decidir bien.',
+      'Al derecho, el Rey de Espadas es decidir con la razón, analizar los datos y actuar con justicia. Sale cuando necesitas pensar en frío antes de un juicio, una negociación o una decisión importante. También puede ser alguien con autoridad intelectual que te ayuda a ver las cosas claras.',
+      'Fíate de tu capacidad de análisis y explica tus motivos con argumentos. Pero la lógica no lo es todo, y escuchar a la gente y entender lo que siente también forma parte de decidir bien.',
     ],
     amor: {
-      pareja: 'Si tienes pareja, puede ser momento de hablar con madurez sobre la relación. Que tanta sensatez no deje sin sitio a la ternura.',
-      sola: 'Si estás sola, puede aparecer una persona seria, honesta y con las ideas claras. Valora su sinceridad, aunque al principio parezca algo distante.',
-      ex: 'Si piensas en tu ex, la carta pide ver la situación con objetividad. Decide con la cabeza, no con la nostalgia.',
+      pareja: 'Toca hablar de la relación como adultos. Que tanta sensatez no deje sin sitio a la ternura.',
+      sola: 'Puede aparecer alguien serio, sincero y con las ideas claras. Valora esa franqueza, aunque al principio parezca algo distante.',
+      ex: 'Mira la situación con objetividad. Decide con la cabeza y no con la nostalgia.',
     },
-    trabajo: 'En el trabajo señala asesoría, temas legales, liderazgo y decisiones estratégicas. Analizar bien será tu punto fuerte. Es buen momento para asumir responsabilidades o defender un proyecto con datos.',
-    dinero: 'En lo económico pide decisiones basadas en números y en asesoramiento fiable. Revisa contratos y no firmes nada que no entiendas del todo.',
+    trabajo: 'Asesoría, temas legales, liderazgo y decisiones estratégicas. Analizar bien será tu punto fuerte. Si te toca asumir responsabilidades o defender un proyecto con datos, adelante.',
+    dinero: 'Decisiones basadas en números y en consejo fiable. Revisa los contratos y no firmes nada que no entiendas del todo.',
     como: {
-      sentimiento: 'La otra persona te respeta y piensa en la relación con seriedad, aunque le cueste expresar lo que siente con palabras cariñosas.',
-      persona: 'Representa a alguien maduro, racional y justo, con autoridad y buena capacidad para argumentar.',
-      futuro: 'En la posición de futuro anuncia decisiones importantes que tomarás con la cabeza. También puede señalar la ayuda de alguien experto.',
+      sentimiento: 'Te respeta y se toma la relación en serio, aunque le cueste poner en palabras cariñosas lo que siente.',
+      persona: 'Alguien maduro, racional y justo, con autoridad y buena mano para argumentar.',
+      futuro: 'Decisiones importantes que tomarás con la cabeza. También puede llegar la ayuda de alguien experto.',
     },
     invertida: [
-      'Invertido, el Rey de Espadas habla de rigidez, abuso de la razón o alguien que usa las palabras para imponerse. Puede señalar a una persona fría, manipuladora o demasiado crítica. En el amor, avisa de discusiones donde alguien quiere tener siempre la razón o de una relación donde falta calidez. En el trabajo, de jefes autoritarios o de decisiones injustas. Busca el equilibrio entre la lógica y la empatía.',
+      'Invertido, el Rey de Espadas es rigidez, abuso de la razón o alguien que usa las palabras para imponerse. Puede tratarse de una persona fría, manipuladora o demasiado crítica. En el amor avisa de discusiones en las que alguien quiere llevar siempre razón, o de una relación a la que le falta calidez. En el trabajo, de jefes autoritarios o decisiones injustas. Busca el punto medio entre la lógica y la empatía.',
     ],
     faq: [
       {
@@ -538,11 +538,11 @@ export const espadas: Record<string, Ampliado> = {
       },
       {
         q: '¿Qué significa el Rey de Espadas como persona?',
-        r: 'Representa a alguien maduro, racional y justo, con autoridad intelectual. Decide con la razón y sabe argumentar.',
+        r: 'Alguien maduro, racional y justo, con autoridad intelectual. Decide con la razón y sabe argumentar.',
       },
       {
         q: '¿Qué significa el Rey de Espadas en el amor?',
-        r: 'Habla de madurez, honestidad y conversaciones serias. Recuerda que el razonamiento también necesita ternura.',
+        r: 'Madurez, sinceridad y conversaciones serias. Razonar está muy bien, pero sin olvidarse de la ternura.',
       },
     ],
   },
