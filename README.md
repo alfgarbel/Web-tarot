@@ -34,4 +34,4 @@ La persona puede elegir entre tres barajas (se recuerda en su navegador):
 
 - **Línea dorada**: dibujo vectorial propio (`src/components/Carta.astro` y `src/data/motivos.ts`).
 - **Azulejo**: el mismo dibujo en cal y azul cobalto (variables en `src/styles/global.css`).
-- **Ilustrada**: 22 láminas pintadas generadas para esta web, en `public/barajas/ilustrada/`.
+- **Ilustrada**: 78 láminas pintadas (22 mayores y 56 menores) generadas para esta web, en `public/barajas/ilustrada/`.

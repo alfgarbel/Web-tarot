@@ -1,5 +1,5 @@
 // Los 56 arcanos menores. Los textos están en un archivo por palo; aquí se añaden el número,
-// el nombre, el slug y el motivo de línea que se dibuja en la carta (sin imagen ilustrada).
+// el nombre, el slug y el motivo de línea que se dibuja en la carta.
 import type { Arcano } from '../arcanos';
 import type { Rango, TextoMenor } from './tipo';
 import { bastos } from './bastos';
@@ -86,7 +86,6 @@ export const menores: Arcano[] = palos.flatMap(({ palo, nombre, textos }, p) =>
       simbolo: '',
       palo,
       motivo: motivoMenor(palo, i, r.rango),
-      sinImagen: true,
     };
   }),
 );
