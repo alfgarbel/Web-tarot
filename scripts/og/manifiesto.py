@@ -63,7 +63,7 @@ for p in paginas:
 # Satori no lee webp: copia en PNG de cada carta usada.
 os.makedirs(TMP + '/cartas', exist_ok=True)
 for c in {c for p in paginas for c in p['cartas']}:
-    Image.open(fRAIZ + '/public/barajas/ilustrada/{c}.webp').convert('RGB').save(f'{TMP}/cartas/{c}.jpg', quality=92)
+    Image.open(f'{RAIZ}/public/barajas/ilustrada/{c}.webp').convert('RGB').save(f'{TMP}/cartas/{c}.jpg', quality=92)
 # Líneas reales del título, medidas con la misma fuente, para colocar el subtítulo debajo.
 from PIL import ImageFont
 FUENTE = RAIZ + '/node_modules/@fontsource/bodoni-moda/files/bodoni-moda-latin-400-normal.woff'
