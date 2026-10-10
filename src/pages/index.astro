@@ -16,10 +16,10 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
   <section class="portada">
     <div class="contenedor portada-rejilla">
       <div class="portada-texto">
-        <h1>Pregunta a las cartas <em>esta noche.</em></h1>
+        <h1>Para esa pregunta que no te sacas de la cabeza. <em>Las cartas te contestan.</em></h1>
         <p class="portada-sub">Tiradas de tarot gratis, escritas para orientarte y no para asustarte. Sin registro y sin letra pequeña.</p>
         <div class="botones">
-          <a href="/tarot-si-o-no/" class="boton">Tirar una carta</a>
+          <a href="/tarot-si-o-no/" class="boton">Haz tu pregunta</a>
           <a href="/cartas/" class="enlace-flecha">Ver los arcanos</a>
         </div>
       </div>
@@ -134,7 +134,7 @@ const abanico = [-24, -16, -8, 0, 8, 16, 24];
     align-items: center;
     min-height: calc(100dvh - 68px - 152px);
   }
-  .portada h1 { max-width: 11ch; }
+  .portada h1 { max-width: 15ch; font-size: clamp(2.4rem, 5.2vw, 4.4rem); }
   .portada-sub { font-size: 1.15rem; color: var(--texto-suave); max-width: 40ch; }
   .botones { display: flex; align-items: center; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
   .portada-imagen { margin: 0; justify-self: end; width: 100%; max-width: 440px; }
