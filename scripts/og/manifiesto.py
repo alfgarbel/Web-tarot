@@ -58,7 +58,7 @@ for f in sorted(glob.glob(D + '/**/index.html', recursive=True)):
     if partes[0] == 'horoscopo' and m: sub = f'Del {m.group(1)}. Tu carta del tarot para hoy en el amor, el trabajo y la salud.'
     sub = subs.get(ruta, sub)
     if ruta == '/':  # el titular entero no cabe: la segunda frase pasa al subtítulo
-        h1, sub = 'Para esa pregunta que no te sacas de la cabeza', 'Las cartas te contestan. Tiradas de tarot gratis y sin registro.'
+        h1, sub = 'Para esa pregunta que no te sacas de la cabeza', 'Las cartas te responden. Tiradas de tarot gratis y sin registro.'
     paginas.append({'ruta': ruta, 'titulo': h1, 'sub': sub, 'cartas': cartas})
 for p in paginas:
     if p['cartas'] is None: p['cartas'] = [arcano_signo[p['ruta'].strip('/').split('/')[1]]]
